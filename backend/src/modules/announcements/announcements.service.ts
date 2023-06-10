@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
-import { AnnouncementRepository } from '../repositories/announcements.repository';
+import { AnnouncementRepository } from './repositories/announcements.repository';
 
 @Injectable()
 export class AnnouncementsService {
@@ -14,19 +14,42 @@ export class AnnouncementsService {
     return announcement;
   }
 
-  findAll() {
-    return `This action returns all announcements`;
+  async findAll() {
+    const announcement = await this.announcementsRepository.findAll();
+
+    return announcement;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} announcement`;
+  async findOne(id: string) {
+    const announcement = await this.announcementsRepository.findOne(id);
+
+    if (!announcement) {
+      throw new NotFoundException('Announcement not found!');
+    }
+
+    return announcement;
   }
 
-  update(id: number, updateAnnouncementDto: UpdateAnnouncementDto) {
-    return `This action updates a #${id} announcement`;
+  async update(id: string, updateAnnouncementDto: UpdateAnnouncementDto) {
+    const found = await this.announcementsRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException('Announcement not found!');
+    }
+    const announcement = await this.announcementsRepository.update(
+      id,
+      updateAnnouncementDto,
+    );
+
+    return announcement;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} announcement`;
+  async remove(id: string) {
+    const found = await this.announcementsRepository.findOne(id);
+    if (!found) {
+      throw new NotFoundException('Announcement not found!');
+    }
+    await this.announcementsRepository.delete(id);
+
+    return;
   }
 }
