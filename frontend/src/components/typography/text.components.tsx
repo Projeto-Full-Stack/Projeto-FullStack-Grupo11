@@ -6,6 +6,8 @@ interface HeadingSchema {
 }
 
 export function Text ({type, weight, extra_classes="", children}: HeadingSchema){
+    if (extra_classes) extra_classes += " " + extra_classes
+
     if (type == "b1" && weight == 600){ return ( <h1 className={`text-[16px] leading-[28px] font-semibold font-inter${extra_classes}`}>{children}</h1> ) }
     if (type == "b1" && weight == 400){ return ( <h1 className={`text-[16px] leading-[28px] font-normal font-inter${extra_classes}`}>{children}</h1> ) }
 
