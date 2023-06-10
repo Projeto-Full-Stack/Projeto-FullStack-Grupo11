@@ -1,118 +1,244 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [showFilter, setAside] = useState("hidden")
+
+  function showAside (){
+    showFilter != "hidden" ? setAside("hidden") : setAside("block")
+  }
+
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+    <header className='flex justify-between'>
+      <div>
+        <h1 className='bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent'>Motors <span>shops</span></h1>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <button>show navigation</button>
+    </header>
+    <div className="bg-[url('https://quatrorodas.abril.com.br/wp-content/uploads/2020/12/chevrolet-2021-onix-premier-8389-e1607978189472.jpg?quality=70&strip=info')]
+                    h-[500px]
+                    bg-center
+                    bg-cover
+                    mb-[60px]
+                    flex
+                    flex-col
+                    justify-center
+                    text-center
+        ">
+          <h1>
+            Title
+          </h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, laboriosam?</p>
+    </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className='lg:max-w-[1600px] lg:mx-auto'>
+      <main className='flex lg:justify-between lg:px-7'>
+        <aside className={`w-[95%] fixed h-screen bottom-0 bg-white z-1 ${showFilter}
+          lg:block
+          lg:w-fit
+          lg:static
+        `}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <header className='flex justify-between lg:hidden'>
+            <p>filter</p>
+            <button onClick={showAside}>X</button>
+          </header>
+          <div>
+            <h3>Marca</h3>
+              <ul>
+                <li>General Motors</li>
+                <li>Fiat</li>
+                <li>Ford</li>
+                <li>Honda</li>
+                <li>Toyota</li>
+                <li>Volswagen</li>
+              </ul>
+          </div>
+          <div>
+            <h3>Modelo</h3>
+            <ul>
+              <li>Civic</li>
+              <li>Corolla</li>
+              <li>Cruze</li>
+              <li>Fit</li>
+              <li>Gol</li>
+              <li>Ka</li>
+              <li>Onix</li>
+              <li>Pulse</li>
+            </ul>
+          </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <div>
+            <h3>Cor</h3>
+              <ul>
+                <li>Azul</li>
+                <li>Branca</li>
+                <li>Cinza</li>
+                <li>Prata</li>
+                <li>Preta</li>
+                <li>Verde</li>
+              </ul>
+          </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+          <div>
+            <h3>Ano</h3>
+              <ul>
+                <li>Ano 1</li>
+                <li>Ano 2</li>
+                <li>Ano 3</li>
+                <li>Ano 4</li>
+                <li>Ano 5</li>
+              </ul>
+          </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <div>
+            <h3>Combustivel</h3>
+              <ul>
+                <li>Flex</li>
+                <li>Hibrido</li>
+                <li>Eletrico</li>
+              </ul>
+          </div>
+
+          <div>
+            <h3>Km</h3>
+            <section className='flex justify-between gap-8'>
+              <input type="number" placeholder='Mínimo' className='w-full'/>
+              <input type="number" placeholder='Máximo' className='w-full'/>
+            </section>
+          </div>
+
+          <div>
+            <h3>Preco</h3>
+            <section className='flex justify-between gap-8'>
+              <input type="number" placeholder='Mínimo'className='w-full'/>
+              <input type="number" placeholder='Máximo'className='w-full'/>
+            </section>
+          </div>
+
+          <button>Filtrar</button>
+        </aside>
+
+        <section className='flex overflow-hidden h-fit'>
+          <ul className='flex gap-3 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10'>
+            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+              />
+              <h2>Car title</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+
+              <div className='flex items-center gap-2'>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
+                <h3>username</h3>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-3'>
+                  <span className='px-2 py-1'>KM - 0</span>
+                  <span className='px-2 py-1'>Year</span>
+                </div>
+                <p>R$ 00.000,00</p>
+              </div>
+            </li>
+
+            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+              />
+              <h2>Car title</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+
+              <div className='flex items-center gap-2'>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
+                <h3>username</h3>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-3'>
+                  <span className='px-2 py-1'>KM - 0</span>
+                  <span className='px-2 py-1'>Year</span>
+                </div>
+                <p>R$ 00.000,00</p>
+              </div>
+            </li>
+
+            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+              />
+              <h2>Car title</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+
+              <div className='flex items-center gap-2'>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
+                <h3>username</h3>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-3'>
+                  <span className='px-2 py-1'>KM - 0</span>
+                  <span className='px-2 py-1'>Year</span>
+                </div>
+                <p>R$ 00.000,00</p>
+              </div>
+            </li>
+
+            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+              />
+              <h2>Car title</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+
+              <div className='flex items-center gap-2'>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
+                <h3>username</h3>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-3'>
+                  <span className='px-2 py-1'>KM - 0</span>
+                  <span className='px-2 py-1'>Year</span>
+                </div>
+                <p>R$ 00.000,00</p>
+              </div>
+            </li>
+
+            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+              />
+              <h2>Car title</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+
+              <div className='flex items-center gap-2'>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
+                <h3>username</h3>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-3'>
+                  <span className='px-2 py-1'>KM - 0</span>
+                  <span className='px-2 py-1'>Year</span>
+                </div>
+                <p>R$ 00.000,00</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    
+    <div className='flex justify-center items-center lg:hidden'>
+      <button onClick={showAside} className=''>Show Filter</button>
+    </div>
+    </>
   )
 }
