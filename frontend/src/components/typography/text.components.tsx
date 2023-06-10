@@ -1,11 +1,11 @@
-interface HeadingSchema {
+interface TextSchema {
     type: "b1" | "b2"
     weight: 600 | 500| 400
     extra_classes?: string
     children: string
 }
 
-export function Text ({type, weight, extra_classes="", children}: HeadingSchema){
+export function Text ({type, weight, extra_classes="", children}: TextSchema){
     if (extra_classes) extra_classes += " " + extra_classes
 
     if (type == "b1" && weight == 600){ return ( <h1 className={`text-[16px] leading-[28px] font-semibold font-inter${extra_classes}`}>{children}</h1> ) }
