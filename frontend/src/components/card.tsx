@@ -1,10 +1,10 @@
-import { annoucementCardData } from "@/schemas/announcementCard.schema"
+import { CardData } from "@/schemas/card.schemas"
 import carImage  from "../image/Carro.png"
 import Profile from "./profile"
 import Button from "./button"
 
 interface ICardProps {
-    announcementCard: annoucementCardData
+    announcementCard: CardData
 }
 
 const Card = ({announcementCard}: ICardProps) => {
