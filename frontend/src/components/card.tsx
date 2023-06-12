@@ -1,33 +1,28 @@
 import Profile from "./profile"
 import Button from "./button"
+import { Heading } from "./typography/heading.component"
+import { Text } from "./typography/text.components"
 
-interface ICardProps {
-    announcementCard: annoucementCardData
-}
-
-const Card = ({announcementCard}: ICardProps) => {
+const Card = () => {
     
     return (
-        <li className="">
-            <div className="m-4">
-                <span className="available">Ativo</span>
-                <img className ="bg-grey-grey_7 border-grey-grey_7" src="../image/Carro.png"/>
-            </div>
-            <div className="m-4">
-                <h4 className="font-semibold my-4 text-grey-grey_1">Product title stays here - max 1 line</h4>
-                <p className="font-medium text-grey-grey_3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur nulla deserunt illo labore sequi</p>
-            </div>
-            <Profile name={"teste"}/>
-            <div className="flex justify-between w-full m-4">
-                <div className="flex justify-start w-1/4">
+        <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
+            <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
+              className='w-fit'
+            />
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
+
+              <Profile name={"teste"}/>
+
+              <div className='flex justify-between items-center'>
+                <div className='flex gap-3'>
                     <Button type="specifications" children="0 KM" extra_classes="mr-4"/>
                     <Button type="specifications" children="2019" extra_classes="mr-4"/> 
                 </div>
-                <div className="mt-2 mr-11">
-                    <p className="font-medium text-grey-grey_1">R$ 00.000,00</p>
-                </div>
-            </div>
-        </li>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
+              </div>
+            </li>
     )
 }
 

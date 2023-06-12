@@ -4,6 +4,7 @@ import { Text } from '@/components/typography/text.components';
 import { Heading } from '@/components/typography/heading.component';
 import NavBar from '@/components/navbar';
 import Button from '@/components/button';
+import Card from '@/components/card';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -124,119 +125,25 @@ export default function Home() {
           </div>
         </aside>
 
-        <section className='flex overflow-hidden h-fit'>
+        <section className='flex overflow-hidden h-fit w-fit'>
           <ul className='flex gap-3 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10'>
-            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
-              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
-              className='w-fit'
-              />
-              <Heading type='h7' weight={600}>Car title</Heading>
-              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
 
-              <div className='flex items-center gap-2'>
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
-                <h3>username</h3>
-              </div>
-
-              <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                  <span className='px-2 py-1'>KM - 0</span>
-                  <span className='px-2 py-1'>Year</span>
-                </div>
-                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
-              </div>
-            </li>
-
-            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
-              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
-              className='w-fit'
-              />
-              <Heading type='h7' weight={600}>Car title</Heading>
-              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
-
-              <div className='flex items-center gap-2'>
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
-                <h3>username</h3>
-              </div>
-
-              <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                  <span className='px-2 py-1'>KM - 0</span>
-                  <span className='px-2 py-1'>Year</span>
-                </div>
-                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
-              </div>
-            </li>
-
-            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
-              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
-              className='w-fit'
-              />
-              <Heading type='h7' weight={600}>Car title</Heading>
-              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
-
-              <div className='flex items-center gap-2'>
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
-                <h3>username</h3>
-              </div>
-
-              <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                  <span className='px-2 py-1'>KM - 0</span>
-                  <span className='px-2 py-1'>Year</span>
-                </div>
-                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
-              </div>
-            </li>
-
-            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
-              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
-              className='w-fit'
-              />
-              <Heading type='h7' weight={600}>Car title</Heading>
-              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
-
-              <div className='flex items-center gap-2'>
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
-                <h3>username</h3>
-              </div>
-
-              <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                  <span className='px-2 py-1'>KM - 0</span>
-                  <span className='px-2 py-1'>Year</span>
-                </div>
-                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
-              </div>
-            </li>
-
-            <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
-              <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
-              className='w-fit'
-              />
-              <Heading type='h7' weight={600}>Car title</Heading>
-              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
-
-              <div className='flex items-center gap-2'>
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
-                <h3>username</h3>
-              </div>
-
-              <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                  <span className='px-2 py-1'>KM - 0</span>
-                  <span className='px-2 py-1'>Year</span>
-                </div>
-                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
-              </div>
-            </li>
           </ul>
         </section>
       </main>
     </div>
     
     <div className='flex justify-center items-center lg:hidden'>
-      <button onClick={showAside} className=''>Show Filter</button>
+      <Button click_event={showAside} type='bg-brand'>Show Filter</Button>
     </div>
     </>
   )
