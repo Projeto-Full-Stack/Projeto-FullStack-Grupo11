@@ -14,12 +14,3 @@
     @apply bg-colors_color_white_fixed align-middle p-11 items-center max-w-2xl rounded;
   }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}

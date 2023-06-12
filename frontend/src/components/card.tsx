@@ -1,9 +1,16 @@
+
 import Profile from "./profile"
 import Button from "./button"
 import { Heading } from "./typography/heading.component"
 import { Text } from "./typography/text.components"
 
-const Card = () => {
+interface ICardProps {
+    name: string,
+    children: any
+}
+
+const Card = ({name, children}: ICardProps) => {
+
     
     return (
         <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
