@@ -50,6 +50,7 @@ module.exports = {
       },
       colors_color_white_fixed: "#ffffff",
       transparent: "transparent"
+
     },
     extend: {
       backgroundImage: {
