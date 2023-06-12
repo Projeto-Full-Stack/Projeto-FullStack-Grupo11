@@ -49,6 +49,7 @@ module.exports = {
         grey_10: "#fdfdfd",
       },
       colors_color_white_fixed: "#ffffff",
+      transparent: "transparent"
     },
     extend: {
       backgroundImage: {
