@@ -5,6 +5,7 @@ import { Heading } from '@/components/typography/heading.component';
 import NavBar from '@/components/navbar';
 import Button from '@/components/button';
 import Card from '@/components/card';
+import { Footer } from '@/components/footer';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,13 +35,14 @@ export default function Home() {
 
     <div className='lg:max-w-[1600px] lg:mx-auto'>
       <main className='flex lg:justify-between lg:px-7'>
-        <aside className={`w-[95%] fixed h-screen bottom-0 bg-colors_color_white_fixed z-1 p-[30px] flex flex-col gap-[42px] ${showFilter}
+        <aside className={`w-[95%] fixed h-screen bottom-0 bg-colors_color_white_fixed z-1 p-[30px] flex flex-col gap-[42px] overflow-y-scroll ${showFilter}
           lg:block
           lg:w-fit
           lg:static
           lg:flex
           lg:flex-col
           lg:gap-[39px]
+          lg:overflow-visible
         `}
         >
           <header className='flex justify-between lg:hidden'>
@@ -125,7 +127,7 @@ export default function Home() {
           </div>
         </aside>
 
-        <section className='flex overflow-hidden h-fit w-fit'>
+        <section className='flex overflow-hidden h-fit w-fit pl-2 lg:pl-0'>
           <ul className='flex gap-3 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10'>
             <Card />
             <Card />
@@ -142,9 +144,11 @@ export default function Home() {
       </main>
     </div>
     
-    <div className='flex justify-center items-center lg:hidden'>
+    <div className='flex justify-center items-center lg:hidden mt-[30px]'>
       <Button click_event={showAside} type='bg-brand'>Show Filter</Button>
     </div>
+
+    <Footer />
     </>
   )
 }
