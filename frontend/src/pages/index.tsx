@@ -14,9 +14,9 @@ export default function Home() {
 
   return (
     <>
-    <header className='flex justify-between'>
+    <header className='flex justify-between bg-grey-grey_1'>
       <div>
-        <h1 className='bg-gradient-to-r from-black to-blue-500 bg-clip-text text-transparent'>Motors <span>shops</span></h1>
+        <h1 className='text-transparent'>Motors <span>shops</span></h1>
       </div>
 
       <button>show navigation</button>
