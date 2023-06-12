@@ -1,13 +1,16 @@
-import { annoucementCardData } from "@/schemas/announcementCard.schema"
 import carImage  from "../image/Carro.png"
 import Profile from "./profile"
 import Button from "./button"
 
+const MAX_FILE_SIZE = 500000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
 interface ICardProps {
-    announcementCard: annoucementCardData
+    name: string,
+    children: any
 }
 
-const Card = ({announcementCard}: ICardProps) => {
+const Card = ({name, children}: ICardProps) => {
     
     return (
         <li className="">
