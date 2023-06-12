@@ -1,5 +1,3 @@
-import { annoucementCardData } from "@/schemas/announcementCard.schema"
-import carImage  from "../image/Carro.png"
 import Profile from "./profile"
 import Button from "./button"
 
@@ -13,7 +11,7 @@ const Card = ({announcementCard}: ICardProps) => {
         <li className="">
             <div className="m-4">
                 <span className="available">Ativo</span>
-                <img className ="bg-grey-grey_7 border-grey-grey_7" src={carImage.src}/>
+                <img className ="bg-grey-grey_7 border-grey-grey_7" src="../image/Carro.png"/>
             </div>
             <div className="m-4">
                 <h4 className="font-semibold my-4 text-grey-grey_1">Product title stays here - max 1 line</h4>

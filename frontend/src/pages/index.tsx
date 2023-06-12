@@ -2,6 +2,8 @@ import { Inter } from 'next/font/google'
 import { useState } from 'react'
 import { Text } from '@/components/typography/text.components';
 import { Heading } from '@/components/typography/heading.component';
+import NavBar from '@/components/navbar';
+import Button from '@/components/button';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,13 +16,7 @@ export default function Home() {
 
   return (
     <>
-    <header className='flex justify-between bg-grey-grey_1'>
-      <div>
-        <h1 className='text-transparent'>Motors <span>shops</span></h1>
-      </div>
-
-      <button>show navigation</button>
-    </header>
+    <NavBar />
     <div className="bg-[url('https://quatrorodas.abril.com.br/wp-content/uploads/2020/12/chevrolet-2021-onix-premier-8389-e1607978189472.jpg?quality=70&strip=info')]
                     h-[500px]
                     bg-center
@@ -37,7 +33,7 @@ export default function Home() {
 
     <div className='lg:max-w-[1600px] lg:mx-auto'>
       <main className='flex lg:justify-between lg:px-7'>
-        <aside className={`w-[95%] fixed h-screen bottom-0 bg-colors_color_white_fixed z-1 ${showFilter}
+        <aside className={`w-[95%] fixed h-screen bottom-0 bg-colors_color_white_fixed z-1 p-[30px] flex flex-col gap-[42px] ${showFilter}
           lg:block
           lg:w-fit
           lg:static
@@ -47,8 +43,8 @@ export default function Home() {
         `}
         >
           <header className='flex justify-between lg:hidden'>
-            <p>filter</p>
-            <button onClick={showAside}>X</button>
+            <Heading type='h7' weight={500}>Filtro</Heading>
+            <button className='text-[12px]text-grey-grey_4' onClick={showAside}>X</button>
           </header>
           <div className="flex flex-col gap-[20px]">
             <Heading type='h4' weight={600}>Marca</Heading>
@@ -123,7 +119,9 @@ export default function Home() {
             </section>
           </div>
 
-          <button>Filtrar</button>
+          <div className='lg:hidden flex justify-center'>
+            <Button type='bg-brand'>Ver anúncios</Button>
+          </div>
         </aside>
 
         <section className='flex overflow-hidden h-fit'>
