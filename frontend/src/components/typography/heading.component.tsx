@@ -1,3 +1,4 @@
+feat/frontend/announcementdetails
 interface HeadingSchema {
   type: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8"
   weight: 700 | 600 | 500 | 400
