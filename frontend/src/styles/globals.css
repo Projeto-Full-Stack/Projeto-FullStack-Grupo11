@@ -5,17 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .body {
+    @apply bg-gradient-to-t from-grey-grey_6 to-20% to-brand-brand_1 from-70%;
   }
-}
+
+  .announcement-box {
+    @apply bg-colors_color_white_fixed align-middle p-11 items-center max-w-2xl rounded;
+  }
 
