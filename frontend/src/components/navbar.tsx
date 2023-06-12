@@ -6,12 +6,9 @@ const NavBar = () => {
     const [navStatus, setNavStatus] = useState("hidden")
 
     function showNavigation (){
-        if (navStatus == "hidden"){
-            setNavStatus("block")
-        }else {
-            setNavStatus("hidden")
-        }
+        navStatus == "hidden" ? setNavStatus("block") : setNavStatus("hidden")
     }
+    
     function textButton (){
        return navStatus == "hidden" ? "Open" : "Close"
     }
