@@ -1,8 +1,9 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { useState } from 'react'
+import { Text } from '@/components/typography/text.components';
+import { Heading } from '@/components/typography/heading.component';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [showFilter, setAside] = useState("hidden")
@@ -10,7 +11,6 @@ export default function Home() {
   function showAside (){
     showFilter != "hidden" ? setAside("hidden") : setAside("block")
   }
-
 
   return (
     <>
@@ -31,91 +31,92 @@ export default function Home() {
                     justify-center
                     text-center
         ">
-          <h1>
-            Title
-          </h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, laboriosam?</p>
+          <Heading type='h1' weight={700} extra_classes='text-colors_color_white_fixed'>Motors Shop</Heading>
+          <Heading type='h2' weight={600} extra_classes='text-colors_color_white_fixed'>A melhor plataforma de anúncios de carros do país</Heading>
     </div>
 
     <div className='lg:max-w-[1600px] lg:mx-auto'>
       <main className='flex lg:justify-between lg:px-7'>
-        <aside className={`w-[95%] fixed h-screen bottom-0 bg-white z-1 ${showFilter}
+        <aside className={`w-[95%] fixed h-screen bottom-0 bg-colors_color_white_fixed z-1 ${showFilter}
           lg:block
           lg:w-fit
           lg:static
+          lg:flex
+          lg:flex-col
+          lg:gap-[39px]
         `}
         >
           <header className='flex justify-between lg:hidden'>
             <p>filter</p>
             <button onClick={showAside}>X</button>
           </header>
-          <div>
-            <h3>Marca</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Marca</Heading>
               <ul>
-                <li>General Motors</li>
-                <li>Fiat</li>
-                <li>Ford</li>
-                <li>Honda</li>
-                <li>Toyota</li>
-                <li>Volswagen</li>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>General Motors</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Fiat</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ford</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Honda</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Toyota</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Volswagen</Heading>
               </ul>
           </div>
-          <div>
-            <h3>Modelo</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Modelo</Heading>
             <ul>
-              <li>Civic</li>
-              <li>Corolla</li>
-              <li>Cruze</li>
-              <li>Fit</li>
-              <li>Gol</li>
-              <li>Ka</li>
-              <li>Onix</li>
-              <li>Pulse</li>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Civic</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Corolla</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Cruze</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Fit</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Gol</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ka</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Onix</Heading>
+              <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Pulse</Heading>
             </ul>
           </div>
 
-          <div>
-            <h3>Cor</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Cor</Heading>
               <ul>
-                <li>Azul</li>
-                <li>Branca</li>
-                <li>Cinza</li>
-                <li>Prata</li>
-                <li>Preta</li>
-                <li>Verde</li>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Azul</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Branca</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Cinza</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Prata</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Preta</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Verde</Heading>
               </ul>
           </div>
 
-          <div>
-            <h3>Ano</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Ano</Heading>
               <ul>
-                <li>Ano 1</li>
-                <li>Ano 2</li>
-                <li>Ano 3</li>
-                <li>Ano 4</li>
-                <li>Ano 5</li>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ano 1</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ano 2</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ano 3</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ano 4</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Ano 5</Heading>
               </ul>
           </div>
 
-          <div>
-            <h3>Combustivel</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Combustivel</Heading>
               <ul>
-                <li>Flex</li>
-                <li>Hibrido</li>
-                <li>Eletrico</li>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Flex</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Hibrido</Heading>
+                <Heading type='h6' weight={500} extra_classes='pl-[10px] text-grey-grey_3'>Eletrico</Heading>
               </ul>
           </div>
 
-          <div>
-            <h3>Km</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Km</Heading>
             <section className='flex justify-between gap-8'>
               <input type="number" placeholder='Mínimo' className='w-full'/>
               <input type="number" placeholder='Máximo' className='w-full'/>
             </section>
           </div>
 
-          <div>
-            <h3>Preco</h3>
+          <div className="flex flex-col gap-[20px]">
+            <Heading type='h4' weight={600}>Preco</Heading>
             <section className='flex justify-between gap-8'>
               <input type="number" placeholder='Mínimo'className='w-full'/>
               <input type="number" placeholder='Máximo'className='w-full'/>
@@ -131,8 +132,8 @@ export default function Home() {
               <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
               className='w-fit'
               />
-              <h2>Car title</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
 
               <div className='flex items-center gap-2'>
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
@@ -144,7 +145,7 @@ export default function Home() {
                   <span className='px-2 py-1'>KM - 0</span>
                   <span className='px-2 py-1'>Year</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
               </div>
             </li>
 
@@ -152,8 +153,8 @@ export default function Home() {
               <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
               className='w-fit'
               />
-              <h2>Car title</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
 
               <div className='flex items-center gap-2'>
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
@@ -165,7 +166,7 @@ export default function Home() {
                   <span className='px-2 py-1'>KM - 0</span>
                   <span className='px-2 py-1'>Year</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
               </div>
             </li>
 
@@ -173,8 +174,8 @@ export default function Home() {
               <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
               className='w-fit'
               />
-              <h2>Car title</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
 
               <div className='flex items-center gap-2'>
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
@@ -186,7 +187,7 @@ export default function Home() {
                   <span className='px-2 py-1'>KM - 0</span>
                   <span className='px-2 py-1'>Year</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
               </div>
             </li>
 
@@ -194,8 +195,8 @@ export default function Home() {
               <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
               className='w-fit'
               />
-              <h2>Car title</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
 
               <div className='flex items-center gap-2'>
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
@@ -207,7 +208,7 @@ export default function Home() {
                   <span className='px-2 py-1'>KM - 0</span>
                   <span className='px-2 py-1'>Year</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
               </div>
             </li>
 
@@ -215,8 +216,8 @@ export default function Home() {
               <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
               className='w-fit'
               />
-              <h2>Car title</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</p>
+              <Heading type='h7' weight={600}>Car title</Heading>
+              <Text type='b2' weight={400}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi doloribus molestiae commodi consequuntur sint deleniti vitae neque corrupti ipsa ab?</Text>
 
               <div className='flex items-center gap-2'>
                 <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="icon" className='w-8 h-8 rounded-full'/>
@@ -228,7 +229,7 @@ export default function Home() {
                   <span className='px-2 py-1'>KM - 0</span>
                   <span className='px-2 py-1'>Year</span>
                 </div>
-                <p>R$ 00.000,00</p>
+                <Heading type='h7' weight={500}>R$ 00.000,00</Heading>
               </div>
             </li>
           </ul>
