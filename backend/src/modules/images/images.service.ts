@@ -33,9 +33,9 @@ export class ImagesService {
     if (!found) {
       throw new NotFoundException('Image not found!');
     }
-    const announcement = await this.imageReopository.update(id, updateImageDto);
+    const image = await this.imageReopository.update(id, updateImageDto);
 
-    return announcement;
+    return image;
   }
 
   async remove(id: string) {
