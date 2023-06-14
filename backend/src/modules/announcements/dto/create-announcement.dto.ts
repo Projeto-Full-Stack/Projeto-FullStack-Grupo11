@@ -1,4 +1,11 @@
-import { IsString, IsNotEmpty, IsNumber, IsBoolean } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  IsBoolean,
+  IsArray,
+} from 'class-validator';
+import { Image } from 'src/modules/images/entities/image.entity';
 
 export class CreateAnnouncementDto {
   @IsString()

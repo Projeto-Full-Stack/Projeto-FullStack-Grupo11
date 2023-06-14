@@ -3,6 +3,7 @@ import { ImagesRepository } from '../images.repository';
 import { CreateImageDto } from '../../dto/create-image.dto';
 import { Image } from '../../entities/image.entity';
 import { PrismaService } from 'src/database/prisma.service';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class ImagesPrismaRepository implements ImagesRepository {
@@ -20,7 +21,7 @@ export class ImagesPrismaRepository implements ImagesRepository {
       },
     });
 
-    return newImage;
+    return plainToInstance(Image, newImage);
   }
 
   async findAll(annId: string): Promise<Image[]> {
@@ -28,7 +29,7 @@ export class ImagesPrismaRepository implements ImagesRepository {
       where: { announcementId: annId },
     });
 
-    return images;
+    return plainToInstance(Image, images);
   }
 
   async delete(id: string): Promise<void> {
