@@ -12,12 +12,26 @@ datasource db {
 
 model Announcement {
   id          String  @id
+  brand       String
+  model       String
+  fuel        String
+  fipe        Int
   color       String
   price       Int
   description String
   coverImage  String
   mileage     Int
   avaliable   Boolean
+  image       Image[]
 
   @@map("announcements")
+}
+
+model Image {
+  id             String       @id
+  imageUrl       String
+  announcement   Announcement @relation(fields: [announcementId], references: [id])
+  announcementId String
+
+  @@map("images")
 }
