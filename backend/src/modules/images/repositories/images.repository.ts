@@ -1,4 +1,5 @@
 import { CreateImageDto } from '../dto/create-image.dto';
+import { UpdateImageDto } from '../dto/update-image.dto';
 import { Image } from '../entities/image.entity';
 
 export abstract class ImagesRepository {
@@ -7,4 +8,6 @@ export abstract class ImagesRepository {
   abstract findAll(
     announcementId: string | undefined,
   ): Promise<Image[] | object>;
+  abstract update(id: string, data: UpdateImageDto): Promise<Image>;
+  abstract delete(id: string): Promise<void>;
 }
