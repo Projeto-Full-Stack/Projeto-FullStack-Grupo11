@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto';
-import { Image } from 'src/modules/images/entities/image.entity';
 
 export class Announcement {
   readonly id: string;
