@@ -6,7 +6,7 @@ interface IProfileProps {
     children?: any
 }
 
-const Profile = ({name, children}: IProfileProps) =>{
+const Profile = ({name, children}: IProfileProps) => {
 
     return (
         <div className="flex align-middle items-center gap-2">
