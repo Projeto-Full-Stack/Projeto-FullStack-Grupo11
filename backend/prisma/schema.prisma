@@ -23,6 +23,8 @@ model Announcement {
   mileage     Int
   avaliable   Boolean
   image       Image[]
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String
 
   @@map("announcements")
 }
@@ -45,6 +47,7 @@ model User {
   birthDate     DateTime
   description   String
   address       String @unique
+  announcements Announcement[]
   
   @@map("users")
 }
