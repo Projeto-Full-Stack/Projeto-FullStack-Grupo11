@@ -1,4 +1,3 @@
-import { Footer } from "@/components/footer";
 import NavBar from "@/components/navbar";
 import { Inter } from "next/font/google";
 
@@ -8,8 +7,9 @@ function RegisterPage() {
     return (
         <>
             <NavBar/>
-
-            <Footer/>
+            <form action="">
+                
+            </form>
         </>
     )
 }
