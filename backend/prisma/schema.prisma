@@ -42,7 +42,7 @@ model User {
   email         String
   cpf           Int
   phone         Int
-  birthDate     DateTime
+  birthDate     String 
   description   String
   address       String @unique
   

@@ -7,7 +7,7 @@ export class User {
   email: string;
   cpf: number;
   phone: number;
-  birthDate: Date;
+  birthDate: string;
   description: string;
 
   @Exclude()
