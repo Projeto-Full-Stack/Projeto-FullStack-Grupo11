@@ -17,13 +17,13 @@ export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post()
-  create(@Body() createImageDto: CreateImageDto, announcement: Announcement) {
-    return this.imagesService.create(createImageDto, announcement);
+  create(@Body() createImageDto: CreateImageDto) {
+    return this.imagesService.create(createImageDto);
   }
 
   @Get()
-  findAll(@Param('id') id: string) {
-    return this.imagesService.findAll(id);
+  findAll() {
+    return this.imagesService.findAll();
   }
 
   @Get(':id')
