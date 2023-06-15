@@ -14,7 +14,7 @@ export default function Announcements() {
       <NavBar/>
       <div className="flex justify-center">
         <section
-          className={` min-h-screen flex flex-col items-center p-3 gap-9`}
+          className={`min-h-screen flex flex-col items-center p-3 gap-9`}
         >
           <article className={`flex flex-col gap-4`}>
             <div className={` announcement-box `}>
