@@ -1,5 +1,5 @@
 import dexter from "../image/Dexter.jpg"
-import { Text } from "./typography/text.components"
+import { Text } from "./typography/text.component"
 
 interface IProfileProps {
     name: string,

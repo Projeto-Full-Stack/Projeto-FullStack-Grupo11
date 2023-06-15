@@ -2,14 +2,10 @@
 import Profile from "./profile"
 import Button from "./button"
 import { Heading } from "./typography/heading.component"
-import { Text } from "./typography/text.components"
+import { Text } from "./typography/text.component"
 
-interface ICardProps {
-    name: string,
-    children: any
-}
 
-const Card = ({name, children}: ICardProps) => {
+const Card = () => {
 
     
     return (

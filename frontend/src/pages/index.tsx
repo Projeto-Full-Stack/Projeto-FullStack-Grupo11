@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { useState } from 'react'
-import { Text } from '@/components/typography/text.components';
+import { Text } from '@/components/typography/text.component';
 import { Heading } from '@/components/typography/heading.component';
 import { Footer } from '@/components/footer';        
 import Input from "@/components/input";
