@@ -1,17 +1,17 @@
-import { Inter } from 'next/font/google';
-import { useRouter } from 'next/router';
-import { Text } from '@/components/typography/text.component';
-import { Heading } from '@/components/typography/heading.component';
-import NavBar from '@/components/navbar';
-import Button from '@/components/button';
+import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
+import { Text } from "@/components/typography/text.component";
+import { Heading } from "@/components/typography/heading.component";
+import NavBar from "@/components/navbar";
+import Button from "@/components/button";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Announcements() {
   const router = useRouter();
   return (
     <main className={`body`}>
-      <NavBar/>
+      <NavBar />
       <div className="flex justify-center">
         <section
           className={`min-h-screen flex flex-col items-center p-3 gap-9`}
@@ -34,7 +34,9 @@ export default function Announcements() {
                   <Button type={"specifications"}>2013</Button>
                   <Button type={"specifications"}>0 KM</Button>
                 </div>
-                <Heading type={"h7"} weight={500}>R$ 00.000,00</Heading>
+                <Heading type={"h7"} weight={500}>
+                  R$ 00.000,00
+                </Heading>
               </div>
               <Button type={"bg-brand"}>Comprar</Button>
             </div>
@@ -59,11 +61,7 @@ export default function Announcements() {
                   >
                     Júlia Lima
                   </Heading>
-                  <Heading
-                    type="h8"
-                    weight={400}
-                    extra_classes="text-grey-grey_3"
-                  >
+                  <Heading type="h8" weight={400} extra_classes="text-grey-3">
                     há 3 dias
                   </Heading>
                 </div>
