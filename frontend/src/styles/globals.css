@@ -15,6 +15,6 @@
   }
 
   .loginBody {
-    @apply bg-grey-grey_6 align-middle items-center rounded;
+    @apply bg-grey-6   align-middle items-center rounded;
   }
 }

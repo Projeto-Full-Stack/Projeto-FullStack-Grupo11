@@ -1,4 +1,4 @@
-import { modalContext } from "@/context/modal.context"
+import { ContextModal } from "@/context/modal.context"
 import { Heading } from "../typography/heading.component"
 
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ModalHeader = ({children}: Props) => {
-    const { setModalContent } = modalContext()
+    const { setModalContent } = ContextModal()
 
     return (
         <header className="flex justify-between items-center py-5">
