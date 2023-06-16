@@ -1,5 +1,5 @@
 interface IButtonSchema{
-    type: "bg-none" | "b-black" | "bg-black" | "bg-transparent" | "bg-light" | "bg-brand" | "bg-grey" | "specifications" | "b-brand" | "bg-alert" | "bg-successfull" | "bg-inactive" | "no-border"
+    type:  "b-grey" | "bg-none" | "b-black" | "bg-black" | "bg-transparent" | "bg-light" | "bg-brand" | "bg-grey" | "specifications" | "b-brand" | "bg-alert" | "bg-successfull" | "bg-inactive" | "no-border"
     extra_classes?: string
     children: string
     click_event?: any
@@ -39,6 +39,12 @@ const Button = ({
     )}
     if (type == "bg-successfull"){return (
         <button onClick={click_event} className={`text-feedback-success_1 bg-feedback-success_3 hover:bg-feedback-success_2 py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
+    )}
+    if(type == "bg-none"){return (
+        <button onClick={click_event} className={`text-brand-2 box-border border-grey-10 border-[1.5px] hover:border-brand-1  hover:text-brand-1 py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
+    )}
+    if(type == "b-grey"){return (
+        <button onClick={click_event} className={`text-grey-0 box-border border-grey-6 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
     )}
 }
 
