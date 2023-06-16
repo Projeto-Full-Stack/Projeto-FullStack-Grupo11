@@ -6,15 +6,14 @@ interface IProfileProps {
   children?: any;
 }
 
-const Profile = ({ name, children }: IProfileProps) => {
-  return (
-    <div className="flex align-middle items-center gap-2">
-      <img className="rounded-full w-8 h-8" src={dexter.src} />
-      <Text type="b2" weight={500} extra_classes="text-grey-2">
-        {name}
-      </Text>
-    </div>
-  );
-};
+const Profile = ({name, children}: IProfileProps) => {
 
-export default Profile;
+    return (
+        <div className="flex align-middle items-center gap-2">
+            <img className="rounded-full w-8 h-8" src={dexter.src}/>
+            <Text type="b2" weight={500} extra_classes="text-grey-grey_2">{name}</Text>
+        </div>
+    )
+}
+
+export default Profile

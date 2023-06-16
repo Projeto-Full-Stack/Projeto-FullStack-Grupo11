@@ -22,13 +22,16 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     return plainToInstance(Announcement, newAnnouncement);
   }
   async findAll(): Promise<Announcement[]> {
-    const announcements = await this.prisma.announcement.findMany();
+    const announcements = await this.prisma.announcement.findMany({
+      include: { image: true },
+    });
 
     return plainToInstance(Announcement, announcements);
   }
   async findOne(id: string): Promise<Announcement> {
     const announcement = await this.prisma.announcement.findUnique({
       where: { id },
+      include: { image: true },
     });
 
     return plainToInstance(Announcement, announcement);

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { IsString, IsNotEmpty, IsNumber, IsBoolean } from 'class-validator';
 
 export class CreateAnnouncementDto {
@@ -8,6 +9,10 @@ export class CreateAnnouncementDto {
   @IsString()
   @IsNotEmpty()
   model: string;
+
+  @IsString()
+  @IsNotEmpty()
+  year: string;
 
   @IsString()
   @IsNotEmpty()
