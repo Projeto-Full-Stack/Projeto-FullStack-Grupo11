@@ -1,9 +1,9 @@
-import dexter from "../image/Dexter.jpg"
-import { Text } from "./typography/text.components"
+import dexter from "../image/Dexter.jpg";
+import { Text } from "./typography/text.components";
 
 interface IProfileProps {
-    name: string,
-    children?: any
+  name: string;
+  children?: any;
 }
 
 const Profile = ({name, children}: IProfileProps) => {

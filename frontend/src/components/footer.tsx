@@ -4,7 +4,7 @@ import { Text } from "./typography/text.components";
 export function Footer() {
   return (
     <footer
-      className="bg-[#000] py-[58px] bottom-0 w-full flex flex-col items-center gap-[60px] pt-[60px]
+      className="bg-[#000] py-[58px] bottom-0 w-full flex flex-col items-center gap-[60px] mt-[60px]
             lg:px-[60px]
             lg:flex-row
             lg:justify-between
@@ -26,7 +26,7 @@ export function Footer() {
       </Text>
       <button
         onClick={() => scroll(0, 0)}
-        className="text-colors_color_white_fixed border border-grey-grey_1 rounded bg-grey-grey_1 w-[53px] h-[53px] text-center text-[30px]"
+        className="text-colors_color_white_fixed border border-grey-1 rounded bg-grey-1 w-[53px] h-[53px] text-center text-[30px]"
       >
         ^
       </button>

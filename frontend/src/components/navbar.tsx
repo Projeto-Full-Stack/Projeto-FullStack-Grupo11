@@ -1,17 +1,17 @@
-import { useState } from "react"
-import Button from "./button"
-import { Heading } from "./typography/heading.component"
+import { useState } from "react";
+import Button from "./button";
+import { Heading } from "./typography/heading.component";
 
 const NavBar = () => {
-    const [navStatus, setNavStatus] = useState("hidden")
+  const [navStatus, setNavStatus] = useState("hidden");
 
-    function showNavigation (){
-        navStatus == "hidden" ? setNavStatus("block") : setNavStatus("hidden")
-    }
-    
-    function textButton (){
-       return navStatus == "hidden" ? "Open" : "Close"
-    }
+  function showNavigation() {
+    navStatus == "hidden" ? setNavStatus("block") : setNavStatus("hidden");
+  }
+
+  function textButton (){
+    return navStatus == "hidden" ? "Open" : "Close"
+ }
 
     return (
         <>
@@ -31,4 +31,4 @@ const NavBar = () => {
         )
 }
 
-export default NavBar
+export default NavBar;
