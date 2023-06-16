@@ -1,5 +1,5 @@
 interface IButtonSchema{
-    type: "bg-black" | "bg-transparent" | "bg-light" | "bg-brand" | "bg-grey" | "specifications" | "b-brand" | "bg-alert" | "bg-successfull" | "bg-inactive" | "no-border"
+    type: "bg-none" | "b-black" | "bg-black" | "bg-transparent" | "bg-light" | "bg-brand" | "bg-grey" | "specifications" | "b-brand" | "bg-alert" | "bg-successfull" | "bg-inactive" | "no-border"
     extra_classes?: string
     children: string
     click_event?: any
@@ -21,7 +21,7 @@ const Button = ({type, extra_classes="", children, click_event}: IButtonSchema) 
         <span className={`bg-brand-brand_4 text-brand-brand_1 py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</span>
     )}
     if (type == "bg-light"){return (
-        <button onClick={click_event} className={`bg-grey-grey_10 border-grey-grey_10 text-grey-grey_2 hover:border-grey-grey_2 hover:text-grey-grey_0  border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
+        <button onClick={click_event} className={`bg-grey-grey_10 border-grey-grey_10 text-grey-grey_2 hover:border-grey-grey_2 hover:text-grey-grey_0 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
     )}
     if (type == "b-brand"){return (
         <button onClick={click_event} className={`bg-grey-grey_10 border-brand-brand_1 hover:bg-brand-brand_4 text-brand-brand_1 disabled:bg-brand-brand_3 disabled:text-brand-brand_4 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
@@ -34,6 +34,12 @@ const Button = ({type, extra_classes="", children, click_event}: IButtonSchema) 
     )}
     if (type == "bg-successfull"){return (
         <button onClick={click_event} className={`text-feedback-success_1 bg-feedback-success_3 hover:bg-feedback-success_2 py-1.5 px-5 rounded font-medium  min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
+    )}
+    if (type == "b-black"){return(
+        <button onClick={click_event} className={`bg-grey-grey_10 border-grey-grey_2 text-grey-grey_0 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
+    )}
+    if (type == "bg-none"){return(
+        <button onClick={click_event} className={`bg-grey-grey_10 border-grey-grey_10 text-brand-brand_2 hover:text-brand-brand_1 hover:underline border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}>{children}</button>
     )}
 }
 

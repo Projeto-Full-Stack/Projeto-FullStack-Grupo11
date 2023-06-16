@@ -3,6 +3,26 @@ import { IsString, IsNotEmpty, IsNumber, IsBoolean } from 'class-validator';
 export class CreateAnnouncementDto {
   @IsString()
   @IsNotEmpty()
+  brand: string;
+
+  @IsString()
+  @IsNotEmpty()
+  model: string;
+
+  @IsString()
+  @IsNotEmpty()
+  year: string;
+
+  @IsString()
+  @IsNotEmpty()
+  fuel: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  fipe: number;
+
+  @IsString()
+  @IsNotEmpty()
   color: string;
 
   @IsNumber()

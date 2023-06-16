@@ -1,17 +1,9 @@
-
-import Profile from "./profile"
-import Button from "./button"
 import { Heading } from "./typography/heading.component"
 import { Text } from "./typography/text.components"
+import Profile from "./profile"
+import Button from "./button"
 
-interface ICardProps {
-    name: string,
-    children: any
-}
-
-const Card = ({name, children}: ICardProps) => {
-
-    
+const Card = () => {
     return (
         <li className='flex flex-col min-w-[312px] max-w-[312px] gap-4 h-fit'>
             <img src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg" alt="car-photo" 
