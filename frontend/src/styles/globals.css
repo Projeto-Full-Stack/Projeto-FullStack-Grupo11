@@ -13,4 +13,4 @@
   .announcement-box {
     @apply bg-colors_color_white_fixed align-middle p-11 items-center max-w-2xl rounded;
   }
-
+}
