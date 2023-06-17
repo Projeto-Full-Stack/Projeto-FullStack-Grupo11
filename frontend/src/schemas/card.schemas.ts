@@ -19,4 +19,4 @@ export const cardSchema = z.object({
     ),
 });
 
-export const CardData = z.infer<typeof cardSchema>;
+export type CardData = z.infer<typeof cardSchema>;
