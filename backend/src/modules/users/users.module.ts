@@ -15,5 +15,6 @@ import { UsersInMemoryRepository } from './repositories/in-memory/users.in-memor
       useClass: UsersInMemoryRepository,
     },
   ],
+  exports: [UsersService],
 })
 export class UsersModule {}
