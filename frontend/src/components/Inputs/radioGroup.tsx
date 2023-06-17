@@ -16,12 +16,8 @@ const RadioGroup = ({ options, onChange, value, labelText }: IProps) => {
   }
   return (
     <div>
-      { <Text weight={500} type="b2">{`${labelText}`}</Text> && (
-        <label className="block text-gray-600 mb-2 text-xs lg:text-sm xl:text-base">
-          {labelText}
-        </label>
-      )}
-      <div className="flex justify-evenly">
+      <label className="block font-medium">{labelText}</label>
+      <div className="flex">
         {options.map((el, index) => (
           <Option
             key={index}

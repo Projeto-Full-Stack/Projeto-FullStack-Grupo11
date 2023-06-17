@@ -14,7 +14,7 @@ function RegisterPage() {
         <main className={`bg-grey-7`}>
             <NavBar/>
         <div className={`flex justify-center items-center h-[90vh]`}>
-                <form action="" className={`bg-grey-10 flex flex-col gap-4 items-start p-5 w-[412px] h-[my-max]`}>
+                <form action="" className={`bg-grey-10 flex flex-col gap-4 items-start py-22 px-24 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5">{"Cadastro"}</Heading>
                 <div>
                         <Text weight={500} type="b2">{"Informações Pessoais"}</Text>
@@ -118,10 +118,10 @@ function RegisterPage() {
                             onChange={(option) => console.log(option)}
                             labelText="Tipo de Conta"
                             options={[
-                              <div className="flex flex-1 justify-around">
+                              <div className="flex justify-around">
                                 <span>Anunciante</span>
                               </div>,
-                              <div className="flex  flex-1 justify-around">
+                              <div className="flex justify-around">
                                 <span>Comprador</span>
                               </div>
                             ]}
