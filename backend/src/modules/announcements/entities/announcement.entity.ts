@@ -13,6 +13,7 @@ export class Announcement {
   coverImage: string;
   mileage: number;
   avaliable: boolean;
+  userId: string;
 
   constructor() {
     this.id = randomUUID();
