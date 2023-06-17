@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Option from "./option";
-import { Text } from "../typography/text.components";
 
 interface IProps {
   options: React.ReactElement[];
@@ -15,9 +14,9 @@ const RadioGroup = ({ options, onChange, value, labelText }: IProps) => {
     onChange && onChange(index);
   }
   return (
-    <div>
-      <label className="block font-medium">{labelText}</label>
-      <div className="flex">
+    <div className="my-[20px]">
+      <label className="block font-medium mb-[10px]">{labelText}</label>
+      <div className="flex w-[314px] justify-between">
         {options.map((el, index) => (
           <Option
             key={index}

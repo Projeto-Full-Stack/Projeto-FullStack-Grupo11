@@ -9,7 +9,7 @@ const Option = (props: OptionProps) => {
   const isSelected = props.index === props.selectedIndex;
   return (
     <div
-      className={`flex items-center cursor-pointer text-grey-0 box-border border-grey-6 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${
+      className={`flex items-center cursor-pointer text-grey-0 box-border border-grey-6 border-[1.5px] py-1.5 px-8 rounded font-medium min-w-max max-h-[48px] ${
         isSelected && "bg-brand-1 text-grey-7"
       }`}
       onClick={() => props.onSelect(props.index)}

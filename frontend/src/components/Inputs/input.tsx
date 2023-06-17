@@ -25,7 +25,7 @@ const Input = ({
             return (
                 <label 
                     htmlFor={input_name} 
-                    className={`block max-w-min font-medium text-grey-1 ${extra_classes}`}
+                    className={`block max-w-min font-medium text-grey-1`}
                 >
                     {label}
                     <input
@@ -34,17 +34,17 @@ const Input = ({
                         type={input_type} 
                         required={is_required}
                         placeholder={children}
-                        className={`border-grey-4 border-[1.5px] focus:border-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                        className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
                     />
                 </label>
             )
         }
 
-        if (input_type == "date" || input_type == "tel"){
+        if (input_type == "tel"){
             return (
                 <label 
                     htmlFor={input_name} 
-                    className={`block max-w-min font-medium text-grey-1 ${extra_classes}`}
+                    className={`block max-w-min font-medium text-grey-1`}
                 >
                     {label}
                     <input
@@ -54,16 +54,36 @@ const Input = ({
                         required={is_required}
                         placeholder={children}
                         pattern={input_pattern}
-                        className={`border-grey-4 border-[1.5px] focus:border-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                        className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                    />
+                </label>
+            )
+        }
+
+        if (input_type == "date"){
+            return (
+                <label 
+                    htmlFor={input_name} 
+                    className={`font-medium text-grey-1`}
+                >
+                    {label}
+                    <input
+                        id={input_name}
+                        name={input_name}
+                        type={input_type}
+                        required={is_required}
+                        placeholder={children}
+                        pattern={input_pattern}
+                        className={`select-none mb-[10px] text-grey-3 border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
                     />
                 </label>
             )
         }
 
         if (input_type == "textArea"){ return(
-                <label htmlFor={input_name} className={`block max-w-min font-medium text-grey-1 ${extra_classes}`}>
+                <label htmlFor={input_name} className={`block mb-[80px] max-w-min font-medium py-2 text-grey-1 ${extra_classes}`}>
                     {label}
-                    <textarea id={input_name} name={input_name} required={is_required} cols={30} rows={5} placeholder={children}></textarea>    
+                    <textarea id={input_name} className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded w-[315px] px-6 pt-3 resize-none border-[1.5px] h-[80px]`} name={input_name} required={is_required} placeholder={children}/>   
                 </label> 
         )}
 }
