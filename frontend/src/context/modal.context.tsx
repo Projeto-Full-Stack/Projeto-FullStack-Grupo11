@@ -21,7 +21,7 @@ export const ModalProvider = ({children}: ProviderProps) => {
     )
 }
 
-export const modalContext = () => useContext(ModalContext)
+export const ContextModal = () => useContext(ModalContext)
 
 /* 
     Para usar o modal, coloquem um botão que no evento "onClick" ele usa a função anônima () => setModalContent(JSXElement) sendo o JSXElement uma função onde o return é um HTML,

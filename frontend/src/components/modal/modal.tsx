@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react"
-import { modalContext } from "@/context/modal.context"
-import { ModalHeader } from "./modalHeader"
+import { ContextModal } from "@/context/modal.context"
 
 export const Modal = () => {
-    const { modalContent } = modalContext()
+    const { modalContent } = ContextModal()
 
     return (
         <>
