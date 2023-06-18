@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Input from "@/components/Inputs/input";
 import NavBar from "@/components/navbar";
 import { Text } from "@/components/typography/text.components";
@@ -7,26 +5,29 @@ import { Heading } from "@/components/typography/heading.component";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import RadioGroup from "@/components/Inputs/radioGroup";
-import { useForm } from "react-hook-form";
-
+import {  SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registerSchema, validationRegisterSchema } from "@/schemas/register.schemas";
 
 const inter = Inter({ subsets: ["latin"] });
 
 function RegisterPage() {
-    const {handleSubmit, register, formState: { isValid, errors }} = useForm({
-        mode: "onChange",
+    const { 
+        handleSubmit, 
+        register, 
+        formState: { errors }
+    } = useForm<validationRegisterSchema>({
+        resolver: zodResolver(registerSchema),
     })
 
-    const handleRegister = (data: any) =>{
-        console.log(data)
-    }
-
+    const onSubmit: SubmitHandler<validationRegisterSchema> = (data) => console.log(data);
+    
     return(
 
         <main className={`bg-grey-7 min-h-screen`}>
             <NavBar/>
         <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
-                <form onSubmit={handleSubmit(handleRegister)} action="" className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
+                <form onSubmit={handleSubmit(onSubmit)} action="" className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5" extra_classes="mb-[32px]">{"Cadastro"}</Heading>
                     <div>
                         <Text weight={500} type="b2" extra_classes="mb-[24px]">{"Informações Pessoais"}</Text>
@@ -39,6 +40,7 @@ function RegisterPage() {
                             label="Nome"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Ex: Samuel Leão"}</Input>
+                        {errors?.name?.type === "required" && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">O nome é obrigatório</Text>}
                         <Input 
                             {...register("email",{
                                 required:true,
