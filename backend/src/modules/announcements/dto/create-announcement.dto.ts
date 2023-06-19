@@ -12,6 +12,10 @@ export class CreateAnnouncementDto {
 
   @IsString()
   @IsNotEmpty()
+  year: string;
+
+  @IsString()
+  @IsNotEmpty()
   fuel: string;
 
   @IsNumber()
