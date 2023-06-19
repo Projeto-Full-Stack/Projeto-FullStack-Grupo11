@@ -13,6 +13,7 @@ export class ImagesController {
     @Param('annId') annId: string,
   ) {
     return this.imagesService.create(createImageDto, annId);
+
   }
 
   @Get(':annId')
