@@ -4,6 +4,7 @@ export class Announcement {
   readonly id: string;
   brand: string;
   model: string;
+  year: string;
   fuel: string;
   fipe: number;
   color: string;
@@ -12,6 +13,7 @@ export class Announcement {
   coverImage: string;
   mileage: number;
   avaliable: boolean;
+  userId: string;
 
   constructor() {
     this.id = randomUUID();

@@ -9,10 +9,14 @@ import { plainToInstance } from 'class-transformer';
 @Injectable()
 export class AnnouncementPrismaRepository implements AnnouncementRepository {
   constructor(private prisma: PrismaService) {}
-  async create(data: CreateAnnouncementDto): Promise<Announcement> {
+  async create(
+    data: CreateAnnouncementDto,
+    userId: string,
+  ): Promise<Announcement> {
     const announcement = new Announcement();
     Object.assign(announcement, {
       ...data,
+      userId: userId,
     });
 
     const newAnnouncement = await this.prisma.announcement.create({
@@ -22,13 +26,16 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     return plainToInstance(Announcement, newAnnouncement);
   }
   async findAll(): Promise<Announcement[]> {
-    const announcements = await this.prisma.announcement.findMany();
+    const announcements = await this.prisma.announcement.findMany({
+      include: { image: true },
+    });
 
     return plainToInstance(Announcement, announcements);
   }
   async findOne(id: string): Promise<Announcement> {
     const announcement = await this.prisma.announcement.findUnique({
       where: { id },
+      include: { image: true },
     });
 
     return plainToInstance(Announcement, announcement);

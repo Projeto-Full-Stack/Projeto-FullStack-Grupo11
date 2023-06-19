@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
-import { useState } from "react";
-import { Footer } from "@/components/footer";
-import Announcements from "./announcement";
+
+import { useState } from 'react'
+import RegisterPage from "./register";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,8 +15,8 @@ export default function Home() {
 
   return (
     <>
-      <Announcements />
-      <Footer />
+      <RegisterPage/>
+
     </>
   );
 }
