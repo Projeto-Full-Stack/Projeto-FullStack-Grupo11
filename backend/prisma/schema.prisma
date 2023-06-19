@@ -43,9 +43,9 @@ model User {
   email         String
   cpf           Int
   phone         Int
-  birthDate     String 
+  birthDate     String
   description   String
-  address       String @unique
+  address       String       @unique
   
   @@map("users")
 }

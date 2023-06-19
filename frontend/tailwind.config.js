@@ -11,9 +11,9 @@ module.exports = {
         alert_1: "#cd2b31",
         alert_2: "#fdd8d8",
         alert_3: "#ffe5e5",
-        sucess_1: "#18794e",
-        sucess_2: "#ccebd7",
-        sucess_3: "#ddf3e4",
+        success_1: "#18794e",
+        success_2: "#ccebd7",
+        success_3: "#ddf3e4",
       },
       random: {
         1: "#e34d8c",

@@ -7,7 +7,7 @@
 
 @layer components {
   .body {
-    @apply bg-gradient-to-t from-grey-6 to-20% to-brand-1 from-70%;
+    @apply bg-gradient-to-t from-grey-6 to-20% to-brand-1 from-85%;
   }
 
   .announcement-box {
@@ -15,6 +15,6 @@
   }
 
   .loginBody {
-    @apply bg-grey-grey_6 align-middle items-center rounded h-full;
+    @apply bg-grey-6 align-middle items-center rounded;
   }
 }

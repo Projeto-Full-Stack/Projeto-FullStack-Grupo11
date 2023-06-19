@@ -1,14 +1,14 @@
+import Input from "@/components/Inputs/input";
 import Button from "@/components/button";
 import { Footer } from "@/components/footer";
-import Input from "@/components/input";
 import NavBar from "@/components/navbar";
 import { Heading } from "@/components/typography/heading.component";
 
 export default function Login() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-grey-6">
       <NavBar />
-      <main className={`loginBody`}>
+      <main className="flex-1">
         <div className="flex justify-center items-center p-6">
           <form
             className={`flex flex-col gap-8 items-start p-10 w-[412px] h-[542px] bg-colors_color_white_fixed rounded`}
@@ -47,6 +47,6 @@ export default function Login() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
