@@ -57,7 +57,7 @@ const Button = ({
   if (type == "specifications") {
     return (
       <span
-        className={`bg-brand-4 text-brand-1 py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-[28px] ${extra_classes}`}
+        className={`bg-brand-4 text-brand-1 py-1.5 px-5 rounded font-medium min-w-max max-h-[32px] max-w-[50px] ${extra_classes}`}
       >
         {children}
       </span>

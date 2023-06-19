@@ -7,7 +7,7 @@
 
 @layer components {
   .body {
-    @apply bg-gradient-to-t from-grey-6 to-20% to-brand-1 from-70%;
+    @apply bg-gradient-to-t from-grey-6 to-20% to-brand-1 from-85%;
   }
 
   .announcement-box {

@@ -14,8 +14,8 @@ const NavBar = () => {
   }
 
   return (
-    <>
-      <header className="flex justify-between items-center px-[16px] h-[80px] bg-grey-10 border-">
+    <div className="w-full  bg-grey-10 ">
+      <header className="max-w-[2300px] flex justify-between items-center px-[16px] h-[80px] bg-grey-10 m-auto ">
         <Heading
           type="h3"
           weight={600}
@@ -24,12 +24,10 @@ const NavBar = () => {
           Motors shops
         </Heading>
         <div className="lg:border-grey-6 items-center lg:border-l-[2px] h-full py-[20px] lg:items-center lg:px-5 lg:min-h-full hidden lg:block">
-          <Button
-            type={"bg-light"}
-            children={"Fazer login"}
-            extra_classes="mx-2"
-          />
-          <Button type={"bg-light"} children={"Cadastrar"} />
+          <Button type={"bg-light"} extra_classes="mx-2">
+            Fazer login
+          </Button>
+          <Button type={"bg-light"}>Cadastrar</Button>
         </div>
         <button className="lg:hidden" onClick={showNavigation}>
           {textButton()}
@@ -38,14 +36,12 @@ const NavBar = () => {
       <div
         className={`absolute min-w-[100%] flex justify-evenly py-[5px] bg-colors_color_white_fixed ${navStatus} lg:hidden`}
       >
-        <Button
-          type={"bg-light"}
-          children={"Fazer login"}
-          extra_classes="mx-2"
-        />
-        <Button type={"bg-light"} children={"Cadastrar"} />
+        <Button type={"bg-light"} extra_classes="mx-2">
+          Fazer login
+        </Button>
+        <Button type={"bg-light"}>Cadastrar</Button>
       </div>
-    </>
+    </div>
   );
 };
 
