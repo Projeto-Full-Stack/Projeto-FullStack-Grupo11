@@ -1,4 +1,4 @@
-import Input from "./input";
+import Input from "./Inputs/input";
 import { ModalHeader } from "./modal/modalHeader";
 
 export const AnnForm = () => {
