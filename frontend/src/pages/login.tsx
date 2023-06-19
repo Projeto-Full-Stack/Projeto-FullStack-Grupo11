@@ -1,29 +1,52 @@
-// import Input from "@/components/input";
-// import NavBar from "@/components/navbar";
+import Input from "@/components/Inputs/input";
+import Button from "@/components/button";
+import { Footer } from "@/components/footer";
+import NavBar from "@/components/navbar";
+import { Heading } from "@/components/typography/heading.component";
 
-// export default function Login() {
-//   return (
-//     <main className={`loginBody`}>
-//       <NavBar />
-//       <div className="flex justify-center items-center h-[90vh]">
-//         <form
-//           className={`flex flex-col gap-4 items-start p-5 w-[412px] h-[542px] bg-colors_color_white_fixed`}
-//         >
-//           <h1>Login</h1>
-//           <div>
-//             <Input
-//               placeholder={`Digitar email`}
-//               htmlFor={`email`}
-//               type={`email`}
-//               label={`Email`}
-//             />
-//             <p>Esqueci minha senha</p>
-//             <button>Entrar</button>
-//             <p>Ainda não possui conta?</p>
-//             <button>Cadastrar</button>
-//           </div>
-//         </form>
-//       </div>
-//     </main>
-//   );
-// }
+export default function Login() {
+  return (
+    <div className="flex flex-col min-h-screen bg-grey-6">
+      <NavBar />
+      <main className="flex-1">
+        <div className="flex justify-center items-center p-6">
+          <form
+            className={`flex flex-col gap-8 items-start p-10 w-[412px] h-[542px] bg-colors_color_white_fixed rounded`}
+          >
+            <Heading type={`h5`} weight={500}>{`Login`}</Heading>
+            <div className="flex flex-col justify-center w-full gap-8">
+              <Input
+                label={`Email`}
+                input_type={`email`}
+                input_name={`email`}
+                extra_classes={`w-full`}
+              >
+                {`Digitar email`}
+              </Input>
+              <Input
+                label={"Senha"}
+                input_type={`password`}
+                input_name={`password`}
+                extra_classes={`w-full`}
+              >{`Digitar senha`}</Input>
+              <a
+                href=""
+                className={`flex justify-end align-center font-semibold text-[14px] leading-[24px] font-inter`}
+              >
+                Esqueci minha senha
+              </a>
+              <Button type={`bg-brand`}>{`Entrar`}</Button>
+              <p
+                className={`flex justify-center align-center font-medium text-[14px] leading-[24px] font-inter`}
+              >
+                Ainda não possui conta?
+              </p>
+              <Button type={`b-black`}>{`Cadastrar`}</Button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
