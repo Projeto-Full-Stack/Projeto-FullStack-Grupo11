@@ -13,4 +13,8 @@
   .announcement-box {
     @apply bg-colors_color_white_fixed align-middle p-11 items-center max-w-2xl rounded;
   }
+
+  .loginBody {
+    @apply bg-grey-6   align-middle items-center rounded;
+  }
 }

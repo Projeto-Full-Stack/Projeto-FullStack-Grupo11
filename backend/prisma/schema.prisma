@@ -14,6 +14,7 @@ model Announcement {
   id          String  @id
   brand       String
   model       String
+  year        String
   fuel        String
   fipe        Int
   color       String
@@ -34,4 +35,17 @@ model Image {
   announcementId String
 
   @@map("images")
+}
+
+model User {
+  id            String        @id
+  name          String
+  email         String
+  cpf           Int
+  phone         Int
+  birthDate     String 
+  description   String
+  address       String @unique
+  
+  @@map("users")
 }

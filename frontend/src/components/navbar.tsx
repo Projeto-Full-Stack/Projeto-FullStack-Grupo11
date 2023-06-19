@@ -9,9 +9,10 @@ const NavBar = () => {
     navStatus == "hidden" ? setNavStatus("block") : setNavStatus("hidden");
   }
 
-  function textButton() {
-    return navStatus == "hidden" ? "Open" : "Close";
-  }
+  function textButton (){
+    return navStatus == "hidden" ? "Open" : "Close"
+ }
+
 
   return (
     <div className="w-full  bg-grey-10 ">
@@ -44,5 +45,6 @@ const NavBar = () => {
     </div>
   );
 };
+
 
 export default NavBar;

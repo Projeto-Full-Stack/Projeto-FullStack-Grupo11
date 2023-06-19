@@ -14,7 +14,7 @@ export default function Announcements() {
       <NavBar />
       <div className="flex justify-center">
         <section
-          className={` min-h-screen flex flex-col items-center p-3 gap-9`}
+          className={`min-h-screen flex flex-col items-center p-3 gap-9`}
         >
           <article className={`flex flex-col gap-4`}>
             <div className={` announcement-box `}>
@@ -42,21 +42,7 @@ export default function Announcements() {
             </div>
           </article>
 
-          <article className={`flex flex-col gap-4 `}>
-            <div
-              className={` announcement-box flex flex-col gap-4 items-start`}
-            >
-              <Heading type="h6" weight={600} extra_classes="text-grey_0">
-                Descrição
-              </Heading>
-              <Text type="b1" weight={400}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the s standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book.
-              </Text>
-            </div>
-
+          <article>
             <ul className={`announcement-box flex flex-col gap-8 items-start`}>
               <Heading type="h6" weight={600} extra_classes="text-grey_0">
                 Comentários
@@ -87,54 +73,7 @@ export default function Announcements() {
                   book.
                 </Text>
               </li>
-
-              <li className={`flex flex-col gap-3`}>
-                <div className={`flex items-center gap-3`}>
-                  <img
-                    className={`w-10 h-10 `}
-                    src="https://img.elo7.com.br/product/zoom/3187C7F/adesivos-de-parede-adesivos-de-parede.jpg"
-                    alt=""
-                  />
-                  <Heading type="h8" weight={500} extra_classes="text-grey_0">
-                    Marco Antônio
-                  </Heading>
-                  <Heading type="h8" weight={400} extra_classes="text-grey-3">
-                    há 7 dias
-                  </Heading>
-                </div>
-                <Text type="b1" weight={400}>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the s standard
-                  dummy text ever since the 1500s, when an unknown printer took
-                  a galley of type and scrambled it to make a type specimen
-                  book.
-                </Text>
-              </li>
-
-              <li className={`flex flex-col gap-3`}>
-                <div className={`flex items-center gap-3`}>
-                  <img
-                    className={`w-10 h-10 `}
-                    src="https://img.elo7.com.br/product/zoom/3187C7F/adesivos-de-parede-adesivos-de-parede.jpg"
-                    alt=""
-                  />
-                  <Heading type="h8" weight={500} extra_classes="text-grey_0">
-                    Camila Silva
-                  </Heading>
-                  <Heading type="h8" weight={400} extra_classes="text-grey-3">
-                    há 1 mês
-                  </Heading>
-                </div>
-                <Text type="b1" weight={400}>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the s standard
-                  dummy text ever since the 1500s, when an unknown printer took
-                  a galley of type and scrambled it to make a type specimen
-                  book.
-                </Text>
-              </li>
             </ul>
-
             <div
               className={` announcement-box flex flex-col gap-4 items-start`}
             >
