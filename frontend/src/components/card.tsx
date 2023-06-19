@@ -2,6 +2,7 @@ import { Heading } from "./typography/heading.component";
 import { Text } from "./typography/text.components";
 import Profile from "./profile";
 import Button from "./button";
+import Image from "next/image";
 
 const Card = () => {
   return (

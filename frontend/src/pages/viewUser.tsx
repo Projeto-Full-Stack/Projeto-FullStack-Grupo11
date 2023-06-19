@@ -37,7 +37,10 @@ const ViewUser = () => {
           >
             Anúncios
           </Heading>
-          <ul className="flex gap-2 overflow-scroll">
+          <ul className="flex gap-4 overflow-scroll md:[613px] md:overflow-hidden md:flex-wrap md:justify-center ">
+            <Card />
+            <Card />
+            <Card />
             <Card />
             <Card />
           </ul>
