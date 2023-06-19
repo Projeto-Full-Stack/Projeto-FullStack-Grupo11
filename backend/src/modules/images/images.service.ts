@@ -7,12 +7,18 @@ import { Announcement } from '@prisma/client';
 @Injectable()
 export class ImagesService {
   constructor(private imageReopository: ImagesRepository) {}
-  async create(createAnnouncementDto: CreateImageDto) {
-    const image = await this.imageReopository.create(createImageDto);
+  async create(
+    createAnnouncementDto: CreateImageDto,
+    announcementId: Announcement,
+  ) {
+    const image = await this.imageReopository.create(
+      createAnnouncementDto,
+      announcementId.id,
+    );
     return image;
   }
-  async findAll() {
-    const images = await this.imageReopository.findAll();
+  async findAll(announcementId: Announcement) {
+    const images = await this.imageReopository.findAll(announcementId.id);
     return images;
   }
   async findOne(id: string) {

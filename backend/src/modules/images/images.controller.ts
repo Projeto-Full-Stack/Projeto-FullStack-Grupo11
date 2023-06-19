@@ -10,20 +10,20 @@ import {
 import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
-import { Announcement } from '@prisma/client';
+import { Announcement } from '../announcements/entities/announcement.entity';
 
 @Controller('images')
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
-  @Post()
-  create(@Body() createImageDto: CreateImageDto) {
-    return this.imagesService.create(createImageDto);
+  @Post(':id')
+  create(@Body() createImageDto: CreateImageDto, @Param('id') id: string) {
+    return this.imagesService.create(createImageDto, Announcement[id]);
   }
 
-  @Get()
-  findAll() {
-    return this.imagesService.findAll();
+  @Get(':id')
+  findAll(@Param('id') id: string) {
+    return this.imagesService.findAll(Announcement[id]);
   }
 
   @Get(':id')
