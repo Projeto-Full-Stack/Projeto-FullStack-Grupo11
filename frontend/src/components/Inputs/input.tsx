@@ -3,7 +3,7 @@ interface IInput {
     input_type: "text" | "select" | "textArea" | "email" | "tel" | "date" | "password" | "radio", 
     label: string,
     children: string,
-    register?: string,
+    register?: {},
     extra_classes?: string, 
 }
 
