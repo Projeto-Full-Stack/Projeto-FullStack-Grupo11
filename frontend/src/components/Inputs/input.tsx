@@ -78,7 +78,7 @@ const Input = ({
         if (input_type == "textArea"){ return(
                 <label htmlFor={input_name} className={`block mb-[80px] max-w-min font-medium py-2 text-grey-1 ${extra_classes}`}>
                     {label}
-                    <textarea id={input_name} className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded w-[315px] px-6 pt-3 resize-none border-[1.5px] h-[80px]`} name={input_name} required={is_required} placeholder={children}/>   
+                    <textarea id={input_name} className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded w-[315px] px-6 pt-3 resize-none border-[1.5px] h-[80px]`} name={input_name} placeholder={children}/>   
                 </label> 
         )}
 }
