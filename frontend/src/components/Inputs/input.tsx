@@ -3,6 +3,7 @@ interface IInput {
     input_type: "text" | "select" | "textArea" | "email" | "tel" | "date" | "password" | "radio", 
     label: string,
     children: string,
+    register?: object
     is_required?: boolean,
     extra_classes?: string, 
 }
@@ -13,7 +14,8 @@ const Input = ({
         input_type, 
         input_name,
         label,
-        extra_classes,  
+        extra_classes,
+        register,
         is_required=true,
         children,
     }: IInput
@@ -25,15 +27,15 @@ const Input = ({
             return (
                 <label 
                     htmlFor={input_name} 
-                    className={`block max-w-min font-medium text-grey-1`}
+                    className={`block font-medium text-grey-1`}
                 >
                     {label}
                     <input
                         id={input_name}
                         name={input_name}
                         type={input_type} 
-                        required={is_required}
                         placeholder={children}
+                        {...register}
                         className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
                     />
                 </label>
@@ -44,7 +46,7 @@ const Input = ({
             return (
                 <label 
                     htmlFor={input_name} 
-                    className={`block max-w-min font-medium text-grey-1`}
+                    className={`block font-medium text-grey-1`}
                 >
                     {label}
                     <input
