@@ -1,29 +1,77 @@
-// import Input from "@/components/input";
-// import NavBar from "@/components/navbar";
+import Input from "@/components/Inputs/input";
+import Button from "@/components/button";
+import { Footer } from "@/components/footer";
+import NavBar from "@/components/navbar";
+import { Heading } from "@/components/typography/heading.component";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { LoginInterface, loginSchema } from "@/schemas/login.schemas";
+import { loginContext } from "@/context/login.context";
+import { useEffect } from "react";
+import Link from "next/link";
+import { Text } from "@/components/typography/text.components";
 
-// export default function Login() {
-//   return (
-//     <main className={`loginBody`}>
-//       <NavBar />
-//       <div className="flex justify-center items-center h-[90vh]">
-//         <form
-//           className={`flex flex-col gap-4 items-start p-5 w-[412px] h-[542px] bg-colors_color_white_fixed`}
-//         >
-//           <h1>Login</h1>
-//           <div>
-//             <Input
-//               placeholder={`Digitar email`}
-//               htmlFor={`email`}
-//               type={`email`}
-//               label={`Email`}
-//             />
-//             <p>Esqueci minha senha</p>
-//             <button>Entrar</button>
-//             <p>Ainda não possui conta?</p>
-//             <button>Cadastrar</button>
-//           </div>
-//         </form>
-//       </div>
-//     </main>
-//   );
-// }
+export default function Login() {
+  const { register, handleSubmit, formState } = useForm<LoginInterface>({
+    resolver: zodResolver(loginSchema)
+  })
+
+  const { loginRequest, loginError, setLoginError } = loginContext()
+
+  useEffect(() => {
+    return (
+      setLoginError("")
+    )
+  }, [])
+
+  return (
+    <div className="flex flex-col min-h-screen bg-grey-6">
+      <NavBar />
+      <main className="flex-1">
+        <div className="flex justify-center items-center p-6">
+          <form
+            className={`flex flex-col gap-8 items-start p-10 w-[412px] h-[542px] bg-colors_color_white_fixed rounded`}
+            onSubmit={handleSubmit(loginRequest)}
+            >
+            <Heading type={`h5`} weight={500}>{`Login`}</Heading>
+            {loginError && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">{loginError}</Text>}
+            <div className="flex flex-col justify-center w-full gap-8">
+              <Input
+                label={`Email`}
+                input_type={`email`}
+                input_name={`email`}
+                extra_classes={`w-full`}
+                register={register("email")}
+              >
+                Digite seu email
+              </Input>
+              <Input
+                label={"Senha"}
+                input_type={`password`}
+                input_name={`password`}
+                extra_classes={`w-full`}
+                register={register("password")}
+              >
+                Digite sua senha
+              </Input>
+              <Link
+                href="/"
+                className={`flex justify-end align-center font-semibold text-[14px] leading-[24px] font-inter`}
+              >
+                Esqueci minha senha
+              </Link>
+              <Button type={`bg-brand`}>{`Entrar`}</Button>
+              <p
+                className={`flex justify-center align-center font-medium text-[14px] leading-[24px] font-inter`}
+              >
+                Ainda não possui conta?
+              </p>
+            </div>
+              <Button type={`b-black`}>{`Cadastrar`}</Button>
+          </form>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}

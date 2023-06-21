@@ -17,7 +17,7 @@ export class UsersService {
     );
 
     if (findUser) {
-      throw new ConflictException('USer already exists');
+      throw new ConflictException('User already exists');
     }
 
     const user = await this.usersRepository.create(createUserDto);
@@ -44,11 +44,35 @@ export class UsersService {
   async findByEmail(email: string) {
     const user = await this.usersRepository.findByEmail(email);
 
+    if (user) {
+      throw new ConflictException('Email already exists');
+    }
+
     return user;
   }
 
+  async loginEmail(email: string){
+    const user = await this.usersRepository.loginEmail(email);
+    return user
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
+    const findUser = await this.usersRepository.findOne(id);
+
+    if (!findUser) {
+      throw new NotFoundException('User not found');
+    }
+
+    const FindEmail = await this.usersRepository.findByEmail(
+      updateUserDto.email,
+    );
+
+    if (FindEmail) {
+      throw new ConflictException('Email already exists');
+    }
+
     const user = await this.usersRepository.update(id, updateUserDto);
+
     return user;
   }
 
