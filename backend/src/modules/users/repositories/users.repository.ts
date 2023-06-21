@@ -9,4 +9,5 @@ export abstract class UsersRepository {
   abstract findByEmail(email: string): Promise<User> | User;
   abstract update(id: string, data: UpdateUserDto): Promise<User> | User;
   abstract delete(id: string): Promise<void> | void;
+  abstract loginEmail(email: string): Promise<User> | User;
 }
