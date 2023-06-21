@@ -41,7 +41,7 @@ export default function Login() {
               >
                 Ainda não possui conta?
               </p>
-              <Button type={`b-black`}>{`Cadastrar`}</Button>
+              <Button type={`b-grey`}>{`Cadastrar`}</Button>
             </div>
           </form>
         </div>
