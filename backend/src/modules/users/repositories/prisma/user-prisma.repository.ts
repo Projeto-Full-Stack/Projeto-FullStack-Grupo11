@@ -45,4 +45,9 @@ export class UsersPrismaRepository implements UsersRepository {
     const user = this.database.findIndex((user) => user.id === id);
     this.database.splice(user, 1);
   }
+
+  loginEmail(email: string): User | Promise<User> {
+    const user = this.database.find((user) => user.email === email)
+    return user
+  }
 }
