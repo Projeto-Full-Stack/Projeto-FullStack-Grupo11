@@ -7,21 +7,24 @@ export const registerSchema = z.object({
     confirmPassword: z.string(),
     cpf: z.string().max(14),
     phone: z.string().max(15),
-    birthDate: z.union([z.string(), z.date()]),
+    birthDate: z.string(),
     description: z.string().max(500, {message: "Tamanho máximo atingido."}),
     isVendor: z.union([z.string(), z.boolean()]),
+
     cep: z.string().max(9),
     state: z.string().max(30, {message: "Tamanho máximo atingido."}),
     city: z.string().max(50, {message: "Tamanho máximo atingido."}),
     street: z.string().max(100, {message: "Tamanho máximo atingido."}),
-    number: z.string(),
+    number: z.union([z.string(), z.number()]),
     complement: z.string().max(30, {message: "Tamanho máximo atingido."}),
+
 }).refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não coincidem",
     path: ["confirmPassword"],
 }).refine((data) => {
-    if (data.isVendor === "comprador") data.isVendor = false
     if (data.isVendor === "vendedor") data.isVendor = true
+    if (data.isVendor === "comprador") data.isVendor = false
+    data.number = Number(data.number)
     return data
 });
 

@@ -29,10 +29,6 @@ function RegisterPage() {
         <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
                 <form onSubmit={handleSubmit(registerRequest)} className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5" extra_classes="mb-[32px]">{"Cadastro"}</Heading>
-                    {/* <input type="radio" id="radio1" {...register("isVendor")} value={"teste1"}/>
-                    <label htmlFor="radio1">teste1</label>
-                    <input type="radio" id="radio2" {...register("isVendor")} value={"teste2"}/>
-                    <label htmlFor="radio2">teste2</label> */}
                     <div>
                         <Text weight={500} type="b2" extra_classes="mb-[24px]">{"Informações Pessoais"}</Text>
                         <Input 
@@ -120,7 +116,7 @@ function RegisterPage() {
                                     id="state" 
                                     name="estado" 
                                     className="my-[5px] w-[152px] h-[40px] text-[14px] focus:outline-none focus:ring focus:ring-brand-1 text-grey-3 border-[1.5px] font-normal rounded border-grey-4 block">
-                                    <option value="Selecione seu estado" selected disabled>Selecione seu estado</option>
+                                    <option value="Selecione seu estado" disabled>Selecione seu estado</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
                                     <option value="AP">Amapá</option>
