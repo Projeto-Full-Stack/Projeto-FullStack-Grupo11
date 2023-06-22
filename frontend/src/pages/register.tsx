@@ -1,104 +1,97 @@
 import Input from "@/components/Inputs/input";
 import NavBar from "@/components/navbar";
+import RadioGroup from "@/components/Inputs/radioGroup";
 import { Text } from "@/components/typography/text.components";
 import { Heading } from "@/components/typography/heading.component";
-import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
-import RadioGroup from "@/components/Inputs/radioGroup";
-import {  SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { registerSchema, validationRegisterSchema } from "@/schemas/register.schemas";
+import { registerSchema, RegisterInterface } from "@/schemas/register.schemas";
+import { registerContext } from "@/context/register.context";
+import { useEffect } from "react";
+import Button from "@/components/button";
 
-const inter = Inter({ subsets: ["latin"] });
 
 function RegisterPage() {
     const { 
         handleSubmit, 
         register, 
-        formState: { errors }
-    } = useForm<validationRegisterSchema>({
+        formState,
+    } = useForm<RegisterInterface>({
         resolver: zodResolver(registerSchema),
     })
+   
+    const { registerRequest, registerError, setRegisterError } = registerContext()
 
-    const onSubmit: SubmitHandler<validationRegisterSchema> = (data) => console.log(data);
-    
+    useEffect(() => {
+        return (
+          setRegisterError("")
+        )
+    }, [])
+
     return(
 
         <main className={`bg-grey-7 min-h-screen`}>
             <NavBar/>
         <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
-                <form onSubmit={handleSubmit(onSubmit)} action="" className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
+                <form onSubmit={handleSubmit(registerRequest)} action="" className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5" extra_classes="mb-[32px]">{"Cadastro"}</Heading>
                     <div>
                         <Text weight={500} type="b2" extra_classes="mb-[24px]">{"Informações Pessoais"}</Text>
                         <Input 
-                            {...register("name",{
-                                required:true,
-                            })}
+                            register={register("name")}
                             input_name="name" 
                             input_type="text"
                             label="Nome"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Ex: Samuel Leão"}</Input>
-                        {errors?.name?.type === "required" && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">O nome é obrigatório</Text>}
+                        {registerError && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">{registerError}</Text>}
                         <Input 
-                            {...register("email",{
-                                required:true,
-                            })}
+                            register={register("email")}
                             input_name="email" 
                             input_type="email"
                             label="Email"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Ex: samuel@kenzie.com.br"}</Input>
                         <Input
-                            {...register("cpf",{
-                                required:true,
-                            })}
+                            register={register("cpf")}
                             input_name="cpf" 
                             input_type="text"
                             label="CPF"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"000.000.000-00"}</Input>
                         <Input
-                            {...register("phone",{
-                                required:true,
-                            })}
+                            register={register("phone")}
                             input_name="phone" 
                             input_type="tel"
                             label="Celular"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"(DDD) 90000-0000"}</Input>
                         <Input
-                            {...register("birthDate",{
-                                required:true,
-                            })}
+                            register={register("birthDate")}
                             input_name="birthDate" 
                             input_type="date"
                             label="Data de nascimento"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"00/00/00"}</Input>
                         <Input
-                        {...register("description",{
-                            required:true,
-                        })}
-                        input_name="description" 
-                        input_type="textArea"
-                        label="Descrição"
-                        extra_classes="w-[315px] h-[40px]"
+                            register={register("description")}
+                            input_name="description" 
+                            input_type="textArea"
+                            label="Descrição"
+                            extra_classes="w-[315px] h-[40px]"
                         >{"Digitar descrição"}</Input>
                     </div>
                     <div className="mt-[30px]">
                         <Text weight={500} type="b2" extra_classes="">{"Informações de Endereço"}</Text>
                         <Input
-                            {...register("cep",{
-                                required:true,
-                            })}
+                            register={register("cep")}
                             input_name="cep" 
                             input_type="text"
                             label="CEP"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"00000-000"}</Input>
-                        <span className="flex justify-between my-[10px]">
+                        <span className="flex gap-[10px] w-[315px] my-[10px]">
                             <label htmlFor="state" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 <Text weight={500} type="b2">Estado</Text>
                                 <select
@@ -139,38 +132,30 @@ function RegisterPage() {
                                 </select>
                             </label>
                             <Input
-                                {...register("city",{
-                                    required:true,
-                                })} 
-                                    input_name="city" 
+                                register={register("city")} 
+                                input_name="city" 
                                 input_type="text"
                                 label="Cidade"
                                 extra_classes="my-[5px] w-[152px] text-[13px] h-[40px]"
                             >{"Digite sua Cidade"}</Input>
                         </span>
                         <Input
-                            {...register("street",{
-                                required:true,
-                            })}
+                            register={register("street")}
                             input_name="street" 
                             input_type="text"
                             label="Rua"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Digite sua Rua"}</Input>
-                        <span className="flex justify-between">
+                        <span className="flex gap-[10px] w-[315px]">
                             <Input 
-                                {...register("number",{
-                                    required:true,
-                                })}
+                                register={register("number")}
                                 input_name="number" 
                                 input_type="text"
                                 label="Número"
                                 extra_classes="my-[5px] w-[152px] h-[40px] text-[15px]"
                             >{"Digitar Número"}</Input>
                             <Input
-                                {...register("complement",{
-                                    required:true,
-                                })} 
+                                register={register("complement")} 
                                 input_name="complement" 
                                 input_type="text"
                                 label="Complemento"
@@ -178,7 +163,7 @@ function RegisterPage() {
                             >{"Ex: apart 307"}</Input>
                         </span>
                         <RadioGroup
-                            {...register("userType",{
+                            {...register("isVendor",{
                                 required:true,
                             })}
                             onChange={(option) => console.log(option)}
@@ -193,23 +178,20 @@ function RegisterPage() {
                           ]}
                         />
                         <Input
-                            {...register("password",{
-                                required:true,
-                            })} 
+                            register={register("password")} 
                             input_name="password" 
                             input_type="password"
                             label="Senha"
                             extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
                         >{"Digitar Senha"}</Input>
                         <Input
-                            {...register("confirmPassword",{
-                                required:true,
-                            })}
+                            register={register("confirmPassword")}
                             input_name="confirmPassword" 
                             input_type="password"
                             label="Confirmar Senha"
                             extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
                         >{"Digitar Senha"}</Input>
+                       <Button type={`bg-brand`} extra_classes={`py-3 mt-3 px-[7.77rem]`}>Cadastrar</Button> 
                     </div>
                 </form>
             </div> 

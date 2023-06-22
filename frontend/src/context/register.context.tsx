@@ -19,8 +19,9 @@ export const RegisterProvider = ({children}: Props) =>{
 
     const registerRequest = async (data: RegisterInterface) =>{
         await motorsApi.post("auth", data)
-        .then((response) =>{
-            
+        .then((response) => {
+            console.log(response)
+            console.log(data)
         })
         .catch((error) =>{
             setRegisterError(error.response.data.message)
