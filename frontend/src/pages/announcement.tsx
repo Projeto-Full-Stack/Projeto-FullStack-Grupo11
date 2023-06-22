@@ -17,8 +17,8 @@ export default function Announcements() {
         <div className='bg-colors_color_white_fixed h-screen'></div>
       </div>
       <NavBar />
-      <main className='lg:grid lg:grid-cols-2 mx-[7%]'>
-      <section className={`flex flex-col items-center p-3 gap-9`}>
+      <main className='lg:grid lg:grid-cols-2 mx-[7%] lg:mt-[10px]'>
+      <section className={`flex flex-col items-center p-3 gap-9 lg:py-[0px]`}>
         <article className={`flex flex-col gap-4 lg:w-full`}>
           <div className='h-[355px] bg-colors_color_white_fixed flex justify-center rounded'>
             <img
