@@ -12,7 +12,10 @@ import Link from "next/link";
 import { Text } from "@/components/typography/text.components";
 
 export default function Login() {
-  const { register, handleSubmit, formState } = useForm<LoginInterface>({
+  const { 
+    register, 
+    handleSubmit, 
+    formState } = useForm<LoginInterface>({
     resolver: zodResolver(loginSchema)
   })
 

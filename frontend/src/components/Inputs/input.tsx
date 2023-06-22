@@ -3,8 +3,7 @@ interface IInput {
     input_type: "text" | "select" | "textArea" | "email" | "tel" | "date" | "password" | "radio", 
     label: string,
     children: string,
-    register?: object
-    is_required?: boolean,
+    register?: {},
     extra_classes?: string, 
 }
 
@@ -14,9 +13,8 @@ const Input = ({
         input_type, 
         input_name,
         label,
-        extra_classes,
+        extra_classes,  
         register,
-        is_required=true,
         children,
     }: IInput
     ) => {
@@ -53,9 +51,9 @@ const Input = ({
                         id={input_name}
                         name={input_name}
                         type={input_type}
-                        required={is_required}
                         placeholder={children}
                         pattern={input_pattern}
+                        {...register}
                         className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
                     />
                 </label>
@@ -73,9 +71,9 @@ const Input = ({
                         id={input_name}
                         name={input_name}
                         type={input_type}
-                        required={is_required}
                         placeholder={children}
                         pattern={input_pattern}
+                        {...register}
                         className={`select-none mb-[10px] text-grey-3 border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
                     />
                 </label>
@@ -85,7 +83,7 @@ const Input = ({
         if (input_type == "textArea"){ return(
                 <label htmlFor={input_name} className={`block mb-[80px] max-w-min font-medium py-2 text-grey-1 ${extra_classes}`}>
                     {label}
-                    <textarea id={input_name} className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded w-[315px] px-6 pt-3 resize-none border-[1.5px] h-[80px]`} name={input_name} required={is_required} placeholder={children}/>   
+                    <textarea id={input_name} {...register} className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded w-[315px] px-6 pt-3 resize-none border-[1.5px] h-[80px]`} name={input_name} placeholder={children}/>   
                 </label> 
         )}
 }
