@@ -12,13 +12,11 @@ export class UsersService {
   constructor(private usersRepository: UsersRepository) {}
 
   async create(createUserDto: CreateUserDto) {
-    const findUser = await this.usersRepository.findByEmail(
-      createUserDto.email,
-    );
+    const userByEmail = await this.usersRepository.findByEmail(createUserDto.email)
+    if (userByEmail) throw new ConflictException("Email already registered.")
 
-    if (findUser) {
-      throw new ConflictException('User already exists');
-    }
+    const userByCpf = await this.usersRepository.findByCpf(createUserDto.cpf)
+    if (userByCpf) throw new ConflictException("CPF already registered.")
 
     const user = await this.usersRepository.create(createUserDto);
 
@@ -41,16 +39,6 @@ export class UsersService {
     return findUser;
   }
 
-  async findByEmail(email: string) {
-    const user = await this.usersRepository.findByEmail(email);
-
-    if (user) {
-      throw new ConflictException('Email already exists');
-    }
-
-    return user;
-  }
-
   async loginEmail(email: string){
     const user = await this.usersRepository.loginEmail(email);
     return user
@@ -63,12 +51,14 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
-    const FindEmail = await this.usersRepository.findByEmail(
-      updateUserDto.email,
-    );
+    if (updateUserDto.email){
+      const findEmail = await this.usersRepository.findByEmail(
+        updateUserDto.email,
+      );
 
-    if (FindEmail) {
-      throw new ConflictException('Email already exists');
+      if (findEmail) {
+        throw new ConflictException('Email already exists');
+      }
     }
 
     const user = await this.usersRepository.update(id, updateUserDto);

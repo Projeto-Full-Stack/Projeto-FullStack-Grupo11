@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./button";
 import { Heading } from "./typography/heading.component";
+import Link from "next/link";
 
 const NavBar = () => {
   const [navStatus, setNavStatus] = useState("hidden");
@@ -25,10 +26,14 @@ const NavBar = () => {
           Motors shops
         </Heading>
         <div className="lg:border-grey-6 items-center lg:border-l-[2px] h-full py-[20px] lg:items-center lg:px-5 lg:min-h-full hidden lg:block">
-          <Button type={"bg-light"} extra_classes="mx-2">
-            Fazer login
-          </Button>
-          <Button type={"bg-light"}>Cadastrar</Button>
+          <Link href="/login">
+            <Button type={"bg-light"} extra_classes="mx-2">
+              Fazer login
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button type={"bg-light"}>Cadastrar</Button>
+          </Link>
         </div>
         <button className="lg:hidden" onClick={showNavigation}>
           {textButton()}
