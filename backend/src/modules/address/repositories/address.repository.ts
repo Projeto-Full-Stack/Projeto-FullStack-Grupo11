@@ -4,10 +4,7 @@ import { Address } from "../entities/address.entity";
 
 
 export abstract class AddressRepository {
-    abstract create(
-        data: CreateAddressDto,
-        user_id: string
-    ): Promise<Address>
+    abstract create(data: CreateAddressDto, user_id: string): Promise<Address>
     abstract findOne(id: string): Promise<Address>;
     abstract update(id: string, content: UpdateAddressDto): Promise<Address>;
 }
