@@ -19,7 +19,7 @@ export default function Announcements() {
       <NavBar />
       <main className='lg:grid lg:grid-cols-2 mx-[7%]'>
       <section className={`flex flex-col items-center p-3 gap-9`}>
-        <article className={`flex flex-col gap-4`}>
+        <article className={`flex flex-col gap-4 lg:w-full`}>
           <div className='h-[355px] bg-colors_color_white_fixed flex justify-center rounded'>
             <img
               className='object-scale-down'
@@ -28,7 +28,7 @@ export default function Announcements() {
             />
           </div>
           <div
-            className={`flex flex-col pl-7 py-7 pr-5 bg-colors_color_white_fixed rounded gap-6`}
+            className={`flex flex-col pl-7 py-7 pr-5 bg-colors_color_white_fixed rounded gap-6 lg:w-full`}
           >
             <Heading type="h6" weight={600} extra_classes="text-grey_0 pt-4">
               Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200
