@@ -5,10 +5,11 @@ export class User {
   readonly id: string;
   name: string;
   email: string;
-  cpf: number;
-  phone: number;
+  cpf: string;
+  phone: string;
   birthDate: string;
   description: string;
+  isVendor: boolean;
 
   @Exclude()
   password: string;

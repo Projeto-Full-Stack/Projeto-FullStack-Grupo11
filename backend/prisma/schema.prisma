@@ -38,27 +38,28 @@ model Image {
 }
 
 model User {
-  id            String        @id
-  name          String
-  email         String        @unique
-  cpf           Int           @unique
-  phone         Int
-  birthDate     String
-  description   String
-  password      String
-  address       Address?
-  
+  id          String   @id
+  name        String
+  email       String   @unique
+  cpf         String   @unique
+  phone       String
+  birthDate   String
+  description String
+  password    String
+  isVendor    Boolean
+  address     Address?
+
   @@map("users")
 }
 
 model Address {
-  id String @id
-  address String
-  state String
-  city String
-  number Int
+  id         String  @id
+  address    String
+  state      String
+  city       String
+  number     Int
   complement String?
-  cep String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  cep        String
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String  @unique
 }

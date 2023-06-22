@@ -19,14 +19,17 @@ export const RegisterProvider = ({children}: Props) =>{
 
     const registerRequest = async (data: RegisterInterface) =>{
         console.log(data)
-        // await motorsApi.post("auth", data)
-        // .then((response) => {
-        //     console.log(response)
-        //     console.log(data)
-        // })
-        // .catch((error) =>{
-        //     setRegisterError(error.response.data.message)
-        // })
+        const { name, email, phone, birthDate, description, password, cpf, isVendor, confirmPassword, ...rest} = data
+        const userData = {name, email, phone, birthDate, description, password, cpf, isVendor}
+        const addressData = {...rest}
+       
+        try {
+            const createUser = await motorsApi.post("users", userData)
+            console.log(createUser)
+        }
+        catch(error) {
+            console.log(error)
+        }
     }
 
     return (
