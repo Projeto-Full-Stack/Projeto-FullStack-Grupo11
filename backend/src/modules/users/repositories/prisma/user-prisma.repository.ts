@@ -4,50 +4,75 @@ import { User } from '../../entities/user.entity';
 import { UsersRepository } from '../users.repository';
 import { UpdateUserDto } from '../../dto/update-user.dto';
 import { plainToInstance } from 'class-transformer';
+import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
-  private database: User[] = [];
-  create(data: CreateUserDto): User | Promise<User> {
-    const newUser = new User();
-    Object.assign(newUser, {
+  constructor(private prisma: PrismaService){}
+
+  async create(data: CreateUserDto): Promise<User> {
+    const user = new User();
+    Object.assign(user, {
       ...data,
     });
-    this.database.push(newUser);
+    
+    const newUser = await this.prisma.user.create({
+      data: {...user}
+    })
+
     return plainToInstance(User, newUser);
   }
 
-  findAll(): User[] | Promise<User[]> {
-    return plainToInstance(User, this.database);
+  async findAll(): Promise<User[]> {
+    const allUsers = await this.prisma.user.findMany()
+
+    return plainToInstance(User, allUsers);
   }
 
-  findOne(id: string): User | Promise<User> {
-    const user = this.database.find((user) => user.id === id);
+  async findOne(id: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+
     return plainToInstance(User, user);
   }
 
-  findByEmail(email: string): User | Promise<User> {
-    const user = this.database.find((user) => user.email === email);
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    });
+
     return plainToInstance(User, user);
   }
 
-  update(id: string, data: UpdateUserDto): User | Promise<User> {
-    const user = this.database.findIndex((user) => user.id === id);
-    this.database[user] = {
-      ...this.database[user],
-      ...data,
-    };
+  async findByCpf(user_cpf: number){
+    const user = await this.prisma.user.findUnique({
+      where: {
+        cpf: user_cpf
+      }
+    })
 
-    return plainToInstance(User, this.database[user]);
+    return plainToInstance(User, user)
   }
 
-  delete(id: string): void | Promise<void> {
-    const user = this.database.findIndex((user) => user.id === id);
-    this.database.splice(user, 1);
+  async update(id: string, data: UpdateUserDto): Promise<User> {
+    const user = await this.prisma.user.update({
+      where: {
+        id
+      },
+      data: {...data}
+    });
+
+    return plainToInstance(User, user);
   }
 
-  loginEmail(email: string): User | Promise<User> {
-    const user = this.database.find((user) => user.email === email)
+  async delete(id: string): Promise<void> {
+    await this.prisma.user.delete({where: {id}})
+  }
+
+  async loginEmail(email: string): Promise<User> {
+    const user = await this.prisma.user.findFirst({ where: { email: email } });
+
     return user
   }
 }
