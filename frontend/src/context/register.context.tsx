@@ -18,14 +18,15 @@ export const RegisterProvider = ({children}: Props) =>{
     const [registerError, setRegisterError] = useState<string>("")
 
     const registerRequest = async (data: RegisterInterface) =>{
-        await motorsApi.post("auth", data)
-        .then((response) => {
-            console.log(response)
-            console.log(data)
-        })
-        .catch((error) =>{
-            setRegisterError(error.response.data.message)
-        })
+        console.log(data)
+        // await motorsApi.post("auth", data)
+        // .then((response) => {
+        //     console.log(response)
+        //     console.log(data)
+        // })
+        // .catch((error) =>{
+        //     setRegisterError(error.response.data.message)
+        // })
     }
 
     return (

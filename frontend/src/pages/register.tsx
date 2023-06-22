@@ -11,31 +11,28 @@ import { registerContext } from "@/context/register.context";
 import { useEffect } from "react";
 import Button from "@/components/button";
 
-
 function RegisterPage() {
     const { 
         handleSubmit, 
         register, 
         formState,
     } = useForm<RegisterInterface>({
-        resolver: zodResolver(registerSchema),
+        resolver: zodResolver(registerSchema)
     })
    
     const { registerRequest, registerError, setRegisterError } = registerContext()
-
-    useEffect(() => {
-        return (
-          setRegisterError("")
-        )
-    }, [])
 
     return(
 
         <main className={`bg-grey-7 min-h-screen`}>
             <NavBar/>
         <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
-                <form onSubmit={handleSubmit(registerRequest)} action="" className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
+                <form onSubmit={handleSubmit(registerRequest)} className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5" extra_classes="mb-[32px]">{"Cadastro"}</Heading>
+                    {/* <input type="radio" id="radio1" {...register("isVendor")} value={"teste1"}/>
+                    <label htmlFor="radio1">teste1</label>
+                    <input type="radio" id="radio2" {...register("isVendor")} value={"teste2"}/>
+                    <label htmlFor="radio2">teste2</label> */}
                     <div>
                         <Text weight={500} type="b2" extra_classes="mb-[24px]">{"Informações Pessoais"}</Text>
                         <Input 
@@ -53,13 +50,7 @@ function RegisterPage() {
                             label="Email"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Ex: samuel@kenzie.com.br"}</Input>
-                        <Input
-                            register={register("cpf")}
-                            input_name="cpf" 
-                            input_type="text"
-                            label="CPF"
-                            extra_classes="my-[5px] w-[315px] h-[40px]"
-                        >{"000.000.000-00"}</Input>
+                        
                         <Input
                             register={register("phone")}
                             input_name="phone" 
@@ -81,7 +72,35 @@ function RegisterPage() {
                             label="Descrição"
                             extra_classes="w-[315px] h-[40px]"
                         >{"Digitar descrição"}</Input>
+
+                        <Input
+                            register={register("password")} 
+                            input_name="password" 
+                            input_type="password"
+                            label="Senha"
+                            extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
+                            >{"Digitar Senha"}</Input>
+                            <Input
+                            register={register("confirmPassword")}
+                            input_name="confirmPassword" 
+                            input_type="password"
+                            label="Confirmar Senha"
+                            extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
+                            >{"Digitar Senha"}</Input>
+                            <Input
+                            register={register("cpf")}
+                            input_name="cpf" 
+                            input_type="text"
+                            label="CPF"
+                            extra_classes="my-[5px] w-[315px] h-[40px]"
+                        >{"000.000.000-00"}</Input>
+                        <input type="radio" id="teste1" {...register("isVendor")} value="comprador" checked/>
+                        <label htmlFor="teste1">Comprador</label>
+                        <input type="radio" id="teste2" {...register("isVendor")} value="vendedor"/>
+                        <label htmlFor="teste2">Vendedor</label>
                     </div>
+
+                    
                     <div className="mt-[30px]">
                         <Text weight={500} type="b2" extra_classes="">{"Informações de Endereço"}</Text>
                         <Input
@@ -162,37 +181,22 @@ function RegisterPage() {
                                 extra_classes="my-[5px] w-[152px] h-[40px]"
                             >{"Ex: apart 307"}</Input>
                         </span>
-                        <RadioGroup
-                            {...register("isVendor",{
-                                required:true,
-                            })}
+                        {/* <RadioGroup
+                            {...register("isVendor")}
                             onChange={(option) => console.log(option)}
                             labelText="Tipo de Conta"
                             options={[
-                            <div className="flex justify-around">
-                              <span>Anunciante</span>
-                            </div>,
-                            <div className="flex justify-around">
-                              <span>Comprador</span>
+                                <div className="flex justify-around">
+                                <span>Anunciante</span>
+                                </div>,
+                                <div className="flex justify-around">
+                                <span>Comprador</span>
                             </div>
                           ]}
-                        />
-                        <Input
-                            register={register("password")} 
-                            input_name="password" 
-                            input_type="password"
-                            label="Senha"
-                            extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
-                        >{"Digitar Senha"}</Input>
-                        <Input
-                            register={register("confirmPassword")}
-                            input_name="confirmPassword" 
-                            input_type="password"
-                            label="Confirmar Senha"
-                            extra_classes="my-[10px] w-[315px] h-[40px] text-[15px]"
-                        >{"Digitar Senha"}</Input>
-                       <Button type={`bg-brand`} extra_classes={`py-3 mt-3 px-[7.77rem]`}>Cadastrar</Button> 
+                        /> */}
+                    
                     </div>
+                       <Button type={`bg-brand`} extra_classes={`py-3 mt-3 px-[7.77rem]`}>Cadastrar</Button> 
                 </form>
             </div> 
             <Footer/>
