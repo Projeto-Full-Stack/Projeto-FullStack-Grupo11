@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 export class Address {
     readonly id: string;
     address: string;
@@ -7,4 +9,8 @@ export class Address {
     complement: string;
     cep: string;
     userId: string;
+    
+  constructor() {
+    this.id = randomUUID();
+  }
 }

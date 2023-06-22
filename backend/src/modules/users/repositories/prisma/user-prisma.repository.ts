@@ -45,7 +45,7 @@ export class UsersPrismaRepository implements UsersRepository {
     return plainToInstance(User, user);
   }
 
-  async findByCpf(user_cpf: number){
+  async findByCpf(user_cpf: string){
     const user = await this.prisma.user.findUnique({
       where: {
         cpf: user_cpf
