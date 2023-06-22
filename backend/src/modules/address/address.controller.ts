@@ -8,13 +8,8 @@ export class AddressController {
   constructor(private readonly addressService: AddressService) {}
 
   @Post()
-  create(@Body() createAddressDto: CreateAddressDto) {
-    return this.addressService.create(createAddressDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.addressService.findAll();
+  create(@Body() createAddressDto: CreateAddressDto, user_id: string) {
+    return this.addressService.create(createAddressDto, user_id);
   }
 
   @Get(':id')
@@ -25,10 +20,5 @@ export class AddressController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
     return this.addressService.update(+id, updateAddressDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.addressService.remove(+id);
   }
 }

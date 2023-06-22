@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from "class-validator";
 
 export class CreateAddressDto {
     @IsString()
@@ -22,7 +22,8 @@ export class CreateAddressDto {
 
     @IsString()
     @MaxLength(30)
-    complmenet: string;
+    @IsOptional()
+    complement: string;
 
     @IsString()
     @IsNotEmpty()
