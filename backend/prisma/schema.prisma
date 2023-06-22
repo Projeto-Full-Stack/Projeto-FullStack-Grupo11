@@ -40,11 +40,12 @@ model Image {
 model User {
   id            String        @id
   name          String
-  email         String
-  cpf           Int
+  email         String        @unique
+  cpf           Int           @unique
   phone         Int
   birthDate     String
   description   String
+  password      String
   address       Address?
   
   @@map("users")
