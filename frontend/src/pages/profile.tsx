@@ -4,7 +4,7 @@ import NavBar from "@/components/navbar";
 import Next from "@/components/next";
 import Profile from "@/components/profile";
 import { Heading } from "@/components/typography/heading.component";
-import { Text } from "@/components/typography/text.components";
+import { Text } from "@/components/typography/text.component";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 

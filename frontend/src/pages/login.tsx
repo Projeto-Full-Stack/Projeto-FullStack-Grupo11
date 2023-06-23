@@ -9,7 +9,7 @@ import { LoginInterface, loginSchema } from "@/schemas/login.schemas";
 import { loginContext } from "@/context/login.context";
 import { useEffect } from "react";
 import Link from "next/link";
-import { Text } from "@/components/typography/text.components";
+import { Text } from "@/components/typography/text.component";
 
 export default function Login() {
   const { 

@@ -1,6 +1,6 @@
 import dexter from "../image/Dexter.jpg";
 import { Heading } from "./typography/heading.component";
-import { Text } from "./typography/text.components";
+import { Text } from "./typography/text.component";
 
 interface IProfileProps {
   type: "big" | "small";
