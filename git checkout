@@ -1,0 +1,15 @@
+* [32mdevelop[m
+  feat/CORs[m
+  feat/backend/address[m
+  feat/disableInput[m
+  feat/frontend/createAccount[m
+  feat/frontend/develop[m
+  feat/frontend/recoverPassword[m
+  feat/frontend/routes[m
+  feat/loginContext[m
+  fix/authLogin[m
+  fix/backend/prismaSchema[m
+  fix/backend/user[m
+  fix/front/announcementPage[m
+  fix/frontend/registerForm[m
+  main[m

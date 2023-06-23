@@ -46,6 +46,7 @@ model User {
   birthDate   String
   description String
   password    String
+  reset_token String?
   isVendor    Boolean
   address     Address?
 

@@ -1,7 +1,7 @@
 import Input from "@/components/Inputs/input";
 import NavBar from "@/components/navbar";
 import RadioGroup from "@/components/Inputs/radioGroup";
-import { Text } from "@/components/typography/text.components";
+import { Text } from "@/components/typography/text.component";
 import { Heading } from "@/components/typography/heading.component";
 import { Footer } from "@/components/footer";
 import { useForm } from "react-hook-form";
