@@ -1,5 +1,5 @@
 import { Heading } from "./typography/heading.component";
-import { Text } from "./typography/text.components";
+import { Text } from "./typography/text.component";
 
 export function Footer() {
   return (

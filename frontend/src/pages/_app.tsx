@@ -4,15 +4,18 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { LoginProvider } from "@/context/login.context";
 import { CarProvider } from "@/context/cars.context";
+import { RegisterProvider } from "@/context/register.context";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ModalProvider>
       <CarProvider>
-        <LoginProvider>
-          <Component {...pageProps} />
-          <Modal />
-        </LoginProvider>
+        <RegisterProvider>
+          <LoginProvider>
+            <Component {...pageProps} />
+            <Modal />
+          </LoginProvider>
+        </RegisterProvider>
       </CarProvider>
     </ModalProvider>
   );

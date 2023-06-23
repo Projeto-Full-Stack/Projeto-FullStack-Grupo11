@@ -32,9 +32,6 @@ export const AnnForm = () => {
       getSpecificCarData(value);
     } else {
       setSecondValue("default");
-      document.getElementById(`year`)?.setAttribute("disabled", "true");
-      document.getElementById(`fuel`)?.setAttribute("disabled", "true");
-      document.getElementById(`fipe`)?.setAttribute("disabled", "true");
     }
   };
 
@@ -45,11 +42,14 @@ export const AnnForm = () => {
   };
 
   const getSpecificCarData = (value: string) => {
+    const fuelType = ["Flex", "Híbrido", "Elétrico"];
     const car: any = Object.values(carsByBrand).find(
       (car: any) => car.name === value
     );
     document.getElementById(`year`)?.setAttribute("value", `${car.year}`);
-    document.getElementById(`fuel`)?.setAttribute("value", `${car.fuel}`);
+    document
+      .getElementById(`fuel`)
+      ?.setAttribute("value", `${fuelType[car.fuel - 1]}`);
     document.getElementById(`fipe`)?.setAttribute("value", `${car.value}`);
   };
 
@@ -106,12 +106,14 @@ export const AnnForm = () => {
             input_name={`year`}
             label={`Ano`}
             extra_classes={`w-full`}
+            state={true}
           >{`Insira o ano`}</Input>
           <Input
             input_type={`text`}
             input_name={`fuel`}
             label={`Combustível`}
             extra_classes={`w-full`}
+            state={true}
           >{`Insira o combustível`}</Input>
         </div>
         <div className={`flex gap-2 w-full`}>
@@ -134,6 +136,7 @@ export const AnnForm = () => {
             input_name={`fipe`}
             label={`Preço FIPE`}
             extra_classes={`w-full`}
+            state={true}
           >{`Insira o preço da fipe`}</Input>
           <Input
             input_type={`text`}

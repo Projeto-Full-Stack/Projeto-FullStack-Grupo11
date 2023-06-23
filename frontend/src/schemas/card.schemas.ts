@@ -8,7 +8,7 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export const cardSchema = z.object({
+const cardSchema = z.object({
   name: z.string(),
   image: z
     .any()
