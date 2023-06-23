@@ -37,7 +37,10 @@ const Input = ({
     input_type == "password"
   ) {
     return (
-      <label htmlFor={input_name} className={`block font-medium text-grey-1`}>
+      <label
+        htmlFor={input_name}
+        className={`block font-medium text-grey-1 w-full`}
+      >
         {label}
         <input
           id={input_name}
