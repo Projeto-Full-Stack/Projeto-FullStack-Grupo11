@@ -1,6 +1,19 @@
+import { ModalProvider } from "@/context/modal.context";
+import { Modal } from "@/components/modal/modal";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { LoginProvider } from "@/context/login.context";
+import { RegisterProvider } from "@/context/register.context";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <ModalProvider>
+      <RegisterProvider>
+        <LoginProvider>
+          <Component {...pageProps} />
+          <Modal />
+        </LoginProvider>
+      </RegisterProvider>
+    </ModalProvider>
+  )
 }

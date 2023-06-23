@@ -12,12 +12,54 @@ datasource db {
 
 model Announcement {
   id          String  @id
+  brand       String
+  model       String
+  year        String
+  fuel        String
+  fipe        Int
   color       String
   price       Int
   description String
   coverImage  String
   mileage     Int
   avaliable   Boolean
+  image       Image[]
 
   @@map("announcements")
+}
+
+model Image {
+  id             String       @id
+  imageUrl       String
+  announcement   Announcement @relation(fields: [announcementId], references: [id])
+  announcementId String
+
+  @@map("images")
+}
+
+model User {
+  id          String   @id
+  name        String
+  email       String   @unique
+  cpf         String   @unique
+  phone       String
+  birthDate   String
+  description String
+  password    String
+  isVendor    Boolean
+  address     Address?
+
+  @@map("users")
+}
+
+model Address {
+  id         String  @id
+  address    String
+  state      String
+  city       String
+  number     Int
+  complement String?
+  cep        String
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String  @unique
 }

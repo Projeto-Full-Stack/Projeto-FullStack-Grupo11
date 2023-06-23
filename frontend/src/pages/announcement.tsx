@@ -6,14 +6,14 @@ import NavBar from '@/components/navbar';
 import Button from '@/components/button';
 import Profile from '@/components/profile';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Announcements() {
   const router = useRouter();
   return (
     <>
       <div className='z-[-1] h-screen absolute'>
-        <div className='bg-brand-brand_1 h-[516px] w-screen absolute'></div>
+        <div className='bg-brand-1 h-[516px] w-screen absolute'></div>
         <div className='bg-colors_color_white_fixed h-screen'></div>
       </div>
       <NavBar />
@@ -141,7 +141,7 @@ export default function Announcements() {
           <ul className='flex flex-col gap-11'>
             <li className={`flex flex-col gap-3`}>
               <div className={`flex items-center gap-2`}>
-                <Profile name='Usuário 1'/>
+                <Profile type='small' name='Usuário 1' extra_classes='flex items-center gap-3'/>
                 <div className='flex gap-3 items-center'>
                   <div className='w-1 h-1 bg-grey-grey_4 rounded-full'></div>
                   <small className='text-grey-grey_3 font-normal font-[14px]'>há 3 dias</small>
@@ -157,7 +157,7 @@ export default function Announcements() {
             </li>
             <li className={`flex flex-col gap-3`}>
               <div className={`flex items-center gap-2`}>
-                <Profile name='Usuário 2'/>
+                <Profile type='small' name='Usuário 2' extra_classes='flex items-center gap-3'/>
                 <div className='flex gap-3 items-center'>
                   <div className='w-1 h-1 bg-grey-grey_4 rounded-full'></div>
                   <small className='text-grey-grey_3 font-normal font-[14px]'>há 5 dias</small>
@@ -173,7 +173,7 @@ export default function Announcements() {
             </li>
             <li className={`flex flex-col gap-3`}>
               <div className={`flex items-center gap-2`}>
-                <Profile name='Usuário 3'/>
+                <Profile type='small' name='Usuário 3' extra_classes='flex items-center gap-3'/>
                 <div className='flex gap-3 items-center'>
                   <div className='w-1 h-1 bg-grey-grey_4 rounded-full'></div>
                   <small className='text-grey-grey_3 font-normal font-[14px]'>há 7 dias</small>
@@ -190,7 +190,7 @@ export default function Announcements() {
           </ul>
         </div>
         <div className='flex flex-col gap-6'>
-          <Profile name='Usuário Logado'/>
+          <Profile type='small' name='Usuário Logado' extra_classes='flex items-center gap-3'/>
           <textarea placeholder='Digite seu comentário aqui...' className='w-full border-grey-grey_4 border rounded px-4 py-3 h-[128px] resize-none'/>
           <Button type='bg-brand'>Comentar</Button>
           <section className='flex gap-2 items-center flex-wrap'>
