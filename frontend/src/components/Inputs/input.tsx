@@ -14,6 +14,7 @@ interface IInput {
   register?: {};
   extra_classes?: string;
   state?: boolean;
+  reference?: string;
 }
 
 const regex: string =

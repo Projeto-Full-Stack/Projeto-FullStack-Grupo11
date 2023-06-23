@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "./Inputs/input";
 import { ModalHeader } from "./modal/modalHeader";
 import { CarContext } from "@/context/cars.context";
+import { useFieldArray, useForm } from "react-hook-form";
 
 export const AnnForm = () => {
   const addImageInput = () => {
@@ -12,18 +13,6 @@ export const AnnForm = () => {
     const auxList = [...aux];
     auxList.splice(index, 1);
     setAux(auxList);
-  };
-
-  const handleSelect = (value: string) => {
-    setFirstValue(value);
-    if (value != "default") {
-      getCarsByBrand(value);
-      document.getElementById("select02")?.removeAttribute("disabled");
-    } else {
-      setCarsByBrand({});
-      resetInputs();
-      document.getElementById("select02")?.setAttribute("disabled", "true");
-    }
   };
 
   const handleSecondSelect = (value: string) => {
@@ -46,19 +35,59 @@ export const AnnForm = () => {
     const car: any = Object.values(carsByBrand).find(
       (car: any) => car.name === value
     );
-    document.getElementById(`year`)?.setAttribute("value", `${car.year}`);
-    document
-      .getElementById(`fuel`)
-      ?.setAttribute("value", `${fuelType[car.fuel - 1]}`);
-    document.getElementById(`fipe`)?.setAttribute("value", `${car.value}`);
+    setValue("year", car.year)
+    // document.getElementById(`year`)?.setAttribute("value", `${car.year}`);
+    // document
+    //   .getElementById(`fuel`)
+    //   ?.setAttribute("value", `${fuelType[car.fuel - 1]}`);
+    // document.getElementById(`fipe`)?.setAttribute("value", `${car.value}`);
   };
+
+  function findCarDetails (modelName: string){
+    const fuelType = ["Flex", "Híbrido", "Elétrico"];
+
+    const carDetails: any = Object.values(carsByBrand).find(
+      (car: any) => {
+        if (car.name === modelName){
+          car.fuel = fuelType[car.fuel - 1]
+          return car
+        }
+      });
+
+      setCarData(carDetails)
+      console.log(carDetails)
+  }
+
+  interface carDataInterface{
+    id: string;
+    brand: string;
+    fuel: string;
+    name: string;
+    value: number;
+    year: string;
+  }
+
+  function teste (){
+    if (!modelSelectState){
+      setValue("year", car.year)
+    }else {
+
+    }
+  }
 
   const [aux, setAux] = useState([{ images: "" }]);
   const [firstValue, setFirstValue] = useState("default");
   const [secondValue, setSecondValue] = useState("default");
-  const [carData, setCarData] = useState<{}>({});
+  
+  const [modelSelectState, setModelSelectState] = useState(true)
+  const [carData, setCarData] = useState<carDataInterface>({} as carDataInterface);
+
 
   const { cars, carsByBrand, setCarsByBrand, getCarsByBrand } = CarContext();
+
+  const { register, setValue } = useForm({
+    
+  })
 
   return (
     <>
@@ -67,7 +96,9 @@ export const AnnForm = () => {
       <form className={`flex flex-col w-full gap-6`}>
         <select
           onChange={(e) => {
-            handleSelect(e.target.value);
+            getCarsByBrand(e.target.value)
+            if (e.target.value !== "default") setModelSelectState(false)
+            if (e.target.value === "default") setModelSelectState(true)
           }}
           id={"select01"}
           className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1`}
@@ -86,12 +117,13 @@ export const AnnForm = () => {
         <select
           onChange={(e) => {
             handleSecondSelect(e.target.value);
+            findCarDetails(e.target.value)
           }}
           id="select02"
-          disabled
           className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1`}
+          disabled={modelSelectState}
         >
-          <option value="default">Insira o modelo</option>
+          <option value="" disabled={!modelSelectState}>Insira o modelo</option>
           {Object.values(carsByBrand).map((model: any) => {
             return (
               <option key={`${model.id}`} value={`${model.name}`}>
@@ -107,6 +139,7 @@ export const AnnForm = () => {
             label={`Ano`}
             extra_classes={`w-full`}
             state={true}
+            register={register("year")}
           >{`Insira o ano`}</Input>
           <Input
             input_type={`text`}
@@ -114,7 +147,7 @@ export const AnnForm = () => {
             label={`Combustível`}
             extra_classes={`w-full`}
             state={true}
-          >{`Insira o combustível`}</Input>
+            >{`Insira o combustível`}</Input>
         </div>
         <div className={`flex gap-2 w-full`}>
           <Input
@@ -137,7 +170,7 @@ export const AnnForm = () => {
             label={`Preço FIPE`}
             extra_classes={`w-full`}
             state={true}
-          >{`Insira o preço da fipe`}</Input>
+            >{`Insira o preço da fipe`}</Input>
           <Input
             input_type={`text`}
             input_name={`price`}

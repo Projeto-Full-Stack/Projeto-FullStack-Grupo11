@@ -3,24 +3,29 @@ import Button from "@/components/button";
 import { Footer } from "@/components/footer";
 import NavBar from "@/components/navbar";
 import { Heading } from "@/components/typography/heading.component";
-import { loginContext } from "@/context/login.context";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import { LoginInterface, loginSchema } from "@/schemas/login.schemas";
+import { LoginContext } from "@/context/login.context";
+import { useEffect } from "react";
 import Link from "next/link";
 import { Text } from "@/components/typography/text.component";
 
 export default function Login() {
-  const { register, handleSubmit, formState } = useForm<LoginInterface>({
-    resolver: zodResolver(loginSchema),
-  });
+  const { 
+    register, 
+    handleSubmit, 
+    formState } = useForm<LoginInterface>({
+    resolver: zodResolver(loginSchema)
+  })
 
-  const { loginRequest, loginError, setLoginError } = loginContext();
+  const { loginRequest, loginError, setLoginError } = LoginContext()
 
   useEffect(() => {
-    return setLoginError("");
-  }, []);
+    return (
+      setLoginError("")
+    )
+  }, [])
 
   return (
     <div className="flex flex-col min-h-screen bg-grey-6">
@@ -29,8 +34,10 @@ export default function Login() {
         <div className="flex justify-center items-center p-6">
           <form
             className={`flex flex-col gap-8 items-start p-10 w-[412px] h-[542px] bg-colors_color_white_fixed rounded`}
-          >
+            onSubmit={handleSubmit(loginRequest)}
+            >
             <Heading type={`h5`} weight={500}>{`Login`}</Heading>
+            {loginError && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">{loginError}</Text>}
             <div className="flex flex-col justify-center w-full gap-8">
               <Input
                 label={`Email`}
@@ -62,8 +69,8 @@ export default function Login() {
               >
                 Ainda não possui conta?
               </p>
-              <Button type={`b-grey`}>{`Cadastrar`}</Button>
             </div>
+              <Button type={`b-black`}>{`Cadastrar`}</Button>
           </form>
         </div>
       </main>
