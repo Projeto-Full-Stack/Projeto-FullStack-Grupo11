@@ -11,14 +11,14 @@ import { MailService } from 'src/utils/mail.service';
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: 'sntp.gmail.com',
+        host: 'smtp.gmail.com',
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
         },
       },
       defaults: {
-        from: 'juniorlonghi13@gmail.com',
+        from: '',
       },
     }),
   ],
