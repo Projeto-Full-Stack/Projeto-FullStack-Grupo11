@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 export class Address {
     readonly id: string;
-    address: string;
+    street: string;
     state: string;
     city: string;
     number: number;

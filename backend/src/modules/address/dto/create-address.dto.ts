@@ -4,7 +4,7 @@ export class CreateAddressDto {
     @IsString()
     @IsNotEmpty()
     @MaxLength(100)
-    address: string;
+    street: string;
 
     @IsString()
     @IsNotEmpty()
