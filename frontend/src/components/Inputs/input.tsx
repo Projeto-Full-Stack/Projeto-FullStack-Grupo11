@@ -4,7 +4,8 @@ interface IInput {
     label: string,
     children: string,
     register?: {},
-    extra_classes?: string, 
+    extra_classes?: string,
+    state?: boolean
 }
 
 const regex: string = '^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\x01|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\x02))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\x03(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\x04(?:(?:1[6-9]|[2-9]\d)?\d{2})$'
@@ -16,6 +17,7 @@ const Input = ({
         extra_classes,  
         register,
         children,
+        state=false
     }: IInput
     ) => {
         let input_pattern = ""
@@ -35,6 +37,7 @@ const Input = ({
                         placeholder={children}
                         {...register}
                         className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                        disabled={state}
                     />
                 </label>
             )
@@ -55,6 +58,7 @@ const Input = ({
                         pattern={input_pattern}
                         {...register}
                         className={`border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                        disabled={state}
                     />
                 </label>
             )
@@ -75,6 +79,7 @@ const Input = ({
                         pattern={input_pattern}
                         {...register}
                         className={`select-none mb-[10px] text-grey-3 border-grey-4 border-[1.5px] focus:outline-none focus:ring focus:ring-brand-1 placeholder:text-grey-3 rounded font-normal px-6 py-1 ${extra_classes}`}
+                        disabled={state}
                     />
                 </label>
             )
