@@ -7,8 +7,8 @@ import { UpdateAddressDto } from './dto/update-address.dto';
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
 
-  @Post()
-  create(@Body() createAddressDto: CreateAddressDto, user_id: string) {
+  @Post(':user_id')
+  create(@Body() createAddressDto: CreateAddressDto, @Param('user_id') user_id: string) {
     return this.addressService.create(createAddressDto, user_id);
   }
 
