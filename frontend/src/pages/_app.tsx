@@ -5,17 +5,20 @@ import type { AppProps } from "next/app";
 import { LoginProvider } from "@/context/login.context";
 import { CarProvider } from "@/context/cars.context";
 import { RegisterProvider } from "@/context/register.context";
+import { AnnouncementProvider } from "@/context/announcement.context";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ModalProvider>
       <CarProvider>
-        <RegisterProvider>
-          <LoginProvider>
-            <Component {...pageProps} />
-            <Modal />
-          </LoginProvider>
-        </RegisterProvider>
+        <AnnouncementProvider>
+          <RegisterProvider>
+            <LoginProvider>
+              <Component {...pageProps} />
+              <Modal />
+            </LoginProvider>
+          </RegisterProvider>
+        </AnnouncementProvider>
       </CarProvider>
     </ModalProvider>
   );

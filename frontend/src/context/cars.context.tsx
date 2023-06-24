@@ -17,7 +17,6 @@ interface ICarProvider {
   setCars: React.Dispatch<React.SetStateAction<{}>>;
   setCarsByBrand: React.Dispatch<React.SetStateAction<{}>>;
   getCarsByBrand: (brand: string) => void;
-  carDetails: (model: string) => void
 }
 
 const carContext = createContext<ICarProvider>({} as ICarProvider);
@@ -44,19 +43,9 @@ export const CarProvider = ({ children }: Props) => {
     setCarsByBrand(getCars.data);
   };
 
-  const carDetails = async (model: string) => {
-    const car = await carsApi.get(`/Cars?model=${model}`)
-    console.log(car)
-    console.log(car)
-
-    return
-  }
-
-
-
   return (
     <carContext.Provider
-      value={{ cars, carsByBrand, setCarsByBrand, setCars, getCarsByBrand, carDetails }}
+      value={{ cars, carsByBrand, setCarsByBrand, setCars, getCarsByBrand }}
     >
       {children}
     </carContext.Provider>
