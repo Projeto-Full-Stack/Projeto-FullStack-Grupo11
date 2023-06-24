@@ -12,6 +12,7 @@ export class AddressPrismaRepository implements AddressRepository {
     constructor(private prisma: PrismaService) {}
 
     async create(data: CreateAddressDto, user_id: string): Promise<Address> {
+        console.log(user_id)
         const address = new Address()
         Object.assign(address, {
             ...data,

@@ -1,4 +1,5 @@
 import {
+  UseGuards,
   Controller,
   Get,
   Post,
@@ -11,13 +12,15 @@ import {
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
+import { JwtAuthGuard } from '../auth/jawt.auth.guard';
 
 @Controller('announcements')
 export class AnnouncementsController {
   constructor(private readonly announcementsService: AnnouncementsService) {}
 
   @Post()
-  create(@Body() createAnnouncementDto: CreateAnnouncementDto, @Request() req) {
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createAnnouncementDto: CreateAnnouncementDto, @Request() req: any) {
     return this.announcementsService.create(createAnnouncementDto, req.user.id);
   }
 
