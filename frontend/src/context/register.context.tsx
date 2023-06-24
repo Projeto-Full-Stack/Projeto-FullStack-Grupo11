@@ -23,16 +23,15 @@ export const RegisterProvider = ({children}: Props) =>{
         const { name, email, phone, birthDate, description, password, cpf, isVendor, confirmPassword, ...rest} = data
         const userData = {name, email, phone, birthDate, description, password, cpf, isVendor}
         const addressData = {...rest}
-        // Mostra os dados do address, onde também está aparecendo o erro state como "Selecione seu Estado"
-        console.log(addressData)
        
         try {
             const createUser = await motorsApi.post("users", userData)
-            const createAddress = await motorsApi.post(`address/${createUser.data.id}`, addressData)
+            await motorsApi.post(`address/${createUser.data.id}`, addressData)
             router.push("/")
         }
-        catch(error) {
+        catch(error: any) {
             console.log(error)
+            setRegisterError(error.response.data.message)
         }
     }
 

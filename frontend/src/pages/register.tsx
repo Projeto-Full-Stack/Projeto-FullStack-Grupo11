@@ -1,6 +1,5 @@
 import Input from "@/components/Inputs/input";
 import NavBar from "@/components/navbar";
-import RadioGroup from "@/components/Inputs/radioGroup";
 import { Text } from "@/components/typography/text.component";
 import { Heading } from "@/components/typography/heading.component";
 import { Footer } from "@/components/footer";
@@ -8,8 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema, RegisterInterface } from "@/schemas/register.schemas";
 import { registerContext } from "@/context/register.context";
-import { useEffect } from "react";
 import Button from "@/components/button";
+import { useEffect } from "react";
 
 function RegisterPage() {
     const { 
@@ -22,14 +21,20 @@ function RegisterPage() {
    
     const { registerRequest, registerError, setRegisterError } = registerContext()
 
-    return(
+    useEffect(() => {
+        return (
+            setRegisterError("")
+        )
+    }, [])
 
+    return(
         <main className={`bg-grey-7 min-h-screen`}>
             <NavBar/>
-        <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
+            <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
                 <form onSubmit={handleSubmit(registerRequest)} className={`bg-grey-10 rounded flex flex-col items-start p-12 w-[412px] min-h-min `}>
                     <Heading weight={500} type="h5" extra_classes="mb-[32px]">{"Cadastro"}</Heading>
                     <div>
+                        { registerError && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">{registerError}</Text> }
                         <Text weight={500} type="b2" extra_classes="mb-[24px]">{"Informações Pessoais"}</Text>
                         <Input 
                             register={register("name")}
@@ -38,7 +43,6 @@ function RegisterPage() {
                             label="Nome"
                             extra_classes="my-[5px] w-[315px] h-[40px]"
                         >{"Ex: Samuel Leão"}</Input>
-                        {registerError && <Text type="b2" weight={500} extra_classes="text-feedback-alert_1">{registerError}</Text>}
                         <Input 
                             register={register("email")}
                             input_name="email" 
@@ -176,23 +180,9 @@ function RegisterPage() {
                                 label="Complemento"
                                 extra_classes="my-[5px] w-[152px] h-[40px]"
                             >{"Ex: apart 307"}</Input>
-                        </span>
-                        {/* <RadioGroup
-                            {...register("isVendor")}
-                            onChange={(option) => console.log(option)}
-                            labelText="Tipo de Conta"
-                            options={[
-                                <div className="flex justify-around">
-                                <span>Anunciante</span>
-                                </div>,
-                                <div className="flex justify-around">
-                                <span>Comprador</span>
-                            </div>
-                          ]}
-                        /> */}
-                    
+                        </span>               
                     </div>
-                       <Button type={`bg-brand`} extra_classes={`py-3 mt-3 px-[7.77rem]`}>Cadastrar</Button> 
+                    <Button type={`bg-brand`} extra_classes={`py-3 mt-3 px-[7.77rem]`}>Cadastrar</Button> 
                 </form>
             </div> 
             <Footer/>
