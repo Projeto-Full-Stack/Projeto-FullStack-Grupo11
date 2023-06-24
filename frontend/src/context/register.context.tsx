@@ -30,7 +30,7 @@ export const RegisterProvider = ({children}: Props) =>{
             router.push("/")
         }
         catch(error: any) {
-            console.log(error)
+            window.scrollTo(0,0)
             setRegisterError(error.response.data.message)
         }
     }
