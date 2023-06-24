@@ -12,7 +12,6 @@ export class AddressPrismaRepository implements AddressRepository {
     constructor(private prisma: PrismaService) {}
 
     async create(data: CreateAddressDto, user_id: string): Promise<Address> {
-        console.log(user_id)
         const address = new Address()
         Object.assign(address, {
             ...data,
@@ -31,7 +30,7 @@ export class AddressPrismaRepository implements AddressRepository {
         return plainToInstance(Address, findAddress)
     }
 
-    async update(id: string, content: UpdateAddressDto): Promise<Address> {
+    async update(id: string, content: UpdateAddressDto, user_id: string): Promise<Address> {
         const updateAddress = await this.prisma.address.update({
             where: {
                 id

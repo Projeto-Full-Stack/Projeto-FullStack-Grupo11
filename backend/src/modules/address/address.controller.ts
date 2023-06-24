@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, UnauthorizedException } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
+import { JwtAuthGuard } from '../auth/jawt.auth.guard';
 
 @Controller('address')
 export class AddressController {
@@ -14,11 +15,15 @@ export class AddressController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.addressService.findOne(+id);
+    return this.addressService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
-    return this.addressService.update(+id, updateAddressDto);
+  @UseGuards(JwtAuthGuard)
+  async update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto, @Request() req: any) {
+    const findAddress = await this.addressService.findOne(id)
+    if (findAddress.userId !== req.user.id) throw new UnauthorizedException()
+
+    return this.addressService.update(id, updateAddressDto, req.user_id);
   }
 }
