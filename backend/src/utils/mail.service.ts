@@ -7,7 +7,7 @@ const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'Projeto e-commerce',
-    link: 'http://localhost: 3001',
+    link: 'http://localhost:3001',
   },
 });
 
