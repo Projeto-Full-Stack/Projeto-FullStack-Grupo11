@@ -8,6 +8,8 @@ import {
   Delete,
   UseGuards,
   HttpCode,
+  Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -24,26 +26,30 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto, @Request() req: any) {
+    if(req.user.id !== id) throw new UnauthorizedException()
+
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string,  @Request() req: any) {
+    console.log(id)
+    console.log(req.user.id)
+    if(req.user.id !== id) throw new UnauthorizedException()
+
     return this.usersService.remove(id);
   }
 
