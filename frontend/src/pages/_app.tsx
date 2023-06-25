@@ -6,6 +6,7 @@ import { LoginProvider } from "@/context/login.context";
 import { CarProvider } from "@/context/cars.context";
 import { RegisterProvider } from "@/context/register.context";
 import { AnnouncementProvider } from "@/context/announcement.context";
+import { RecoveryProvider } from "@/context/recovery.context";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <AnnouncementProvider>
           <RegisterProvider>
             <LoginProvider>
-              <Component {...pageProps} />
+              <RecoveryProvider>
+                <Component {...pageProps} />
+              </RecoveryProvider>
               <Modal />
             </LoginProvider>
           </RegisterProvider>

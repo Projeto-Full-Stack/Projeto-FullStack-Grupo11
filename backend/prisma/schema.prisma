@@ -24,6 +24,8 @@ model Announcement {
   mileage     Int
   avaliable   Boolean
   image       Image[]
+  user        User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String
 
   @@map("announcements")
 }
@@ -46,15 +48,17 @@ model User {
   birthDate   String
   description String
   password    String
+  reset_token String?
   isVendor    Boolean
   address     Address?
+  announcements Announcement[]
 
   @@map("users")
 }
 
 model Address {
   id         String  @id
-  address    String
+  street     String
   state      String
   city       String
   number     Int

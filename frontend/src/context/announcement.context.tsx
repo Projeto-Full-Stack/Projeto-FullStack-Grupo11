@@ -1,6 +1,6 @@
 import { AnnoucementInterface } from "@/schemas/announcement.schemas"
 import motorsApi from "@/services/motors.service"
-import { ReactNode, createContext, useContext } from "react"
+import { ReactNode, createContext, useContext, useState } from "react"
 
 interface Props {
     children: ReactNode
@@ -14,9 +14,16 @@ const announcementContext = createContext<AnnouncementContextInterface>({} as An
 
 export function AnnouncementProvider ({children}: Props){
     async function createAnnouncement (data: AnnoucementInterface){
-        const announcement = motorsApi.post("/")
-
-
+        try{
+            const announcement = await motorsApi.post("/announcements", data, {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`
+                }
+            })
+        }
+        catch(error) {
+            console.log(error)
+        }
     }
 
     return (

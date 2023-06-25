@@ -24,6 +24,6 @@ export class AuthService {
 
   async login(email: string) {
     const user = await this.userService.loginEmail(email);
-    return {token: this.jwtService.sign({ email }, { subject: user.id })};
+    return {token: this.jwtService.sign({ email, vendor: user.isVendor }, { subject: user.id})};
   }
 }
