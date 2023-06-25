@@ -1,5 +1,6 @@
 import {
   Controller,
+  UseGuards,
   Get,
   Post,
   Body,
@@ -11,6 +12,7 @@ import {
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
+import { JwtAuthGuard } from '../auth/jawt.auth.guard';
 
 @Controller('announcements')
 export class AnnouncementsController {
