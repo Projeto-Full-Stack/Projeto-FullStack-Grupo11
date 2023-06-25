@@ -1,6 +1,6 @@
 import {
-  Controller,
   UseGuards,
+  Controller,
   Get,
   Post,
   Body,
@@ -8,6 +8,7 @@ import {
   Param,
   Delete,
   Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
@@ -19,7 +20,10 @@ export class AnnouncementsController {
   constructor(private readonly announcementsService: AnnouncementsService) {}
 
   @Post()
-  create(@Body() createAnnouncementDto: CreateAnnouncementDto, @Request() req) {
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createAnnouncementDto: CreateAnnouncementDto, @Request() req: any) {
+    if (!req.user.vendor) throw new UnauthorizedException()
+
     return this.announcementsService.create(createAnnouncementDto, req.user.id);
   }
 
@@ -34,15 +38,20 @@ export class AnnouncementsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateAnnouncementDto: UpdateAnnouncementDto,
-  ) {
+  @UseGuards(JwtAuthGuard)
+  async update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto, @Request() req: any) {
+    const findAnnouncement = await this.announcementsService.findOne(id)
+    if (findAnnouncement.user_id !== req.user.id) throw new UnauthorizedException()
+
     return this.announcementsService.update(id, updateAnnouncementDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @UseGuards(JwtAuthGuard)
+  async remove(@Param('id') id: string, @Request() req: any) {
+    const findAnnouncement = await this.announcementsService.findOne(id)
+    if (findAnnouncement.user_id !== req.user.id) throw new UnauthorizedException()
+
     return this.announcementsService.remove(id);
   }
 }

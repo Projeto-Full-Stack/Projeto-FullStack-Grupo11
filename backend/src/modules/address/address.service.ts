@@ -12,11 +12,15 @@ export class AddressService {
     return address
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  async findOne(id: string) {
+    const address = await this.addressRepository.findOne(id)
+
+    return address
   }
 
-  update(id: number, updateAddressDto: UpdateAddressDto) {
-    return `This action updates a #${id} address`;
+  async update(id: string, updateAddressDto: UpdateAddressDto, user_id: string) {
+    const updated = await this.addressRepository.update(id, updateAddressDto, user_id)
+
+    return updated
   }
 }

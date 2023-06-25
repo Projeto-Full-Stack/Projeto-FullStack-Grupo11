@@ -25,13 +25,13 @@ export class UsersPrismaRepository implements UsersRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const allUsers = await this.prisma.user.findMany();
+    const allUsers = await this.prisma.user.findMany({ include: { address: true } });
 
     return plainToInstance(User, allUsers);
   }
 
   async findOne(id: string): Promise<User> {
-    const user = await this.prisma.user.findUnique({ where: { id } });
+    const user = await this.prisma.user.findUnique({ where: { id }, include: { address: true } });
 
     return plainToInstance(User, user);
   }
