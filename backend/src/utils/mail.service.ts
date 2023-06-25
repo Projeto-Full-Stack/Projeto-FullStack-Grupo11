@@ -48,7 +48,7 @@ export class MailService {
           button: {
             color: '#4529e6',
             text: 'Reset your password',
-            link: `http://localhost:3001/users/resetPassword/${resetToken}`,
+            link: `http://localhost:3000/recovery/${resetToken}`,
           },
         },
         outro:
