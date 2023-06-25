@@ -41,13 +41,17 @@ export class AnnouncementsController {
   @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto, @Request() req: any) {
     const findAnnouncement = this.announcementsService.findOne(id)
-    console.log(findAnnouncement)
+    if (findAnnouncement.userId !== req.user.id) throw new UnauthorizedException()
 
     return this.announcementsService.update(id, updateAnnouncementDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @UseGuards(JwtAuthGuard)
+  remove(@Param('id') id: string, @Request() req: any) {
+    const findAnnouncement = this.announcementsService.findOne(id)
+    if (findAnnouncement.userId !== req.user.id) throw new UnauthorizedException()
+
     return this.announcementsService.remove(id);
   }
 }
