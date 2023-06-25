@@ -6,7 +6,7 @@ import { Heading } from "@/components/typography/heading.component";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LoginInterface, loginSchema } from "@/schemas/login.schemas";
-import { loginContext } from "@/context/login.context";
+import { LoginContext } from "@/context/login.context";
 import { useEffect } from "react";
 import Link from "next/link";
 import { Text } from "@/components/typography/text.component";
@@ -19,7 +19,7 @@ export default function Login() {
     resolver: zodResolver(loginSchema)
   })
 
-  const { loginRequest, loginError, setLoginError } = loginContext()
+  const { loginRequest, loginError, setLoginError } = LoginContext()
 
   useEffect(() => {
     return (
