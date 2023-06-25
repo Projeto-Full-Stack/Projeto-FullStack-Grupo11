@@ -1,7 +1,6 @@
 import {
   UseGuards,
   Controller,
-  UseGuards,
   Get,
   Post,
   Body,
@@ -40,18 +39,18 @@ export class AnnouncementsController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto, @Request() req: any) {
-    const findAnnouncement = this.announcementsService.findOne(id)
-    if (findAnnouncement.userId !== req.user.id) throw new UnauthorizedException()
+  async update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto, @Request() req: any) {
+    const findAnnouncement = await this.announcementsService.findOne(id)
+    if (findAnnouncement.user_id !== req.user.id) throw new UnauthorizedException()
 
     return this.announcementsService.update(id, updateAnnouncementDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string, @Request() req: any) {
-    const findAnnouncement = this.announcementsService.findOne(id)
-    if (findAnnouncement.userId !== req.user.id) throw new UnauthorizedException()
+  async remove(@Param('id') id: string, @Request() req: any) {
+    const findAnnouncement = await this.announcementsService.findOne(id)
+    if (findAnnouncement.user_id !== req.user.id) throw new UnauthorizedException()
 
     return this.announcementsService.remove(id);
   }
