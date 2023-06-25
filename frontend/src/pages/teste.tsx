@@ -1,8 +1,9 @@
 import { AnnForm } from "@/components/annForm";
+import { LoginContext } from "@/context/login.context";
 import { ContextModal } from "@/context/modal.context";
 
 export default function Teste() {
-  const { setModalContent } = ContextModal();
+  const { userInfo } = LoginContext();
 
   function teste(event: any){
     event.preventDefault()
@@ -10,7 +11,7 @@ export default function Teste() {
   }
   return (
     <>
-      <button onClick={() => setModalContent(<AnnForm />)}>X</button>      
+      <button onClick={() => console.log(userInfo)}>X</button>      
     </>
   );
 }
