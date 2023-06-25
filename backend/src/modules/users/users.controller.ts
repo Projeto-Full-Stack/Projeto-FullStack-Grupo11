@@ -46,8 +46,6 @@ export class UsersController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string,  @Request() req: any) {
-    console.log(id)
-    console.log(req.user.id)
     if(req.user.id !== id) throw new UnauthorizedException()
 
     return this.usersService.remove(id);
