@@ -29,13 +29,12 @@ function RegisterPage() {
     resolver: zodResolver(registerSchema),
   });
 
-  const { registerRequest, registerError, setRegisterError } = registerContext();
-  
+  const { registerRequest, registerError, setRegisterError } =
+    registerContext();
+
   useEffect(() => {
-    return (
-        setRegisterError("")
-    )
-  }, [])
+    return setRegisterError("");
+  }, []);
 
   return (
     <main className={`bg-grey-7 min-h-screen`}>
@@ -48,15 +47,15 @@ function RegisterPage() {
           <Heading weight={500} type="h5" extra_classes="mb-[32px]">
             {"Cadastro"}
           </Heading>
-            {registerError && (
-              <Text
-                type="b2"
-                weight={500}
-                extra_classes="text-feedback-alert_1 mb-4"
-              >
-                {registerError}
-              </Text>
-            )}
+          {registerError && (
+            <Text
+              type="b2"
+              weight={500}
+              extra_classes="text-feedback-alert_1 mb-4"
+            >
+              {registerError}
+            </Text>
+          )}
           <div>
             <Text weight={500} type="b2" extra_classes="mb-[24px]">
               {"Informações Pessoais"}

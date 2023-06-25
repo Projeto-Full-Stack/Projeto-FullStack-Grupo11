@@ -1,17 +1,25 @@
+import Button from "@/components/button";
 import Card from "@/components/card";
 import { Footer } from "@/components/footer";
+import EditAddressForm from "@/components/forms/formAddressEdit";
+import EditUserForm from "@/components/forms/formUserEdit";
+import { Modal } from "@/components/modal/modal";
 import NavBar from "@/components/navbar";
 import Next from "@/components/next";
 import Profile from "@/components/profile";
 import { Heading } from "@/components/typography/heading.component";
 import { Text } from "@/components/typography/text.component";
+import { ModalContext } from "@/context/modal.context";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const ViewUser = () => {
   const router = useRouter();
+  const { setModalContent } = useContext(ModalContext);
+
   return (
     <div>
       <main className={"body"}>
@@ -21,13 +29,28 @@ const ViewUser = () => {
             <Profile
               type="big"
               name="Mayza"
-              extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-7 mb-8 max-w-[1240px]"
+              extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-7 mb-8 max-w-[1240px] h-fit"
             >
               <Text type="b1" weight={400} extra_classes="text-grey_2 h-35">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industrys standard dummy text
                 ever since the 1500s
               </Text>
+              <div className="mt-2 flex gap-4">
+                <Button
+                  type="bg-brand"
+                  click_event={() => setModalContent(<EditUserForm />)}
+                >
+                  Editar Perfil
+                </Button>
+
+                <Button
+                  type="bg-brand"
+                  click_event={() => setModalContent(<EditAddressForm />)}
+                >
+                  Editar Endereço
+                </Button>
+              </div>
             </Profile>
           </section>
           <Heading
