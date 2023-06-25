@@ -16,9 +16,9 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     const announcement = new Announcement();
     Object.assign(announcement, {
       ...data,
-      userId: userId,
+      user_id: userId,
     });
-
+    this.prisma.announcement.createMany
     const newAnnouncement = await this.prisma.announcement.create({
       data: { ...announcement },
     });
