@@ -3,7 +3,6 @@ import Card from "@/components/card";
 import { Footer } from "@/components/footer";
 import EditAddressForm from "@/components/forms/formAddressEdit";
 import EditUserForm from "@/components/forms/formUserEdit";
-import { Modal } from "@/components/modal/modal";
 import NavBar from "@/components/navbar";
 import Next from "@/components/next";
 import Profile from "@/components/profile";
