@@ -18,7 +18,7 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
       ...data,
       user_id: userId,
     });
-
+    this.prisma.announcement.createMany
     const newAnnouncement = await this.prisma.announcement.create({
       data: { ...announcement },
     });
