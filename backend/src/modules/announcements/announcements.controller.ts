@@ -8,6 +8,7 @@ import {
   Param,
   Delete,
   Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
@@ -21,6 +22,8 @@ export class AnnouncementsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() createAnnouncementDto: CreateAnnouncementDto, @Request() req: any) {
+    if (!req.user.vendor) throw new UnauthorizedException()
+
     return this.announcementsService.create(createAnnouncementDto, req.user.id);
   }
 
@@ -35,10 +38,11 @@ export class AnnouncementsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateAnnouncementDto: UpdateAnnouncementDto,
-  ) {
+  @UseGuards(JwtAuthGuard)
+  update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto, @Request() req: any) {
+    const findAnnouncement = this.announcementsService.findOne(id)
+    console.log(findAnnouncement)
+
     return this.announcementsService.update(id, updateAnnouncementDto);
   }
 
