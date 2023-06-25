@@ -163,7 +163,7 @@ const EditAddressForm = () => {
                 </p>
               )}
             </div>
-            <div>
+            <div className="w-full">
               <Input
                 register={register("complement")}
                 input_name="complement"
@@ -181,7 +181,6 @@ const EditAddressForm = () => {
             </div>
           </span>
           <section className="w-full flex gap-2 justify-end mt-2">
-            <Button type="bg-alert2">Cancelar</Button>
             <Button type="bg-brand">Salvar alterações</Button>
           </section>
         </div>

@@ -122,18 +122,10 @@ const EditUserForm = () => {
             </p>
           )}
         </div>
-        <section className="w-full flex flex-col gap-2">
-          <div className="flex justify-between">
-            <Button type="bg-alert2" extra_classes="w-">
-              Cancelar
-            </Button>
-            <Button type="bg-alert">Excluir Perfil</Button>
-          </div>
-          <div className="flex justify-center">
-            <Button type="bg-brand" extra_classes="">
-              Salvar alterações
-            </Button>
-          </div>
+        <section className="w-full mt-2 flex justify-end">
+          <Button type="bg-brand" extra_classes="">
+            Salvar alterações
+          </Button>
         </section>
       </form>
     </>
