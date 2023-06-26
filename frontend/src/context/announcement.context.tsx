@@ -13,6 +13,7 @@ interface AnnouncementContextInterface {
     setUserAnnouncements: (data: []) => void;
     userAnnouncements: IncludeIdAnnouncementInterface[];
     editAnnouncement: (data: EditAnnouncementInterface) => void;
+    deleteAnnouncement: (announcement_id: string) => void;
 }
 
 const announcementContext = createContext<AnnouncementContextInterface>({} as AnnouncementContextInterface)
@@ -48,7 +49,7 @@ export function AnnouncementProvider ({children}: Props){
         try {
             const updatedAnnouncement = await motorsApi.patch(`announcements/${id}`, announcementDetails, {
                 headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("token")}`
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`
                 }
             })
             const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === id)
@@ -61,8 +62,21 @@ export function AnnouncementProvider ({children}: Props){
         }
     }
 
+    async function deleteAnnouncement (announcement_id: string){
+        await motorsApi.delete(`announcements/${announcement_id}`, {
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`
+            }
+        })
+        const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === announcement_id)
+        const array = [...userAnnouncements]
+        array.splice(index, 1)
+        setUserAnnouncements(array)
+        setModalContent(false)
+    }
+
     return (
-        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements, setUserAnnouncements, editAnnouncement}}>
+        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements, setUserAnnouncements, editAnnouncement, deleteAnnouncement}}>
             {children}
         </announcementContext.Provider>
     )

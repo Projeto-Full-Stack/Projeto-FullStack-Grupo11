@@ -106,7 +106,7 @@ const ViewUser = () => {
                   {userAnnouncements.length ?
                     userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
                     :
-                    <p>Array vazio</p>
+                    <Text type="b1" weight={600}>Você não possui nenhum carro anunciado</Text>
                   }
                 </ul>
                 <Next />

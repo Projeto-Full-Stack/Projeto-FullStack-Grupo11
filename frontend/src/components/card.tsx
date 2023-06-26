@@ -8,6 +8,7 @@ import { ModalContext } from "@/context/modal.context";
 import { useRouter } from "next/router";
 import { IncludeIdAnnouncementInterface } from "@/schemas/announcement.schemas";
 import { EditAnnouncementForm } from "./forms/announcement/editAnnouncement";
+import { DeleteAnnouncementForm } from "./forms/announcement/deleteAnnouncement";
 
 interface Props {
   car: IncludeIdAnnouncementInterface
@@ -55,7 +56,7 @@ const Card = ({car}: Props) => {
       {userInfo?.isVendor == true && router.pathname == "/profile/[id]" ? (
         <div className="mt-2 flex gap-4 ">
           <Button type="bg-light" click_event={() => setModalContent(<EditAnnouncementForm announcement={car}/>)}>Editar</Button>
-          <Button type="bg-alert">Deletar</Button>
+          <Button type="bg-alert" click_event={() => setModalContent(<DeleteAnnouncementForm id={car.id}/>)}>Deletar</Button>
         </div>
       ) : (
         <div></div>
