@@ -37,7 +37,7 @@ function RegisterPage() {
   }, []);
 
   return (
-    <main className={`bg-grey-7 min-h-screen`}>
+    <main className={`bg-grey-7 min-h-screen`}> 
       <NavBar />
       <div className={`flex justify-center items-center mt-[45px] mb-[94px]`}>
         <form

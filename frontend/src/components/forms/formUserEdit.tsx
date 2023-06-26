@@ -1,4 +1,3 @@
-import Input from "../Inputs/input";
 import { Text } from "../typography/text.component";
 import { ModalHeader } from "../modal/modalHeader";
 import Button from "../button";
@@ -7,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerContext } from "@/context/register.context";
 import { useEffect } from "react";
+import Input from "@/components/Inputs/input";
 
 const EditUserForm = () => {
   const {

@@ -14,6 +14,7 @@ interface IInput {
   register?: {};
   extra_classes?: string;
   state?: boolean;
+  reference?: string;
 }
 
 const regex: string =
@@ -37,7 +38,10 @@ const Input = ({
     input_type == "password"
   ) {
     return (
-      <label htmlFor={input_name} className={`block font-medium text-grey-1`}>
+      <label
+        htmlFor={input_name}
+        className={`block font-medium text-grey-1 w-full`}
+      >
         {label}
         <input
           id={input_name}
@@ -92,13 +96,13 @@ const Input = ({
     return (
       <label
         htmlFor={input_name}
-        className={`flex flex-col max-w-full font-medium py-2 text-grey-1 ${extra_classes}`}
+        className={`flex flex-col mb-[80px] max-w-full font-medium py-2 text-grey-1 ${extra_classes}`}
       >
         {label}
         <textarea
           id={input_name}
           {...register}
-          className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded px-6 pt-3 resize-none border-[1.5px] h-[80px] `}
+          className={`border-grey-4 font-normal focus:outline-none focus:ring focus:ring-brand-1 rounded px-6 pt-3 resize-none border-[1.5px] h-[80px]`}
           name={input_name}
           placeholder={children}
         />

@@ -12,15 +12,15 @@ import { ModalContext } from "@/context/modal.context";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { loginContext } from "@/context/login.context";
+import { LoginContext } from "@/context/login.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const ViewUser = () => {
   const router = useRouter();
-  const { userInfo } = LoginContext();
 
   const { setModalContent } = useContext(ModalContext);
+  const { userInfo } = LoginContext();
 
   return (
     <div>
