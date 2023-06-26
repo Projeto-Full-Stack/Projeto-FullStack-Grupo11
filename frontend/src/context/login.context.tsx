@@ -14,9 +14,10 @@ interface ILoginProvider {
   loginError: string;
   setLoginError: (text: string) => void;
   setUserInfo: (data: UserInterface) => void;
-  userInfo: UserInterface;
+  userInfo: UserInterface | null;
   setToken: (token: string) => void;
   tokenState: string;
+  logout: () => void;
 }
 
 interface DecodedInterface {
@@ -31,7 +32,7 @@ const loginContext = createContext<ILoginProvider>({} as ILoginProvider);
 
 export const LoginProvider = ({ children }: Props) => {
   const [loginError, setLoginError] = useState<string>("");
-  const [userInfo, setUserInfo] = useState<UserInterface>({} as UserInterface)
+  const [userInfo, setUserInfo] = useState<UserInterface | null>(null)
   const [tokenState, setToken] = useState<string>("")
 
   const router = useRouter();
@@ -57,6 +58,13 @@ export const LoginProvider = ({ children }: Props) => {
       });
   };
 
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    router.push("/")
+    setUserInfo(null)
+    setToken("")
+  }
+
   useEffect(() => {
     if (window.localStorage.getItem("token")) {
       const checkToken = async () => {
@@ -78,7 +86,7 @@ export const LoginProvider = ({ children }: Props) => {
   }, [])
 
   return (
-    <loginContext.Provider value={{ loginRequest, loginError, setLoginError, setUserInfo, userInfo, setToken, tokenState}}>
+    <loginContext.Provider value={{ loginRequest, loginError, setLoginError, setUserInfo, userInfo, setToken, tokenState, logout}}>
       {children}
     </loginContext.Provider>
   );
