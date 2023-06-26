@@ -90,7 +90,9 @@ export const LoginProvider = ({ children }: Props) => {
       }
       checkToken()
     }else {
-      router.push("/login")
+      if (!router.pathname.includes("/recovery")){
+        router.push("/login")
+      }
     }
   }, [])
 
