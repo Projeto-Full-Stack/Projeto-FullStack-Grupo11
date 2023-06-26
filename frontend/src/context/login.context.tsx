@@ -59,8 +59,21 @@ export const LoginProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (window.localStorage.getItem("token")) {
-      stateUserDetails(window.localStorage.getItem("token")!)
-      setToken(window.localStorage.getItem("token")!)
+      const checkToken = async () => {
+        try {
+          const decoded: DecodedInterface = jwtDecode(window.localStorage.getItem("token")!)
+          const userDetails = await motorsApi.get(`/users/${decoded.sub}`)
+          setUserInfo(userDetails.data)
+          setToken(window.localStorage.getItem("token")!)
+        }
+        catch (error){
+          router.push("/login")
+          window.localStorage.removeItem("token")
+        }
+      }
+      checkToken()
+    }else {
+      router.push("/login")
     }
   }, [])
 

@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <RegisterProvider>
             <LoginProvider>
               <RecoveryProvider>
-                <Component {...pageProps} />
+                  <Component {...pageProps} />
               </RecoveryProvider>
               <Modal />
             </LoginProvider>
