@@ -32,6 +32,11 @@ export class AnnouncementsController {
     return this.announcementsService.findAll();
   }
 
+  @Get('/users/:user_id')
+  findAllByUser (@Param('user_id') user_id: string){
+    return this.announcementsService.findAllByUser(user_id)
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.announcementsService.findOne(id);

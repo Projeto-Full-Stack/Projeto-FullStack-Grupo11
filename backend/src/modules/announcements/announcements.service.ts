@@ -21,6 +21,12 @@ export class AnnouncementsService {
     return announcement;
   }
 
+  async findAllByUser (user_id: string){
+    const announcement = await this.announcementsRepository.findAllByUser(user_id);
+
+    return announcement;
+  }
+
   async findOne(id: string) {
     const announcement = await this.announcementsRepository.findOne(id);
 
