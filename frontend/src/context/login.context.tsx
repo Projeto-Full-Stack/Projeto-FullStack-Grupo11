@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { LoginInterface } from "@/schemas/login.schemas";
 import motorsApi from "@/services/motors.service";
 import { useRouter } from "next/router";
@@ -56,6 +56,13 @@ export const LoginProvider = ({ children }: Props) => {
         setLoginError(error.response.data.message);
       });
   };
+
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) {
+      stateUserDetails(window.localStorage.getItem("token")!)
+      setToken(window.localStorage.getItem("token")!)
+    }
+  }, [])
 
   return (
     <loginContext.Provider value={{ loginRequest, loginError, setLoginError, setUserInfo, userInfo, setToken, tokenState}}>
