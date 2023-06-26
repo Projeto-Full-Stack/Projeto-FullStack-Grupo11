@@ -47,7 +47,7 @@ const ViewUser = () => {
       <main className={"body"}>
         <NavBar />
         {profilePageInformation ? 
-          <div className="px-4 py-20 flex flex-col max-w-[2300px] m-auto">
+          <div className="px-4 py-20 flex flex-col m-auto">
             <section className="flex items-center w-full justify-center">
               <Profile
                 type="big"
@@ -88,19 +88,21 @@ const ViewUser = () => {
                 )}
               </Profile>
             </section>
+
+
             {userInfo?.isVendor &&
-              <>
-                <div>
+              <section className="max-w-[1140px] mx-auto">
+                <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
                   type="h5"
                   weight={600}
-                  extra_classes="text-grey_0 mt-10 mb-11 px-4"
+                  extra_classes="text-grey_0 px-4"
                   >
                     Anúncios
                   </Heading>
                   <Button type="bg-brand" click_event={() => setModalContent(<AnnForm />)}>Criar anuncio</Button>
                 </div>
-                <ul className="flex gap-4 overflow-scroll md:[613px] md:overflow-hidden md:flex-wrap md:justify-center ">
+                <ul className="flex gap-4 overflow-scroll lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
                   {userAnnouncements.length ?
                     userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
                     :
@@ -108,7 +110,7 @@ const ViewUser = () => {
                   }
                 </ul>
                 <Next />
-              </>
+              </section>
             }
             
           </div>
