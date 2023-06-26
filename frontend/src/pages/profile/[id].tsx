@@ -15,6 +15,8 @@ import { useContext, useEffect } from "react";
 import { LoginContext } from "@/context/login.context";
 import { ProfileContext } from "@/context/profile.context";
 import { DeleteUserForm } from "@/components/forms/formUserDelete";
+import { AnnouncementContext } from "@/context/announcement.context";
+import { AnnForm } from "@/components/annForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,7 @@ const ViewUser = () => {
 
   const { setModalContent } = useContext(ModalContext);
   const { getProfileDetails, profilePageInformation } = ProfileContext()
+  const { userAnnouncements ,getAllUserAnnouncements } = AnnouncementContext()
   const { userInfo, tokenState } = LoginContext();
 
   useEffect(() => {
@@ -30,6 +33,12 @@ const ViewUser = () => {
       getProfileDetails(router.query.id)
     }
   }, [router.query.id])
+
+  useEffect(() => {
+    if (userInfo?.isVendor){
+      getAllUserAnnouncements(userInfo.id)
+    }
+  }, [userInfo])
 
 
 
@@ -79,26 +88,27 @@ const ViewUser = () => {
                 )}
               </Profile>
             </section>
-            {userInfo?.isVendor ?
+            {userInfo?.isVendor &&
               <>
-                <Heading
-                type="h5"
-                weight={600}
-                extra_classes="text-grey_0 mt-10 mb-11 px-4"
-                >
-                  Anúncios
-                </Heading>
+                <div>
+                  <Heading
+                  type="h5"
+                  weight={600}
+                  extra_classes="text-grey_0 mt-10 mb-11 px-4"
+                  >
+                    Anúncios
+                  </Heading>
+                  <Button type="bg-brand" click_event={() => setModalContent(<AnnForm />)}>Criar anuncio</Button>
+                </div>
                 <ul className="flex gap-4 overflow-scroll md:[613px] md:overflow-hidden md:flex-wrap md:justify-center ">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                  {userAnnouncements.length ?
+                    userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
+                    :
+                    <p>Array vazio</p>
+                  }
                 </ul>
                 <Next />
               </>
-              :
-              <p>"not vendor"</p>
             }
             
           </div>
