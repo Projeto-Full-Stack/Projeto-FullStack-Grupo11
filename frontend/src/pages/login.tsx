@@ -58,7 +58,7 @@ export default function Login() {
                 Digite sua senha
               </Input>
               <Link
-                href="/"
+                href="/recovery"
                 className={`flex justify-end align-center font-semibold text-[14px] leading-[24px] font-inter`}
               >
                 Esqueci minha senha
@@ -70,7 +70,7 @@ export default function Login() {
                 Ainda não possui conta?
               </p>
             </div>
-              <Button type={`b-black`}>{`Cadastrar`}</Button>
+              <Link href="/register" className="text-grey-0 box-border border-grey-6 border-[1.5px] py-1.5 px-5 rounded font-medium min-w-max max-h-[48px] max-w-full w-full text-center">Cadastrar</Link>
           </form>
         </div>
       </main>
