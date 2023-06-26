@@ -2,6 +2,7 @@ import { z } from "zod";
 
 
 export const userSchema = z.object({
+    id: z.string(),
     name: z
         .string()
         .max(120, { message: "Tamanho máximo 120 caracteres" })

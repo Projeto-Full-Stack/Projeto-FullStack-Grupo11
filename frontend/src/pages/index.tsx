@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import { useState } from "react";
 import RegisterPage from "./register";
-import Profile from "./profile";
+import Profile from "./profile/[id]";
 
 const inter = Inter({ subsets: ["latin"] });
 
