@@ -8,6 +8,7 @@ export abstract class AnnouncementRepository {
     userId: string,
   ): Promise<Announcement>;
   abstract findAll(): Promise<Announcement[]>;
+  abstract findAllByUser(user_id: string): Promise<Announcement[]>;
   abstract findOne(id: string): Promise<Announcement>;
   abstract update(
     id: string,
