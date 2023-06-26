@@ -27,7 +27,6 @@ const ViewUser = () => {
   useEffect(() => {
     if (router.query.id){
       getProfileDetails(router.query.id)
-      console.log(router.query.id)
     }
   }, [router.query.id])
 
@@ -53,8 +52,8 @@ const ViewUser = () => {
                   {profilePageInformation!.description}
                 </Text>
                 {userInfo?.id === profilePageInformation.id && (
-                  <div className="mt-2 flex flex-col gap-4 sm:[500px] sm:flex-row sm:justify-between">
-                    <div className="flex justify-between w-full sm:w-[30%] gap-4">
+                  <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:flex-row lg:justify-between">
+                    <div className="flex flex-col w-full lg:w-[30%] lg:flex-row gap-4">
                       <Button
                         type="bg-brand"
                         click_event={() => setModalContent(<EditUserForm />)}
@@ -70,7 +69,7 @@ const ViewUser = () => {
                     </div>
                     <Button
                       type="bg-alert"
-                      extra_classes="w-[30%] sm:[500px] sm:w-[20%]"
+                      extra_classes="lg:w-[20%]"
                     >
                       Excluir Perfil
                     </Button>

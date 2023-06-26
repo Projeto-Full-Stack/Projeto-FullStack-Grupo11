@@ -24,7 +24,14 @@ export const userSchema = z.object({
         .string()
         .max(500, { message: "Tamanho máximo atingido." })
         .nonempty("Insira uma descrição"),
-    isVendor: z.union([z.string(), z.boolean()]),   
+    isVendor: z.union([z.string(), z.boolean()])
 })
 
 export type UserInterface = z.infer<typeof userSchema>
+
+export const omitIdUserSchema = userSchema.omit({
+    id: true,
+    isVendor: true,
+})
+
+export type OmitedUserInterface = z.infer<typeof omitIdUserSchema>

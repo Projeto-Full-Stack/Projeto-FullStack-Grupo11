@@ -1,13 +1,15 @@
 import { Text } from "../typography/text.component";
 import { ModalHeader } from "../modal/modalHeader";
 import Button from "../button";
-import { registerSchema, RegisterInterface } from "@/schemas/register.schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerContext } from "@/context/register.context";
 import { useEffect } from "react";
 import Input from "@/components/Inputs/input";
 import { LoginContext } from "@/context/login.context";
+import { ProfileContext } from "@/context/profile.context";
+import { omitIdUserSchema, OmitedUserInterface } from "@/schemas/user.schemas";
+import motorsApi from "@/services/motors.service";
+import { ContextModal } from "@/context/modal.context";
 
 const EditUserForm = () => {
   const {
@@ -15,25 +17,43 @@ const EditUserForm = () => {
     setValue,
     register,
     formState: { errors },
-  } = useForm<RegisterInterface>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<OmitedUserInterface>({
+    resolver: zodResolver(omitIdUserSchema),
     mode: "onChange",
   });
 
-  const { userInfo } = LoginContext();
-
-  const { registerRequest, registerError, setRegisterError } =
-    registerContext();
+  const { userInfo, setUserInfo, tokenState } = LoginContext();
+  const { profilePageInformation , setProfileInformation ,updateProfile } = ProfileContext()
+  const { setModalContent } = ContextModal()
 
   useEffect(() => {
-    return setRegisterError("");
-  });
+    setValue("name", userInfo!.name)
+    setValue("email", userInfo!.email)
+    setValue("cpf", userInfo!.cpf)
+    setValue("phone", userInfo!.phone)
+    setValue("description", userInfo!.description)
+  }, [])
+
+  async function editUser (data: any){
+    try {
+      const updated = await motorsApi.patch(`users/${userInfo!.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${tokenState}`
+        }
+      })
+      setUserInfo(updated.data)
+      setModalContent(false)
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
 
   return (
     <>
       <ModalHeader>Editar perfil</ModalHeader>
       <form
-        onSubmit={handleSubmit(registerRequest)}
+        onSubmit={(handleSubmit(editUser))}
         className={`bg-grey-10 rounded flex flex-col items-start  min-h-min `}
       >
         <div className="w-full h-fit">
@@ -47,7 +67,7 @@ const EditUserForm = () => {
             label="Nome *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {userInfo.name}
+            Digite seu nome...
           </Input>
           {errors.name && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -61,7 +81,7 @@ const EditUserForm = () => {
             label="Email *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {userInfo.email}
+            Digite seu email...
           </Input>
           {errors.email && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -75,7 +95,7 @@ const EditUserForm = () => {
             label="CPF *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {userInfo.cpf}
+            Digite seu CPF...
           </Input>
           {errors.cpf && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -90,7 +110,7 @@ const EditUserForm = () => {
             label="Celular *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {userInfo.phone}
+            Digite seu telefone...
           </Input>
           {errors.phone && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -104,7 +124,7 @@ const EditUserForm = () => {
             label="Data de nascimento *"
             extra_classes="my-[5px] w-full h-[40px] "
           >
-            {userInfo.birthDate}
+            MM/DD/YYYY
           </Input>
           {errors.birthDate && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -117,7 +137,7 @@ const EditUserForm = () => {
             input_type="textArea"
             label="Descrição *"
           >
-            {userInfo.description}
+            Escreva sobre você...
           </Input>
           {errors.description && (
             <p className={`flex py-2 text-feedback-alert_1`}>

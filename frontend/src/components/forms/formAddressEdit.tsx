@@ -1,14 +1,14 @@
 import Input from "@/components/Inputs/input";
 import { Text } from "@/components/typography/text.component";
-import { Heading } from "@/components/typography/heading.component";
-import { Footer } from "@/components/footer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, RegisterInterface } from "@/schemas/register.schemas";
-import { registerContext } from "@/context/register.context";
 import { useEffect, useState } from "react";
-import Button from "@/components/button";
 import { ModalHeader } from "../modal/modalHeader";
+import { LoginContext } from "@/context/login.context";
+import Button from "../button";
+import { IdOmitedAddressInterface, idOmitedAddressSchema } from "@/schemas/address.schemas";
+import motorsApi from "@/services/motors.service";
+import { ContextModal } from "@/context/modal.context";
 
 const EditAddressForm = () => {
   const [selected, setSelected] = useState(true);
@@ -23,24 +23,45 @@ const EditAddressForm = () => {
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors },
-  } = useForm<RegisterInterface>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<IdOmitedAddressInterface>({
+    resolver: zodResolver(idOmitedAddressSchema),
     mode: "onChange",
   });
 
-  const { registerRequest, registerError, setRegisterError } =
-    registerContext();
+  const { userInfo, tokenState, addressInfo, setAddressInfo } = LoginContext()
+  const { setModalContent } = ContextModal()
 
   useEffect(() => {
-    return setRegisterError("");
-  });
+    console.log(addressInfo)
+    setValue("cep", addressInfo.cep)
+    setValue("street", addressInfo.street)
+    setValue("city", addressInfo.city)
+    setValue("number", addressInfo.number)
+    setValue("complement", addressInfo.complement)
+  }, [])
+
+  async function teste (data: any){
+    try {
+      const updatedAddress = await motorsApi.patch(`address/${addressInfo.id}`, data, {
+        headers: {
+          Authorization: `Bearer ${tokenState}`
+        }
+      })
+      setAddressInfo(updatedAddress.data)
+      setModalContent(false)
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
 
   return (
     <>
       <ModalHeader>Editar endereço</ModalHeader>
       <form
-        onSubmit={handleSubmit(registerRequest)}
+        onSubmit={handleSubmit(teste)}
         className={`bg-grey-10 rounded flex flex-col items-start  min-h-min `}
       >
         <div className="w-full h-fit">
@@ -180,7 +201,9 @@ const EditAddressForm = () => {
               )}
             </div>
           </span>
-          <section className="w-full flex gap-2 justify-end mt-2"></section>
+          <section className="w-full flex gap-2 justify-end mt-2">
+            <Button type="b-brand">Teste</Button>
+          </section>
         </div>
       </form>
     </>
