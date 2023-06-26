@@ -163,13 +163,13 @@ const EditAddressForm = () => {
                 </p>
               )}
             </div>
-            <div>
+            <div className="w-full">
               <Input
                 register={register("complement")}
                 input_name="complement"
                 input_type="text"
                 label="Complemento"
-                extra_classes="my-[5px] w-full  h-[40px] flex flex-col "
+                extra_classes="my-[5px]  h-[40px] flex flex-col w-full "
               >
                 {"Ex: apart 307"}
               </Input>
@@ -180,10 +180,7 @@ const EditAddressForm = () => {
               )}
             </div>
           </span>
-          <section className="w-full flex gap-2 justify-end mt-2">
-            <Button type="bg-alert2">Cancelar</Button>
-            <Button type="bg-brand">Salvar alterações</Button>
-          </section>
+          <section className="w-full flex gap-2 justify-end mt-2"></section>
         </div>
       </form>
     </>

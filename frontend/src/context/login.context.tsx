@@ -38,7 +38,8 @@ export const LoginProvider = ({ children }: Props) => {
 
   const stateUserDetails = async (token: string) => {
     const decoded: DecodedInterface = jwtDecode(token);
-    const userDetails = await motorsApi.get(`/users/${decoded.sub}`);
+
+    const userDetails = await motorsApi.get(`users/${decoded.sub}`);
     setUserInfo(userDetails.data);
   };
 

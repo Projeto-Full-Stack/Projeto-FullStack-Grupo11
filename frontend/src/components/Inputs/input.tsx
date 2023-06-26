@@ -38,10 +38,7 @@ const Input = ({
     input_type == "password"
   ) {
     return (
-      <label
-        htmlFor={input_name}
-        className={`block font-medium text-grey-1 w-full`}
-      >
+      <label htmlFor={input_name} className={`font-medium text-grey-1 w-full`}>
         {label}
         <input
           id={input_name}
@@ -96,7 +93,7 @@ const Input = ({
     return (
       <label
         htmlFor={input_name}
-        className={`flex flex-col mb-[80px] max-w-full font-medium py-2 text-grey-1 ${extra_classes}`}
+        className={`flex flex-col mb-2 max-w-full font-medium py-2 text-grey-1 ${extra_classes}`}
       >
         {label}
         <textarea

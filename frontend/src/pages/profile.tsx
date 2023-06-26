@@ -20,7 +20,7 @@ const ViewUser = () => {
   const router = useRouter();
 
   const { setModalContent } = useContext(ModalContext);
-  const { userInfo } = LoginContext();
+  const { userInfo, tokenState } = LoginContext();
 
   return (
     <div>
@@ -30,29 +30,42 @@ const ViewUser = () => {
           <section className="flex items-center w-full justify-center">
             <Profile
               type="big"
-              name="Mayza"
-              extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-7 mb-8 max-w-[1240px] h-fit"
+              name={userInfo.name}
+              extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-3 mb-8 w-[1140px] h-fit "
             >
-              <Text type="b1" weight={400} extra_classes="text-grey_2 h-35">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industrys standard dummy text
-                ever since the 1500s
+              <Text
+                type="b1"
+                weight={400}
+                extra_classes="text-grey_2 h-35 w-full"
+              >
+                {userInfo.description}
               </Text>
-              <div className="mt-2 flex gap-4">
-                <Button
-                  type="bg-brand"
-                  click_event={() => setModalContent(<EditUserForm />)}
-                >
-                  Editar Perfil
-                </Button>
-
-                <Button
-                  type="bg-brand"
-                  click_event={() => setModalContent(<EditAddressForm />)}
-                >
-                  Editar Endereço
-                </Button>
-              </div>
+              {userInfo.isVendor == true ? (
+                <div className="mt-2 flex flex-col gap-4 sm:[500px] sm:flex-row sm:justify-between">
+                  <div className="flex justify-between w-full sm:w-[30%] gap-4">
+                    <Button
+                      type="bg-brand"
+                      click_event={() => setModalContent(<EditUserForm />)}
+                    >
+                      Editar Perfil
+                    </Button>
+                    <Button
+                      type="bg-brand"
+                      click_event={() => setModalContent(<EditAddressForm />)}
+                    >
+                      Editar Endereço
+                    </Button>
+                  </div>
+                  <Button
+                    type="bg-alert"
+                    extra_classes="w-[30%] sm:[500px] sm:w-[20%]"
+                  >
+                    Excluir Perfil
+                  </Button>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </Profile>
           </section>
           <Heading
@@ -78,6 +91,3 @@ const ViewUser = () => {
 };
 
 export default ViewUser;
-function LoginContext(): { userInfo: any } {
-  throw new Error("Function not implemented.");
-}

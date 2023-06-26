@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerContext } from "@/context/register.context";
 import { useEffect } from "react";
 import Input from "@/components/Inputs/input";
+import { LoginContext } from "@/context/login.context";
 
 const EditUserForm = () => {
   const {
@@ -18,6 +19,8 @@ const EditUserForm = () => {
     resolver: zodResolver(registerSchema),
     mode: "onChange",
   });
+
+  const { userInfo } = LoginContext();
 
   const { registerRequest, registerError, setRegisterError } =
     registerContext();
@@ -44,7 +47,7 @@ const EditUserForm = () => {
             label="Nome *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {"Ex: Samuel Leão"}
+            {userInfo.name}
           </Input>
           {errors.name && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -58,7 +61,7 @@ const EditUserForm = () => {
             label="Email *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {"Ex: samuel@kenzie.com.br"}
+            {userInfo.email}
           </Input>
           {errors.email && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -72,7 +75,7 @@ const EditUserForm = () => {
             label="CPF *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {"000.000.000-00"}
+            {userInfo.cpf}
           </Input>
           {errors.cpf && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -87,7 +90,7 @@ const EditUserForm = () => {
             label="Celular *"
             extra_classes="my-[5px] w-full h-[40px] flex flex-col"
           >
-            {"(DDD) 90000-0000"}
+            {userInfo.phone}
           </Input>
           {errors.phone && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -101,7 +104,7 @@ const EditUserForm = () => {
             label="Data de nascimento *"
             extra_classes="my-[5px] w-full h-[40px] "
           >
-            {"00/00/00"}
+            {userInfo.birthDate}
           </Input>
           {errors.birthDate && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -114,7 +117,7 @@ const EditUserForm = () => {
             input_type="textArea"
             label="Descrição *"
           >
-            {"Digitar descrição"}
+            {userInfo.description}
           </Input>
           {errors.description && (
             <p className={`flex py-2 text-feedback-alert_1`}>
@@ -123,16 +126,8 @@ const EditUserForm = () => {
           )}
         </div>
         <section className="w-full flex flex-col gap-2">
-          <div className="flex justify-between">
-            <Button type="bg-alert2" extra_classes="w-">
-              Cancelar
-            </Button>
-            <Button type="bg-alert">Excluir Perfil</Button>
-          </div>
-          <div className="flex justify-center">
-            <Button type="bg-brand" extra_classes="">
-              Salvar alterações
-            </Button>
+          <div className="flex justify-end">
+            <Button type="bg-brand">Salvar alterações</Button>
           </div>
         </section>
       </form>
