@@ -37,7 +37,7 @@ const Card = () => {
           R$ 00.000,00
         </Heading>
       </div>
-      {userInfo.isVendor == true ? (
+      {userInfo && userInfo.isVendor == true ? (
         <div className="mt-2 flex gap-4 ">
           <Button type="bg-light">Editar</Button>
           <Button type="bg-light">Ver detalhes</Button>

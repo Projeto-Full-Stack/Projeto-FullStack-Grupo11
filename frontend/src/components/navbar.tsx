@@ -32,7 +32,7 @@ const NavBar = () => {
         <div className="lg:border-grey-6 items-center lg:border-l-[2px] h-full py-[20px] lg:items-center lg:px-5 lg:min-h-full hidden lg:block">
           {userInfo ?
           <div className="flex gap-6 items-center">
-            <Link href="/profile"><Profile type="small" name={userInfo.name} extra_classes="flex items-center gap-5"/></Link>
+            <Link href={`/profile/${userInfo.id}`}><Profile type="small" name={userInfo.name} extra_classes="flex items-center gap-5"/></Link>
             <Button type="bg-alert" click_event={() => logout()}>Logout</Button>
           </div>
           : 

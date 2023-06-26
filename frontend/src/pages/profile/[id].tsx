@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { LoginContext } from "@/context/login.context";
 import { ProfileContext } from "@/context/profile.context";
+import { DeleteUserForm } from "@/components/forms/formUserDelete";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,6 +71,7 @@ const ViewUser = () => {
                     <Button
                       type="bg-alert"
                       extra_classes="lg:w-[20%]"
+                      click_event={() => setModalContent(<DeleteUserForm />)}
                     >
                       Excluir Perfil
                     </Button>
