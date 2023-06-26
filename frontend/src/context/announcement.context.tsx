@@ -13,9 +13,11 @@ interface AnnouncementContextInterface {
 const announcementContext = createContext<AnnouncementContextInterface>({} as AnnouncementContextInterface)
 
 export function AnnouncementProvider ({children}: Props){
+    const [userAnnouncements, setUserAnnouncements] = useState()
+
     async function createAnnouncement (data: AnnoucementInterface){
         try{
-            const announcement = await motorsApi.post("/announcements", data, {
+            const announcement = await motorsApi.post("announcements", data, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem("token")}`
                 }
@@ -24,6 +26,11 @@ export function AnnouncementProvider ({children}: Props){
         catch(error) {
             console.log(error)
         }
+    }
+
+    async function getAllUserAnnouncements (user_id: string){
+        const announcements = await motorsApi.get(`announcements/${user_id}`)
+        console.log(announcements)
     }
 
     return (

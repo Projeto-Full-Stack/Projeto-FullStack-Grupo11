@@ -79,21 +79,28 @@ const ViewUser = () => {
                 )}
               </Profile>
             </section>
-            <Heading
-              type="h5"
-              weight={600}
-              extra_classes="text-grey_0 mt-10 mb-11 px-4"
-            >
-              Anúncios
-            </Heading>
-            <ul className="flex gap-4 overflow-scroll md:[613px] md:overflow-hidden md:flex-wrap md:justify-center ">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-            </ul>
-            <Next />
+            {userInfo?.isVendor ?
+              <>
+                <Heading
+                type="h5"
+                weight={600}
+                extra_classes="text-grey_0 mt-10 mb-11 px-4"
+                >
+                  Anúncios
+                </Heading>
+                <ul className="flex gap-4 overflow-scroll md:[613px] md:overflow-hidden md:flex-wrap md:justify-center ">
+                  <Card />
+                  <Card />
+                  <Card />
+                  <Card />
+                  <Card />
+                </ul>
+                <Next />
+              </>
+              :
+              <p>"not vendor"</p>
+            }
+            
           </div>
           :
           <div>
