@@ -5,51 +5,58 @@ import Button from "./button";
 import { LoginContext } from "@/context/login.context";
 import { useContext } from "react";
 import { ModalContext } from "@/context/modal.context";
+import { useRouter } from "next/router";
+import { IncludeIdAnnouncementInterface } from "@/schemas/announcement.schemas";
+import { EditAnnouncementForm } from "./forms/announcement/editAnnouncement";
+import { DeleteAnnouncementForm } from "./forms/announcement/deleteAnnouncement";
 
-const Card = () => {
+interface Props {
+  car: IncludeIdAnnouncementInterface
+}
+
+const Card = ({car}: Props) => {
   const { setModalContent } = useContext(ModalContext);
   const { userInfo, tokenState } = LoginContext();
+  const router = useRouter()
 
   return (
     <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
-      <img
-        src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg"
-        alt="car-photo"
-        className="w-fit"
-      />
-      <Heading type="h7" weight={600}>
-        Car title
-      </Heading>
-      <Text type="b2" weight={400}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
-        doloribus molestiae commodi consequuntur sint deleniti vitae neque
-        corrupti ipsa ab?
-      </Text>
-
-      <Profile type="small" name={"Mayza"} />
-
-      <div className="flex justify-between items-center">
-        <div className="flex w-1/3 gap-3 ">
-          <Button type="specifications">0 KM</Button>
-          <Button type="specifications">2019</Button>
-        </div>
-        <Heading type="h7" weight={500}>
-          R$ 00.000,00
-        </Heading>
-      </div>
-      {userInfo && userInfo.isVendor == true ? (
-        <div className="mt-2 flex gap-4 ">
-          <Button type="bg-light">Editar</Button>
-          <Button type="bg-light">Ver detalhes</Button>
-          {userInfo.isVendor == true ? (
-            <span className="w-fit h-fit bg-brand-1 text-colors_color_white_fixed absolute top-2 left-2 py-1 px-2 rounded">
+      <div className="relative">
+        <img
+          src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg"
+          alt="car-photo"
+          className="w-fit"
+        />
+        {car.avaliable == true ? (
+            <span className="w-fit bg-brand-1 text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
               Ativo
             </span>
           ) : (
-            <span className="w-10 h-6 bg-grey-4  text-colors_color_white_fixed absolute top-2 left-2 py-1 px-2 rounded">
+            <span className="w-fit bg-grey-4  text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
               Inativo
             </span>
           )}
+      </div>
+      <Heading type="h7" weight={600}>{car.model}</Heading>
+      <Text type="b2" weight={400}>
+        {car.description}
+      </Text>
+
+      <Profile type="small" name={"Mayza"} extra_classes="flex items-center gap-3"/>
+
+      <div className="flex justify-between items-center">
+        <div className="flex w-1/3 gap-3 ">
+          <Button type="specifications">{`${String(car.mileage)} KM`}</Button>
+          <Button type="specifications">{car.year}</Button>
+        </div>
+        <Heading type="h7" weight={500}>
+          {`R$ ${Number(car.price).toFixed(2).toString()}`}
+        </Heading>
+      </div>
+      {userInfo?.isVendor == true && router.pathname == "/profile/[id]" ? (
+        <div className="mt-2 flex gap-4 ">
+          <Button type="bg-light" click_event={() => setModalContent(<EditAnnouncementForm announcement={car}/>)}>Editar</Button>
+          <Button type="bg-alert" click_event={() => setModalContent(<DeleteAnnouncementForm id={car.id}/>)}>Deletar</Button>
         </div>
       ) : (
         <div></div>

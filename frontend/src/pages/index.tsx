@@ -3,6 +3,7 @@ import { useState } from "react";
 import RegisterPage from "./register";
 import Profile from "./profile/[id]";
 import NavBar from "@/components/navbar";
+import Card from "@/components/card";
 
 const inter = Inter({ subsets: ["latin"] });
 
