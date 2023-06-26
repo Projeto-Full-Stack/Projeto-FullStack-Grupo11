@@ -3,7 +3,6 @@ import Card from "@/components/card";
 import { Footer } from "@/components/footer";
 import EditAddressForm from "@/components/forms/formAddressEdit";
 import EditUserForm from "@/components/forms/formUserEdit";
-import { Modal } from "@/components/modal/modal";
 import NavBar from "@/components/navbar";
 import Next from "@/components/next";
 import Profile from "@/components/profile";
@@ -13,11 +12,14 @@ import { ModalContext } from "@/context/modal.context";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import { loginContext } from "@/context/login.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const ViewUser = () => {
   const router = useRouter();
+  const { userInfo } = LoginContext();
+
   const { setModalContent } = useContext(ModalContext);
 
   return (
@@ -76,3 +78,6 @@ const ViewUser = () => {
 };
 
 export default ViewUser;
+function LoginContext(): { userInfo: any } {
+  throw new Error("Function not implemented.");
+}

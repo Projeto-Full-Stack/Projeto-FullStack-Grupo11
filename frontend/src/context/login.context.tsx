@@ -13,7 +13,7 @@ interface ILoginProvider {
   setLoginError: (text: string) => void;
 }
 
-const LoginContext = createContext<ILoginProvider>({} as ILoginProvider);
+const loginContext = createContext<ILoginProvider>({} as ILoginProvider);
 
 export const LoginProvider = ({ children }: Props) => {
   const [loginError, setLoginError] = useState<string>("");
@@ -33,10 +33,10 @@ export const LoginProvider = ({ children }: Props) => {
   };
 
   return (
-    <LoginContext.Provider value={{ loginRequest, loginError, setLoginError }}>
+    <loginContext.Provider value={{ loginRequest, loginError, setLoginError }}>
       {children}
-    </LoginContext.Provider>
+    </loginContext.Provider>
   );
 };
 
-export const loginContext = () => useContext(LoginContext);
+export const LoginContext = () => useContext(loginContext);

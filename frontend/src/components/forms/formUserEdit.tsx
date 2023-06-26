@@ -6,12 +6,12 @@ import { registerSchema, RegisterInterface } from "@/schemas/register.schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerContext } from "@/context/register.context";
-import { useContext, useEffect } from "react";
-import { ModalContext } from "@/context/modal.context";
+import { useEffect } from "react";
 
 const EditUserForm = () => {
   const {
     handleSubmit,
+    setValue,
     register,
     formState: { errors },
   } = useForm<RegisterInterface>({
