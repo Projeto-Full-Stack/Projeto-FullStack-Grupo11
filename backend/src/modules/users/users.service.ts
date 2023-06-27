@@ -58,14 +58,17 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
-    if (updateUserDto.email) {
-      const findEmail = await this.usersRepository.findByEmail(
-        updateUserDto.email,
-      );
+    const findEmail = await this.usersRepository.findByEmail(updateUserDto.email);
 
-      if (findEmail) {
-        throw new ConflictException('Email already exists');
-      }
+
+    if (findEmail && findEmail.id !== id) {
+      throw new ConflictException('Email already exists');
+    }
+
+    const findCpf = await this.usersRepository.findByCpf(updateUserDto.cpf)
+
+    if (findCpf && findCpf.id !== id) {
+      throw new ConflictException('CPF already registered');
     }
 
     const user = await this.usersRepository.update(id, updateUserDto);
