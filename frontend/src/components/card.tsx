@@ -53,7 +53,7 @@ const Card = ({car}: Props) => {
           {`R$ ${Number(car.price).toFixed(2).toString()}`}
         </Heading>
       </div>
-      {userInfo?.isVendor == true && router.pathname == "/profile/[id]" ? (
+      {userInfo?.id == router.query.id && router.pathname == "/profile/[id]" ? (
         <div className="mt-2 flex gap-4 ">
           <Button type="bg-light" click_event={() => setModalContent(<EditAnnouncementForm announcement={car}/>)}>Editar</Button>
           <Button type="bg-alert" click_event={() => setModalContent(<DeleteAnnouncementForm id={car.id}/>)}>Deletar</Button>
