@@ -2,6 +2,7 @@ import { AnnoucementInterface, EditAnnouncementInterface, IncludeIdAnnouncementI
 import motorsApi from "@/services/motors.service"
 import { ReactNode, createContext, useContext, useState } from "react"
 import { ContextModal } from "./modal.context";
+import { UserInterface } from "@/schemas/user.schemas";
 
 interface Props {
     children: ReactNode
@@ -14,12 +15,17 @@ interface AnnouncementContextInterface {
     userAnnouncements: IncludeIdAnnouncementInterface[];
     editAnnouncement: (data: EditAnnouncementInterface) => void;
     deleteAnnouncement: (announcement_id: string) => void;
+    getAnnouncement: (announcement_id: string | string[]) => void;
+    announcementData: IncludeIdAnnouncementInterface | null;
+    announcementUserData: UserInterface;
 }
 
 const announcementContext = createContext<AnnouncementContextInterface>({} as AnnouncementContextInterface)
 
 export function AnnouncementProvider ({children}: Props){
     const [userAnnouncements, setUserAnnouncements] = useState<IncludeIdAnnouncementInterface[] | []>([])
+    const [announcementData, setAnnouncementData] = useState<IncludeIdAnnouncementInterface | null>(null)
+    const [announcementUserData, setAnnouncementUserData] = useState<UserInterface>({} as UserInterface)
     const { setModalContent } = ContextModal()
 
     async function createAnnouncement (data: AnnoucementInterface){
@@ -75,8 +81,21 @@ export function AnnouncementProvider ({children}: Props){
         setModalContent(false)
     }
 
+    async function getAnnouncement (announcement_id: string | string[]){
+        try {
+            const announcement = await motorsApi.get(`announcements/${announcement_id}`)
+            setAnnouncementData(announcement.data)
+            setAnnouncementUserData(announcement.data.user)
+        }
+        catch (error){
+            setAnnouncementData(null)
+        }
+    }
+
     return (
-        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements, setUserAnnouncements, editAnnouncement, deleteAnnouncement}}>
+        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements,
+         setUserAnnouncements, editAnnouncement, deleteAnnouncement, getAnnouncement, announcementData, announcementUserData
+         }}>
             {children}
         </announcementContext.Provider>
     )
