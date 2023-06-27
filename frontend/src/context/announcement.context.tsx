@@ -14,12 +14,15 @@ interface AnnouncementContextInterface {
     userAnnouncements: IncludeIdAnnouncementInterface[];
     editAnnouncement: (data: EditAnnouncementInterface) => void;
     deleteAnnouncement: (announcement_id: string) => void;
+    getAnnouncement: (announcement_id: string | string[]) => void;
+    announcementData: IncludeIdAnnouncementInterface | null;
 }
 
 const announcementContext = createContext<AnnouncementContextInterface>({} as AnnouncementContextInterface)
 
 export function AnnouncementProvider ({children}: Props){
     const [userAnnouncements, setUserAnnouncements] = useState<IncludeIdAnnouncementInterface[] | []>([])
+    const [announcementData, setAnnouncementData] = useState<IncludeIdAnnouncementInterface | null>(null)
     const { setModalContent } = ContextModal()
 
     async function createAnnouncement (data: AnnoucementInterface){
@@ -75,8 +78,21 @@ export function AnnouncementProvider ({children}: Props){
         setModalContent(false)
     }
 
+    async function getAnnouncement (announcement_id: string | string[]){
+        try {
+            const announcement = await motorsApi.get(`announcements/${announcement_id}`)
+            setAnnouncementData(announcement.data)
+            console.log(announcement.data)
+        }
+        catch (error){
+            setAnnouncementData(null)
+        }
+    }
+
     return (
-        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements, setUserAnnouncements, editAnnouncement, deleteAnnouncement}}>
+        <announcementContext.Provider value={{createAnnouncement, getAllUserAnnouncements, userAnnouncements,
+         setUserAnnouncements, editAnnouncement, deleteAnnouncement, getAnnouncement, announcementData
+         }}>
             {children}
         </announcementContext.Provider>
     )

@@ -5,11 +5,21 @@ import { Heading } from "@/components/typography/heading.component";
 import NavBar from "@/components/navbar";
 import Button from "@/components/button";
 import Profile from "@/components/profile";
+import { AnnouncementContext } from "@/context/announcement.context";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Announcements() {
   const router = useRouter();
+  const { announcementData, getAnnouncement } = AnnouncementContext()
+
+  useEffect(() => {
+    if (router.query.id){
+      getAnnouncement(router.query.id)
+    }
+  }, [router.query])
+
   return (
     <>
       <div className="z-[-1] h-screen absolute">
@@ -31,19 +41,19 @@ export default function Announcements() {
               className={`flex flex-col pl-7 py-7 pr-5 bg-colors_color_white_fixed rounded gap-6 lg:w-full`}
             >
               <Heading type="h6" weight={600} extra_classes="text-grey_0 pt-4">
-                Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200
+                {announcementData!.model}
               </Heading>
               <div className={`flex flex-col gap-4`}>
                 <div className={`flex gap-3`}>
                   <Button type="specifications" extra_classes="mr-4">
-                    0
+                    {`${announcementData!.mileage} KM`}
                   </Button>
                   <Button type="specifications" extra_classes="mr-4">
-                    2019
+                    {`${announcementData!.year}`}
                   </Button>
                 </div>
                 <Heading type="h7" weight={500}>
-                  R$ 00.000,00
+                 {`R$ ${Number(announcementData?.price).toFixed(2)}`}
                 </Heading>
               </div>
               <button className="w-fit">Comprar</button>
@@ -59,10 +69,7 @@ export default function Announcements() {
                 Descrição
               </Heading>
               <Text type="b1" weight={400}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the s standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book.
+                {`${announcementData!.description}`}
               </Text>
             </div>
           </article>
