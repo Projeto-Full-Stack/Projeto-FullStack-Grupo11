@@ -26,6 +26,7 @@ model Announcement {
   image       Image[]
   user        User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     String
+  comments    Comment[]
 
   @@map("announcements")
 }
@@ -52,6 +53,7 @@ model User {
   isVendor    Boolean
   address     Address?
   announcements Announcement[]
+  comments    Comment?
 
   @@map("users")
 }
@@ -66,4 +68,16 @@ model Address {
   cep        String
   user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String  @unique
+}
+
+model Comment {
+  id             String @id
+  comment        String
+  createdAt      DateTime @default(now())
+  author         User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId       String  @unique
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  announcementId String @unique
+
+  @@map("comments")
 }
