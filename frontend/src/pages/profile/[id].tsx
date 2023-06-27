@@ -35,10 +35,10 @@ const ViewUser = () => {
   }, [router.query.id])
 
   useEffect(() => {
-    if (userInfo?.isVendor){
-      getAllUserAnnouncements(userInfo.id)
+    if (profilePageInformation?.isVendor){
+      getAllUserAnnouncements(profilePageInformation.id)
     }
-  }, [userInfo])
+  }, [profilePageInformation])
 
 
 
@@ -90,7 +90,7 @@ const ViewUser = () => {
             </section>
 
 
-            {userInfo?.isVendor &&
+            {profilePageInformation?.isVendor ?
               <section className="max-w-[1140px] mx-auto">
                 <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
@@ -100,7 +100,9 @@ const ViewUser = () => {
                   >
                     Anúncios
                   </Heading>
-                  <Button type="bg-brand" click_event={() => setModalContent(<AnnForm />)}>Criar anuncio</Button>
+                  {profilePageInformation?.id === userInfo?.id &&
+                    <Button type="bg-brand" click_event={() => setModalContent(<AnnForm />)}>Criar anuncio</Button>
+                  }
                 </div>
                 <ul className="flex gap-4 overflow-scroll lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
                   {userAnnouncements.length ?
@@ -111,6 +113,8 @@ const ViewUser = () => {
                 </ul>
                 <Next />
               </section>
+              :
+              <Heading type="h1" weight={700} extra_classes="text-feedback-alert_1 text-center">Esse usuário não é um anunciante</Heading>
             }
             
           </div>

@@ -69,7 +69,7 @@ export default function Announcements() {
         </section>
 
         <aside
-          className={`align-middle p-11 items-center rounded flex flex-col items-start gap-[52px] bg-colors_color_white_fixed flex flex-col items-center p-3 gap-9`}
+          className={`align-middle p-11 items-center rounded flex flex-col items-start gap-[52px] bg-colors_color_white_fixed items-center p-3 gap-9`}
         >
           <article className="flex flex-col gap-8">
             <Heading type="h6" weight={600} extra_classes="text-grey_0">
