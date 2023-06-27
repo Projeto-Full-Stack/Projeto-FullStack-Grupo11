@@ -6,18 +6,10 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnnoucementInterface, annoucementSchema } from "@/schemas/announcement.schemas";
 import { AnnouncementContext } from "@/context/announcement.context";
+import Button from "./button";
+import { ContextModal } from "@/context/modal.context";
 
 export const AnnForm = () => {
-  const addImageInput = () => {
-    setAux([...aux, { images: "" }]);
-  };
-
-  const removeImageInput = (index: number) => {
-    const auxList = [...aux];
-    auxList.splice(index, 1);
-    setAux(auxList);
-  };
-
   const getSpecificCarData = (value: string) => {
     const fuelType = ["Flex", "Híbrido", "Elétrico"];
     const car: any = Object.values(carsByBrand).find(
@@ -37,16 +29,29 @@ export const AnnForm = () => {
     setValue("fipe", "")
     setValue("fuel", "")
   }
-
-  const [aux, setAux] = useState([{ images: "" }]);
   
   const [modelSelectState, setModelSelectState] = useState(true)
 
   const { cars, carsByBrand, getCarsByBrand } = CarContext();
+  const { setModalContent } = ContextModal()
   const { createAnnouncement } = AnnouncementContext()
 
-  const { register, setValue, handleSubmit, formState } = useForm<AnnoucementInterface>({
-    resolver: zodResolver(annoucementSchema)
+  const { register, setValue, handleSubmit, control, formState } = useForm<AnnoucementInterface>({
+    resolver: zodResolver(annoucementSchema),
+    defaultValues: {
+      images: [
+        {imageUrl: ""}
+      ]
+    }
+  })
+
+  const { fields, append, remove } = useFieldArray({
+    name: "images",
+    control,
+    rules: {
+      minLength: 2,
+      maxLength: 6
+    }
   })
 
 
@@ -158,42 +163,20 @@ export const AnnForm = () => {
           extra_classes={`w-full`}
           register={register("coverImage")}
           >{`Insira uma imagem de capa`}</Input>
-        {/* <Input
-          input_type={`text`}
-          input_name={`image`}
-          label={`1ª imagem da galeria`}
-          extra_classes={`w-full`}
-        >{`Insira a imagem`}</Input>
-        {aux.map((image, index) => (
-          <div key={index} className={`flex w-full`}>
-            <Input
-              input_type={`text`}
-              input_name={`image`}
-              label={`${index + 2}ª imagem da galeria`}
-              extra_classes={`w-full`}
-            >{`Insira a imagem`}</Input>
-            {aux.length > 1 && (
-              <button
-                type="button"
-                className={`bg-brand-4 rounded text-brand-1 w-[8%] h-[8%] mt-5 p-2`}
-                onClick={() => removeImageInput(index)}
-              >
-                X
-              </button>
-            )}
+        <label>Fotos</label>
+        {fields.map((element, index) => 
+          <div className="flex gap-2">
+            <input type="text" placeholder="Coloque uma url da foto do carro..." className="border w-full p-1 rounded border-grey-4" {...register(`images.${index}.imageUrl`)} key={element.id}/>
+            { fields.length > 1 &&  
+              <button onClick={() => remove(index)} className="border rounded bg-brand-3 border-brand-3 px-3">X</button>
+            }
           </div>
-        ))}
-        {aux.length < 5 && (
-          <button
-            type="button"
-            className={`bg-brand-4 rounded text-brand-1 w-[80%] mb-6 p-2`}
-            onClick={addImageInput}
-          >
-            Adicionar campo para imagem da galeria
-          </button>
-        )} */}
+          )}
+          {fields.length >= 1 && fields.length < 6 &&
+            <Button type="bg-brand" click_event={() => append({imageUrl: ""})}>Adicionar mais fotos</Button>
+          }
         <div className={`flex gap-2 justify-end`}>
-          <button className={`bg-grey-6 rounded p-2 px-6`}>Cancelar</button>
+          <button className={`bg-grey-6 rounded p-2 px-6`} onClick={() => setModalContent(false)}>Cancelar</button>
           <button
             className={`bg-brand-3 p-2 px-6 rounded text-colors_color_white_fixed`}
           >

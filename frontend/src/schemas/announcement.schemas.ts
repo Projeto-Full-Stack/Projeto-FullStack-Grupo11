@@ -11,7 +11,8 @@ export const annoucementSchema = z.object({
     price: z.union([z.string(), z.number()]),
     description: z.string(),
     coverImage: z.string().url(),
-    avaliable: z.boolean().default(true)
+    avaliable: z.boolean().default(true),
+    images: z.array(z.object({imageUrl: z.string().url()}))
 }).refine((data) => {
     data.fipe = Number(data.fipe)
     data.price = Number(data.price)
