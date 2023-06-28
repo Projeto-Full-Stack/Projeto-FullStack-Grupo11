@@ -9,7 +9,7 @@ export class ImagesController {
 
   @Post(':annId')
   create(
-    @Body() createImageDto: CreateImageDto,
+    @Body() createImageDto: CreateImageDto[],
     @Param('annId') annId: string,
   ) {
     return this.imagesService.create(createImageDto, annId);

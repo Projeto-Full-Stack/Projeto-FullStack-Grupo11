@@ -7,7 +7,7 @@ import { Announcement } from '@prisma/client';
 export class ImagesService {
   constructor(private imageReopository: ImagesRepository) {}
 
-  async create(createImageDto: CreateImageDto, annId: string) {
+  async create(createImageDto: CreateImageDto[], annId: string) {
     const image = await this.imageReopository.create(createImageDto, annId);
 
     return image;

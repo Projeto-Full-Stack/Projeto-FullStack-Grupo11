@@ -8,20 +8,22 @@ import { plainToInstance } from 'class-transformer';
 @Injectable()
 export class ImagesPrismaRepository implements ImagesRepository {
   constructor(private prisma: PrismaService) {}
-  async create(data: CreateImageDto, announcementId: string): Promise<Image> {
-    const image = new Image();
-    Object.assign(image, {
-      ...data,
+  async create(data: CreateImageDto[], announcementId: string): Promise<Image> {
+    const array = []
+    data.forEach((imageData) => {
+      const image = new Image();
+      Object.assign(image, {
+        ...imageData,
+        announcementId
+      });
+      array.push(image)
+    })
+
+    const newImage = await this.prisma.image.createMany({
+      data: array
     });
 
-    const newImage = await this.prisma.image.create({
-      data: {
-        ...image,
-        announcementId,
-      },
-    });
-
-    return plainToInstance(Image, newImage);
+    return plainToInstance(Image, newImage)
   }
 
   async findAll(annId: string): Promise<Image[]> {
