@@ -49,6 +49,7 @@ export function AnnouncementProvider ({children}: Props){
 
     async function getAllUserAnnouncements (user_id: string){
         const announcements = await motorsApi.get(`announcements/users/${user_id}`)
+        console.log(announcements.data)
         setUserAnnouncements(announcements.data)
     }
 

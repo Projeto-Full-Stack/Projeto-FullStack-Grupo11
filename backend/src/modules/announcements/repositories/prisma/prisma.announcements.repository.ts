@@ -35,7 +35,8 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
 
   async findAllByUser(user_id: string): Promise<Announcement[]> {
     const announcements = await this.prisma.announcement.findMany({
-      where: {user_id} 
+      where: {user_id},
+      include: { image: true }
     })
 
     return announcements

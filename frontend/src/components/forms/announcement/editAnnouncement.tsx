@@ -6,16 +6,27 @@ import { ContextModal } from "@/context/modal.context";
 import { EditAnnouncementInterface, IncludeIdAnnouncementInterface, editAnnouncementSchema } from "@/schemas/announcement.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 interface Props {
     announcement: IncludeIdAnnouncementInterface;
 }
 
 export function EditAnnouncementForm ({announcement}: Props){
-    const {handleSubmit, register, setValue, formState: { errors }} = useForm<EditAnnouncementInterface>({
+    const {handleSubmit, register, setValue, formState: { errors }, control} = useForm<EditAnnouncementInterface>({
         resolver: zodResolver(editAnnouncementSchema),
+        defaultValues: {
+            
+        }
     });
+    // const { fields, append, remove } = useFieldArray({
+    //     name: "images",
+    //     control,
+    //     rules: {
+    //       minLength: 2,
+    //       maxLength: 6
+    //     }
+    //   })
 
     const { editAnnouncement } = AnnouncementContext()
     const { setModalContent } = ContextModal()
@@ -25,7 +36,9 @@ export function EditAnnouncementForm ({announcement}: Props){
         setValue("price", announcement.price)
         setValue("color", announcement.color)
         setValue("mileage", announcement.mileage)
+        console.log(announcement)
     }, [])
+
 
     return (
         <>
@@ -48,6 +61,17 @@ export function EditAnnouncementForm ({announcement}: Props){
                     <Button type="bg-brand">Editar</Button>
                     <Button type="bg-grey" click_event={() => setModalContent(false)}>Cancelar</Button>
                 </div>
+                {/* {fields.map((element, index) => 
+                    <div className="flex gap-2">
+                        <input type="text" placeholder="Coloque uma url da foto do carro..." className="border w-full p-1 rounded border-grey-4" {...register(`images.${index}.imageUrl`)} key={element.id}/>
+                    { fields.length > 1 &&  
+                        <button onClick={() => remove(index)} className="border rounded bg-brand-3 border-brand-3 px-3">X</button>
+                    }
+                    </div>
+                )}
+                {fields.length >= 1 && fields.length < 6 &&
+                    <Button type="bg-brand" click_event={() => append({imageUrl: ""})}>Adicionar mais fotos</Button>
+                } */}
             </form>
         </>
     )
