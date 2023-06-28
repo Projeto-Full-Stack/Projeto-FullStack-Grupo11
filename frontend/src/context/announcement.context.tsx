@@ -31,14 +31,12 @@ export function AnnouncementProvider ({children}: Props){
     async function createAnnouncement (data: AnnoucementInterface){
         try{
             const { images, ...announcementData } = data
-            console.log(images)
-            console.log(announcementData)
             const announcement: any = await motorsApi.post("announcements", announcementData, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem("token")}`
                 }
             })
-            await motorsApi.post(`images/${announcement.id}`, images)
+            await motorsApi.post(`images/${announcement.data.id}`, images)
             const array = [...userAnnouncements]
             array.push(announcement.data)
             setUserAnnouncements(array)
