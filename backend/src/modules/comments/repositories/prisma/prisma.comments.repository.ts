@@ -23,6 +23,19 @@ export class CommentPrismaRepository implements CommentsRepository {
         return plainToInstance(Comment, newComment);
     }
 
+    async findOne(id: string): Promise<Comment> {
+        const findComment = await this.prisma.comment.findUnique({ where: { id }})
+        return plainToInstance(Comment, findComment)
+    }
+
+    async findAllByUser(announcementId: string): Promise<Comment[]> {
+        const comments = await this.prisma.comment.findMany({
+          where: {announcementId} 
+        });
+    
+        return comments;
+    }
+
     async delete(id: string): Promise<void> {
         await this.prisma.comment.delete({ where: { id } });
     }

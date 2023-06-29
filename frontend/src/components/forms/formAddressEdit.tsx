@@ -6,7 +6,10 @@ import { useEffect, useState } from "react";
 import { ModalHeader } from "../modal/modalHeader";
 import { LoginContext } from "@/context/login.context";
 import Button from "../button";
-import { IdOmitedAddressInterface, idOmitedAddressSchema } from "@/schemas/address.schemas";
+import {
+  IdOmitedAddressInterface,
+  idOmitedAddressSchema,
+} from "@/schemas/address.schemas";
 import motorsApi from "@/services/motors.service";
 import { ContextModal } from "@/context/modal.context";
 
@@ -30,30 +33,32 @@ const EditAddressForm = () => {
     mode: "onChange",
   });
 
-  const { userInfo, tokenState, addressInfo, setAddressInfo } = LoginContext()
-  const { setModalContent } = ContextModal()
+  const { userInfo, tokenState, addressInfo, setAddressInfo } = LoginContext();
+  const { setModalContent } = ContextModal();
 
   useEffect(() => {
-    console.log(addressInfo)
-    setValue("cep", addressInfo.cep)
-    setValue("street", addressInfo.street)
-    setValue("city", addressInfo.city)
-    setValue("number", addressInfo.number)
-    setValue("complement", addressInfo.complement)
-  }, [])
+    setValue("cep", addressInfo.cep);
+    setValue("street", addressInfo.street);
+    setValue("city", addressInfo.city);
+    setValue("number", addressInfo.number);
+    setValue("complement", addressInfo.complement);
+  }, []);
 
-  async function teste (data: any){
+  async function teste(data: any) {
     try {
-      const updatedAddress = await motorsApi.patch(`address/${addressInfo.id}`, data, {
-        headers: {
-          Authorization: `Bearer ${tokenState}`
+      const updatedAddress = await motorsApi.patch(
+        `address/${addressInfo.id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenState}`,
+          },
         }
-      })
-      setAddressInfo(updatedAddress.data)
-      setModalContent(false)
-    }
-    catch (error){
-      console.log(error)
+      );
+      setAddressInfo(updatedAddress.data);
+      setModalContent(false);
+    } catch (error) {
+      console.log(error);
     }
   }
 
