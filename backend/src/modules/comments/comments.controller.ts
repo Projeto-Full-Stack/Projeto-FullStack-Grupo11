@@ -19,36 +19,36 @@ import { CommentService } from "./comments.service";
 export class CommentsController{
     constructor(private readonly commentsService: CommentService){}
 
-    @Post()
+    @Post(':announcementId')
     @UseGuards(JwtAuthGuard)
-    create(@Body() CreateCommentDto: CreateCommentDto, @Request() req:any){
-        return this.commentsService.create(CreateCommentDto, req.user.id)
+    create(@Param('announcementId') announcementId: string, @Body() CreateCommentDto: CreateCommentDto, @Request() req: any){
+        return this.commentsService.create(CreateCommentDto, announcementId, req.user.id)
     }
 
-    @Get('/create/:commentId')
-    findOne(@Param('commentId') commentId: string) {
+    @Get()
+    findOne(commentId: string) {
       return this.commentsService.findOne(commentId);
     }
 
-    @Get('/:announcementId')
-    findAllByAnnouncement (@Param('announcementId') annoucementId: string){
-        return this.commentsService.findAllOfAnnounce(annoucementId)
+    @Get(':announcementId')
+    findAll(@Param('announcementId') annoucementId: string){
+        return this.commentsService.findAll(annoucementId)
     }
 
-    @Patch('/update:commentId')
+    @Patch(':commentId')
     @UseGuards(JwtAuthGuard)
     async update(@Param('commentId') commentId: string, @Body() updateCommentDto: UpdateCommentDto, @Request() req:any){
         const findComment = await this.commentsService.findOne(commentId);
-        if(!findComment) throw new UnauthorizedException();
+        if(req.user.id !== findComment.authorId) throw new UnauthorizedException();
 
-        return this.commentsService.update(commentId, updateCommentDto);
+        return this.commentsService.update(commentId,  updateCommentDto);
     }
 
-    @Delete('/delete:commentId')
+    @Delete(':commentId')
     @UseGuards(JwtAuthGuard)
     async remove(@Param('commentId') commentId: string, @Request() req:any){
         const findComment = await this.commentsService.findOne(commentId);
-        if(!findComment) throw new UnauthorizedException();
+        if(req.user.id !== findComment.authorId) throw new UnauthorizedException();
 
         return this.commentsService.remove(commentId)
     }

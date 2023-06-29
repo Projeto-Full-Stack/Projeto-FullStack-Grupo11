@@ -10,10 +10,12 @@ import { Comment } from "../../entities/comment.entity";
 export class CommentPrismaRepository implements CommentsRepository {
     constructor(private prisma: PrismaService) {}
     
-    async create(data: CreateCommentDto): Promise<Comment> {
+    async create(data: CreateCommentDto, announcementId: string, userId:string): Promise<Comment> {
         const comment = new Comment();
         Object.assign(comment, {
             ...data,
+            announcementId: announcementId,
+            authorId: userId
         });
 
         const newComment = await this.prisma.comment.create({
@@ -28,7 +30,7 @@ export class CommentPrismaRepository implements CommentsRepository {
         return plainToInstance(Comment, findComment)
     }
 
-    async findAllByUser(announcementId: string): Promise<Comment[]> {
+    async findAll(announcementId: string): Promise<Comment[]> {
         const comments = await this.prisma.comment.findMany({
           where: {announcementId} 
         });

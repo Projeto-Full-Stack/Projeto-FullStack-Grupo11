@@ -10,7 +10,4 @@ export class CreateCommentDto {
     @IsNotEmpty()
     @MaxLength(300)
     comment: string;
-
-    @IsDate()
-    createdAt: Date;
 }
