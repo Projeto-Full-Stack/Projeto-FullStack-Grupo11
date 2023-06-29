@@ -4,6 +4,7 @@ import { CreateImageDto } from '../../dto/create-image.dto';
 import { Image } from '../../entities/image.entity';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
+import { UpdateImageDto } from '../../dto/update-image.dto';
 
 @Injectable()
 export class ImagesPrismaRepository implements ImagesRepository {
@@ -34,9 +35,33 @@ export class ImagesPrismaRepository implements ImagesRepository {
     return plainToInstance(Image, images);
   }
 
-  async delete(id: string): Promise<void> {
-    await this.prisma.image.delete({
-      where: { id },
+  async findOne(imageId: string): Promise<Image> {
+    const image = await this.prisma.image.findUnique({
+      where: { id: imageId } 
+    })
+
+    return plainToInstance(Image, image)
+  }
+
+  async update(imageId: string, data: UpdateImageDto): Promise<Image> {
+    const image = await this.prisma.image.update({
+      where: {
+        id: imageId
+      },
+      data: { ...data }
+    })
+
+    return plainToInstance(Image, image)
+  }
+
+  async deleteMany(ids: string[]): Promise<void> {
+    await this.prisma.image.deleteMany({
+      where: { 
+        id: 
+          {
+            in: ids
+          }
+      },
     });
   }
 }

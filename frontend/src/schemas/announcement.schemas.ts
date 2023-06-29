@@ -52,7 +52,7 @@ export const editAnnouncementSchema = z.object({
     price: z.union([z.string(), z.number()]),
     description: z.string(),
     avaliable: z.union([z.boolean(), z.string()]).default(true),
-    image: z.array(z.object({imageUrl: z.string()}))
+    image: z.array(z.object({id: z.string().nullish(), imageUrl: z.string()}))
 }).refine((data) => {
     data.price = Number(data.price)
     data.mileage = Number(data.mileage)
@@ -62,3 +62,12 @@ export const editAnnouncementSchema = z.object({
 })
 
 export type EditAnnouncementInterface = z.infer<typeof editAnnouncementSchema>
+
+export const announcementImagesSchema = z.array(
+    z.object({
+        id: z.string().nullish(),
+        imageUrl: z.string()
+    })
+)
+
+export type AnnouncementImagesInterface = z.infer<typeof announcementImagesSchema>

@@ -13,20 +13,23 @@ interface Props {
 }
 
 export function EditAnnouncementForm ({announcement}: Props){
+    const array = announcement.image.length ? announcement.image : [{imageUrl: ""}]
+
     const {handleSubmit, register, setValue, formState: { errors }, control} = useForm<EditAnnouncementInterface>({
         resolver: zodResolver(editAnnouncementSchema),
         defaultValues: {
-            
+            image: array
         }
     });
-    // const { fields, append, remove } = useFieldArray({
-    //     name: "images",
-    //     control,
-    //     rules: {
-    //       minLength: 2,
-    //       maxLength: 6
-    //     }
-    //   })
+
+    const { fields, append, remove } = useFieldArray({
+        name: "image",
+        control,
+        rules: {
+          minLength: 2,
+          maxLength: 6
+        }
+      })
 
     const { editAnnouncement } = AnnouncementContext()
     const { setModalContent } = ContextModal()
@@ -36,14 +39,13 @@ export function EditAnnouncementForm ({announcement}: Props){
         setValue("price", announcement.price)
         setValue("color", announcement.color)
         setValue("mileage", announcement.mileage)
-        console.log(announcement)
     }, [])
 
 
     return (
         <>
             <ModalHeader>Editar anúncio</ModalHeader>
-            <form onSubmit={handleSubmit(editAnnouncement)} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit((data) => editAnnouncement(data, announcement.image))} className="flex flex-col gap-5">
                 <input className="hidden" value={announcement.id} {...register("id")}></input>
                 <Input input_type="textArea" input_name="description" label="Descrição" register={register("description")}>Digite a descrição...</Input>
                 <div className="flex justify-between gap-4">
@@ -57,21 +59,25 @@ export function EditAnnouncementForm ({announcement}: Props){
                         <label htmlFor="avaliable_false"><input type="radio" id="avaliable_false" {...register("avaliable")} value={"false"} />Indisponível</label>
                     </div>
                 </div>
-                <div className="flex justify-between">
-                    <Button type="bg-brand">Editar</Button>
-                    <Button type="bg-grey" click_event={() => setModalContent(false)}>Cancelar</Button>
-                </div>
-                {/* {fields.map((element, index) => 
+
+                <label className={`font-medium text-grey-1 w-full`}>Fotos</label>
+                {fields.map((element, index) => 
                     <div className="flex gap-2">
-                        <input type="text" placeholder="Coloque uma url da foto do carro..." className="border w-full p-1 rounded border-grey-4" {...register(`images.${index}.imageUrl`)} key={element.id}/>
+                        <input type="text" placeholder="Coloque uma url da foto do carro..." className="border w-full p-1 rounded border-grey-4" {...register(`image.${index}.imageUrl`)} key={element.id}/>
                     { fields.length > 1 &&  
-                        <button onClick={() => remove(index)} className="border rounded bg-brand-3 border-brand-3 px-3">X</button>
+                        <button onClick={() => remove(index)} type="button" className="border rounded bg-brand-3 border-brand-3 px-3">X</button>
                     }
                     </div>
                 )}
                 {fields.length >= 1 && fields.length < 6 &&
                     <Button type="bg-brand" click_event={() => append({imageUrl: ""})}>Adicionar mais fotos</Button>
-                } */}
+                }
+
+
+                <div className="flex justify-between">
+                    <Button type="bg-brand">Editar</Button>
+                    <Button type="bg-grey" click_event={() => setModalContent(false)}>Cancelar</Button>
+                </div>
             </form>
         </>
     )

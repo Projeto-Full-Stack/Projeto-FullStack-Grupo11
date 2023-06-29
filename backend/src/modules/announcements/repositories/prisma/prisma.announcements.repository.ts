@@ -55,6 +55,7 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     const announcement = await this.prisma.announcement.update({
       where: { id },
       data: { ...data },
+      include: { image: true }
     });
 
     return plainToInstance(Announcement, announcement);

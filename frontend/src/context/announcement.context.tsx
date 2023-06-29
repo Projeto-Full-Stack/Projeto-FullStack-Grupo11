@@ -1,4 +1,4 @@
-import { AnnoucementInterface, EditAnnouncementInterface, IncludeIdAnnouncementInterface } from "@/schemas/announcement.schemas"
+import { AnnoucementInterface, AnnouncementImagesInterface, EditAnnouncementInterface, IncludeIdAnnouncementInterface } from "@/schemas/announcement.schemas"
 import motorsApi from "@/services/motors.service"
 import { ReactNode, createContext, useContext, useState } from "react"
 import { ContextModal } from "./modal.context";
@@ -13,7 +13,7 @@ interface AnnouncementContextInterface {
     getAllUserAnnouncements: (user_id: string) => void;
     setUserAnnouncements: (data: []) => void;
     userAnnouncements: IncludeIdAnnouncementInterface[];
-    editAnnouncement: (data: EditAnnouncementInterface) => void;
+    editAnnouncement: (data: EditAnnouncementInterface, originalImages: AnnouncementImagesInterface) => void;
     deleteAnnouncement: (announcement_id: string) => void;
     getAnnouncement: (announcement_id: string | string[]) => void;
     announcementData: IncludeIdAnnouncementInterface | null;
@@ -49,12 +49,25 @@ export function AnnouncementProvider ({children}: Props){
 
     async function getAllUserAnnouncements (user_id: string){
         const announcements = await motorsApi.get(`announcements/users/${user_id}`)
-        console.log(announcements.data)
         setUserAnnouncements(announcements.data)
     }
 
-    async function editAnnouncement (data: EditAnnouncementInterface){
-        const {id, ...announcementDetails} = data
+    async function editAnnouncement (data: EditAnnouncementInterface, originalImages: AnnouncementImagesInterface){
+        const {id, image, ...announcementDetails} = data
+
+
+        const newImages = image.filter((photo) => !photo.id)
+
+        const deleted = originalImages.filter((oldPhoto) => {
+            if (!image.some((element) => oldPhoto.id === element.id)){
+                return oldPhoto.id
+            }
+        })
+        const deletedIds = deleted.map(element => element.id)
+
+        const edited = image.filter((newPhoto) => originalImages.some((oldPhoto) => (newPhoto.id === oldPhoto.id && newPhoto.imageUrl !== oldPhoto.imageUrl )))
+
+
         try {
             const updatedAnnouncement = await motorsApi.patch(`announcements/${id}`, announcementDetails, {
                 headers: {
@@ -62,7 +75,25 @@ export function AnnouncementProvider ({children}: Props){
                 }
             })
             const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === id)
+
+            if (newImages){
+                await motorsApi.post(`images/${id}`, newImages)
+            }
+
+
+            if (deletedIds.length){
+                await motorsApi.delete("images", { params: deletedIds})
+            }
+
+            if (edited){
+                edited.map(async (photo) => {
+                    const data = {imageUrl: photo.imageUrl}
+                    const editedPhoto = await motorsApi.patch(`images/${photo.id}`, data)
+                })
+            }
+
             userAnnouncements[index] = updatedAnnouncement.data
+            userAnnouncements[index].image = image
             setUserAnnouncements(userAnnouncements)
             setModalContent(false)
         }
