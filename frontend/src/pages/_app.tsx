@@ -8,6 +8,7 @@ import { RegisterProvider } from "@/context/register.context";
 import { AnnouncementProvider } from "@/context/announcement.context";
 import { RecoveryProvider } from "@/context/recovery.context";
 import { ProfileProvider } from "@/context/profile.context";
+import { CommentProvider } from "@/context/comments.context";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <LoginProvider>
               <ProfileProvider>
                 <RecoveryProvider>
+                  <CommentProvider>
                     <Component {...pageProps} />
+                  </CommentProvider>
                 </RecoveryProvider>
               </ProfileProvider>
               <Modal />
