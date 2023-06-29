@@ -11,7 +11,8 @@ export const annoucementSchema = z.object({
     price: z.union([z.string(), z.number()]),
     description: z.string(),
     coverImage: z.string().url(),
-    avaliable: z.boolean().default(true)
+    avaliable: z.boolean().default(true),
+    images: z.array(z.object({imageUrl: z.string().url()}))
 }).refine((data) => {
     data.fipe = Number(data.fipe)
     data.price = Number(data.price)
@@ -33,7 +34,8 @@ export const includeIdAnnouncementSchema = z.object({
     price: z.union([z.string(), z.number()]),
     description: z.string(),
     coverImage: z.string().url(),
-    avaliable: z.boolean().default(true)
+    avaliable: z.boolean().default(true),
+    image: z.array(z.object({imageUrl: z.string()}))
 }).refine((data) => {
     data.fipe = Number(data.fipe)
     data.price = Number(data.price)
@@ -49,7 +51,8 @@ export const editAnnouncementSchema = z.object({
     color: z.string(),
     price: z.union([z.string(), z.number()]),
     description: z.string(),
-    avaliable: z.union([z.boolean(), z.string()]).default(true)
+    avaliable: z.union([z.boolean(), z.string()]).default(true),
+    image: z.array(z.object({id: z.string().nullish(), imageUrl: z.string()}))
 }).refine((data) => {
     data.price = Number(data.price)
     data.mileage = Number(data.mileage)
@@ -59,3 +62,12 @@ export const editAnnouncementSchema = z.object({
 })
 
 export type EditAnnouncementInterface = z.infer<typeof editAnnouncementSchema>
+
+export const announcementImagesSchema = z.array(
+    z.object({
+        id: z.string().nullish(),
+        imageUrl: z.string()
+    })
+)
+
+export type AnnouncementImagesInterface = z.infer<typeof announcementImagesSchema>
