@@ -13,7 +13,6 @@ import { commentContext } from "@/context/comments.context";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { CommentInterface, commentSchema } from "@/schemas/comment.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProfileContext } from "@/context/profile.context";
 import { LoginContext } from "@/context/login.context";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +21,8 @@ export default function Announcements() {
   const router = useRouter();
   const { announcementData, getAnnouncement, announcementUserData } =
     AnnouncementContext();
-  const { comments, commentRequest } = commentContext();
+  const { commentRequest, getAllAnnoucementComments, listComments } =
+    commentContext();
   const { userInfo } = LoginContext();
 
   const {
@@ -35,17 +35,23 @@ export default function Announcements() {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<CommentInterface> = (data) => {
-    if (userInfo) {
-      commentRequest(data, announcementData!.id);
-    }
-  };
-
   useEffect(() => {
     if (router.query.id) {
       getAnnouncement(router.query.id);
     }
   }, [router.query]);
+
+  useEffect(() => {
+    if (router.query.id) {
+      getAllAnnoucementComments(router.query.id);
+    }
+  }, [router.query.id]);
+
+  const onSubmit: SubmitHandler<CommentInterface> = (data) => {
+    if (userInfo) {
+      commentRequest(data, announcementData!.id);
+    }
+  };
 
   if (!announcementData) {
     return (
@@ -68,14 +74,15 @@ export default function Announcements() {
   }
 
   return (
-    <>
+    <div className={"body"}>
       <div className="z-[-1] h-screen absolute">
         <div className="bg-brand-1 h-[516px] w-screen absolute"></div>
-        <div className="bg-colors_color_white_fixed h-screen"></div>
       </div>
       <NavBar />
-      <main className="lg:grid lg:grid-cols-2 mx-[7%] lg:mt-[10px]">
-        <section className={`flex flex-col items-center p-3 gap-9 lg:py-[0px]`}>
+      <main className="lg:grid lg:grid-cols-2 mx-[3%] lg:mt-[10px]">
+        <section
+          className={`flex flex-col items-center py-3 gap-9 lg:py-[0px]`}
+        >
           <article className={`flex flex-col gap-4 lg:w-full`}>
             <div className="h-[355px] bg-colors_color_white_fixed flex justify-center rounded">
               <img
@@ -109,10 +116,10 @@ export default function Announcements() {
             </div>
           </article>
           <article
-            className={`flex flex-col gap-4 bg-colors_color_white_fixed rounded`}
+            className={`flex flex-col gap-4 bg-colors_color_white_fixed rounded w-full`}
           >
             <div
-              className={`align-middle p-11 items-center rounded flex flex-col gap-4 items-start`}
+              className={`align-middle p-11 rounded flex flex-col gap-4 items-start`}
             >
               <Heading type="h6" weight={600} extra_classes="text-grey_0">
                 Descrição
@@ -125,9 +132,9 @@ export default function Announcements() {
         </section>
 
         <aside
-          className={`align-middle p-11 items-center rounded flex flex-col items-start gap-[52px] bg-colors_color_white_fixed items-center p-3 gap-9`}
+          className={` flex flex-col items-center p-11 gap-9 bg-colors_color_white_fixed `}
         >
-          <article className="flex flex-col gap-8">
+          <article className="flex flex-col gap-8 w-full">
             <Heading type="h6" weight={600} extra_classes="text-grey_0">
               Fotos
             </Heading>
@@ -141,52 +148,12 @@ export default function Announcements() {
                   alt=""
                 />
               </li>
-              <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                <img
-                  className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                  alt=""
-                />
-              </li>
-              <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                <img
-                  className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                  alt=""
-                />
-              </li>
-              <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                <img
-                  className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                  alt=""
-                />
-              </li>
-              <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                <img
-                  className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                  alt=""
-                />
-              </li>
-              <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                <img
-                  className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                  alt=""
-                />
-              </li>
             </ul>
           </article>
 
           <article
-            className={`align-middle px-7 items-center rounded flex flex-col gap-7 items-start w-full flex flex-col items-center text-center`}
+            className={`align-middle px-7 items-center rounded flex flex-col gap-7 items-start w-full flex flex-col items-center text-center h-fit`}
           >
-            <img
-              className={`w-[104px] h-[104px] rounded-full`}
-              src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-              alt="Profile Avatar"
-            />
             <Heading type="h6" weight={600} extra_classes="text-grey_0">
               {`${announcementUserData.name}`}
             </Heading>
@@ -204,19 +171,22 @@ export default function Announcements() {
           </article>
         </aside>
 
-        <section className="bg-colors_color_white_fixed px-7 py-9 flex flex-col gap-[42px]">
+        <section className="bg-colors_color_white_fixed px-11 py-9 flex flex-col gap-[42px]">
           <div className="flex flex-col gap-7">
             <Heading type="h6" weight={600}>
               Comentários
             </Heading>
-            <ListComments comments={comments} />
+            <ListComments comments={listComments} />
           </div>
           <div className="flex flex-col gap-6">
-            <Profile
-              type="small"
-              name={userInfo!.name}
-              extra_classes="flex items-center gap-3"
-            />
+            {userInfo! && (
+              <Profile
+                type="small"
+                name={userInfo.name}
+                extra_classes="flex items-center gap-3"
+              />
+            )}
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <textarea
                 {...register("comment")}
@@ -240,6 +210,6 @@ export default function Announcements() {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

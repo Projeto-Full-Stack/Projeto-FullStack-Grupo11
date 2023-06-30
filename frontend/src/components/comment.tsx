@@ -5,26 +5,19 @@ import {
 } from "@/schemas/comment.schemas";
 import Profile from "./profile";
 import { Text } from "@/components/typography/text.component";
-import { LoginContext } from "@/context/login.context";
-import { ProfileContext } from "@/context/profile.context";
-import { commentContext } from "@/context/comments.context";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
 interface Props {
   comment: IncludeIdCommentInterface;
 }
 
 const Comment = ({ comment }: Props) => {
-  const { userInfo } = LoginContext();
-
   return (
     <>
       <li className={`flex flex-col gap-3`}>
         <div className={`flex items-center gap-2`}>
           <Profile
             type="small"
-            name={userInfo!.name}
+            name={comment.author.name}
             extra_classes="flex items-center gap-3"
           />
           <div className="flex gap-3 items-center">
