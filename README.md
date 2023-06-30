@@ -49,6 +49,9 @@ $ yarn
 
 # Crie um arquivo chamado .env e modifique seus itens de acordo com seu banco de dados/usuário (utilize o arquivo .env.example)
 
+# Após a criação do .env, rode o comando para criar as demais tabelas em seu banco de dados
+$ prisma migrate dev
+
 # Execute a aplicação em modo de desenvolvimento
 $ yarn run start:dev
 
