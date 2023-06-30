@@ -53,7 +53,7 @@ model User {
   isVendor    Boolean
   address     Address?
   announcements Announcement[]
-  comments    Comment?
+  comments    Comment[]
 
   @@map("users")
 }
@@ -75,9 +75,9 @@ model Comment {
   comment        String
   createdAt      DateTime @default(now())
   author         User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId       String  @unique
+  authorId       String
   announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
-  announcementId String @unique
+  announcementId String
 
   @@map("comments")
 }

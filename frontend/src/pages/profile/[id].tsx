@@ -42,7 +42,7 @@ const ViewUser = () => {
 
   return (
     <div>
-      <main className={"body"}>
+      <main className={"body overflow-hidden"}>
         <NavBar />
         {profilePageInformation ? (
           <div className="px-4 py-20 flex flex-col m-auto">
@@ -61,20 +61,6 @@ const ViewUser = () => {
                 </Text>
                 {userInfo?.id === profilePageInformation.id && (
                   <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:flex-row lg:justify-between">
-                    <div className="flex flex-col w-full lg:w-[30%] lg:flex-row gap-4">
-                      <Button
-                        type="bg-brand"
-                        click_event={() => setModalContent(<EditUserForm />)}
-                      >
-                        Editar Perfil
-                      </Button>
-                      <Button
-                        type="bg-brand"
-                        click_event={() => setModalContent(<EditAddressForm />)}
-                      >
-                        Editar Endereço
-                      </Button>
-                    </div>
                     <Button
                       type="bg-alert"
                       extra_classes="lg:w-[20%]"
@@ -87,8 +73,9 @@ const ViewUser = () => {
               </Profile>
             </section>
 
+
             {profilePageInformation?.isVendor ? (
-              <section className="max-w-[1140px] mx-auto">
+              <section className="flex flex-col lg:mx-auto">
                 <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
                     type="h5"
@@ -106,16 +93,12 @@ const ViewUser = () => {
                     </Button>
                   )}
                 </div>
-                <ul className="flex gap-4 overflow-scroll lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
-                  {userAnnouncements.length ? (
-                    userAnnouncements.map((element) => (
-                      <Card key={element.id} car={element} />
-                    ))
-                  ) : (
-                    <Text type="b1" weight={600}>
-                      Você não possui nenhum carro anunciado
-                    </Text>
-                  )}
+                <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
+                  {userAnnouncements.length ?
+                    userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
+                    :
+                    <Text type="b1" weight={600}>Você não possui nenhum carro anunciado</Text>
+                  }
                 </ul>
                 <Next />
               </section>
