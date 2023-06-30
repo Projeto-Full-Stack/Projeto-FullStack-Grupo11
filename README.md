@@ -72,8 +72,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Figma](https://www.figma.com/file/KX3C3fIi8zmCRpNipxIYYF/M6---E-Commerce-Filter?type=design&node-id=45-2&mode=design&t=JxsFniec9pmnH3Jd-0)
 - [DER](https://imgur.com/rWQe2x0)
 
-# Criadores:
-[Edmilson Junior](https://github.com/Malaiobol)
-[Elias Jin](https://github.com/Eliasjp)
-[João Vicente](https://github.com/Joaovicente985)
-[Mayza Santos](https://github.com/MOS-01)
+## Criadores:
+[Edmilson Junior](https://github.com/Malaiobol),
+[Elias Jin](https://github.com/Eliasjp),
+[João Vicente](https://github.com/Joaovicente985),
+[Mayza Santos](https://github.com/MOS-01).
