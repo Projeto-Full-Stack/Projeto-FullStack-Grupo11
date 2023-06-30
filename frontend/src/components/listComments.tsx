@@ -10,7 +10,7 @@ interface IListCommentsProps {
 
 const ListComments = ({ comments }: IListCommentsProps) => {
   return (
-    <ul>
+    <ul className="flex flex-col gap-11">
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}

@@ -60,7 +60,7 @@ const ViewUser = () => {
                   {profilePageInformation!.description}
                 </Text>
                 {userInfo?.id === profilePageInformation.id && (
-                  <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:flex-row lg:justify-between">
+                  <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:justify-between">
                     <Button
                       type="bg-alert"
                       extra_classes="lg:w-[20%]"
@@ -72,7 +72,6 @@ const ViewUser = () => {
                 )}
               </Profile>
             </section>
-
 
             {profilePageInformation?.isVendor ? (
               <section className="flex flex-col lg:mx-auto">
@@ -94,11 +93,15 @@ const ViewUser = () => {
                   )}
                 </div>
                 <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
-                  {userAnnouncements.length ?
-                    userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
-                    :
-                    <Text type="b1" weight={600}>Você não possui nenhum carro anunciado</Text>
-                  }
+                  {userAnnouncements.length ? (
+                    userAnnouncements.map((element) => (
+                      <Card key={element.id} car={element} />
+                    ))
+                  ) : (
+                    <Text type="b1" weight={600}>
+                      Você não possui nenhum carro anunciado
+                    </Text>
+                  )}
                 </ul>
                 <Next />
               </section>
