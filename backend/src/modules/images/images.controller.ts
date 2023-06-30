@@ -12,6 +12,13 @@ export class ImagesController {
 
   @Post(':annId')
   @ApiCreatedResponse({ description: "Cria uma ou mais imagens para um anúncio" })
+  @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o anúncio", schema: {
+    example: {
+        "statusCode": 404,
+        "message": "Announcement not found!",
+        "error": "Not Found"
+    }
+}})
   create(
     @Body() createImageDto: CreateImageDto[],
     @Param('annId') annId: string,
@@ -31,12 +38,20 @@ export class ImagesController {
   }
 
   @Patch(':imageId')
+  @ApiOkResponse({ description: "Edita a imagem com uma nova URL" })
+  @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o anúncio", schema: {
+    example: {
+        "statusCode": 404,
+        "message": "Image not found!",
+        "error": "Not Found"
+    }
+}})
   update(@Param('imageId') imageId: string, @Body() data: UpdateImageDto){
-    console.log(data)
     return this.imagesService.update(imageId, data)
   }
 
   @Delete()
+  @ApiResponse({ status: 204, description: "Deleta um ou mais imagens de um anúncio" })
   remove(@Query() query: {}) {
     const ids: string[] = Object.values(query)
     return this.imagesService.remove(ids);
