@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { LoginInterface } from "@/schemas/login.schemas";
 import motorsApi from "@/services/motors.service";
 import { useRouter } from "next/router";
@@ -35,9 +41,11 @@ const loginContext = createContext<ILoginProvider>({} as ILoginProvider);
 
 export const LoginProvider = ({ children }: Props) => {
   const [loginError, setLoginError] = useState<string>("");
-  const [userInfo, setUserInfo] = useState<UserInterface | null>(null)
-  const [addressInfo, setAddressInfo] = useState<AddressInterface>({} as AddressInterface)
-  const [tokenState, setToken] = useState<string>("")
+  const [userInfo, setUserInfo] = useState<UserInterface | null>(null);
+  const [addressInfo, setAddressInfo] = useState<AddressInterface>(
+    {} as AddressInterface
+  );
+  const [tokenState, setToken] = useState<string>("");
 
   const router = useRouter();
 
@@ -46,7 +54,7 @@ export const LoginProvider = ({ children }: Props) => {
 
     const userDetails = await motorsApi.get(`users/${decoded.sub}`);
     setUserInfo(userDetails.data);
-    setAddressInfo(userDetails.data.address)
+    setAddressInfo(userDetails.data.address);
   };
 
   const loginRequest = async (data: LoginInterface) => {
@@ -67,37 +75,46 @@ export const LoginProvider = ({ children }: Props) => {
   };
 
   const logout = () => {
-    window.localStorage.removeItem("token")
-    router.push("/")
-    setUserInfo(null)
-    setToken("")
-  }
+    window.localStorage.removeItem("token");
+    router.push("/");
+    setUserInfo(null);
+    setToken("");
+  };
 
   useEffect(() => {
     if (window.localStorage.getItem("token")) {
       const checkToken = async () => {
         try {
-          const decoded: DecodedInterface = jwtDecode(window.localStorage.getItem("token")!)
-          const userDetails = await motorsApi.get(`/users/${decoded.sub}`)
-          setUserInfo(userDetails.data)
-          setAddressInfo(userDetails.data.address)
-          setToken(window.localStorage.getItem("token")!)
+          const decoded: DecodedInterface = jwtDecode(
+            window.localStorage.getItem("token")!
+          );
+          const userDetails = await motorsApi.get(`/users/${decoded.sub}`);
+          setUserInfo(userDetails.data);
+          setAddressInfo(userDetails.data.address);
+          setToken(window.localStorage.getItem("token")!);
+        } catch (error) {
+          window.localStorage.removeItem("token");
         }
-        catch (error){
-          router.push("/login")
-          window.localStorage.removeItem("token")
-        }
-      }
-      checkToken()
-    }else {
-      if (!router.pathname.includes("/recovery")){
-        router.push("/login")
-      }
+      };
+      checkToken();
     }
-  }, [])
+  }, []);
 
   return (
-    <loginContext.Provider value={{ loginRequest, loginError, setLoginError, setUserInfo, userInfo, setToken, tokenState, logout, setAddressInfo, addressInfo}}>
+    <loginContext.Provider
+      value={{
+        loginRequest,
+        loginError,
+        setLoginError,
+        setUserInfo,
+        userInfo,
+        setToken,
+        tokenState,
+        logout,
+        setAddressInfo,
+        addressInfo,
+      }}
+    >
       {children}
     </loginContext.Provider>
   );

@@ -9,6 +9,8 @@ import { AnnouncementContext } from "@/context/announcement.context";
 import { useEffect } from "react";
 import { Footer } from "@/components/footer";
 import Link from "next/link";
+import { ImageCard } from "@/components/annImageCard";
+import { ImageList } from "@/components/annImageList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,7 +52,7 @@ export default function Announcements() {
               <div className="h-[355px] bg-colors_color_white_fixed flex justify-center rounded">
                 <img
                   className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
+                  src={announcementData.coverImage}
                   alt="Cobalt"
                 />
               </div>
@@ -93,58 +95,19 @@ export default function Announcements() {
           </section>
   
           <aside
-            className={`align-middle p-11 items-center rounded flex flex-col items-start gap-[52px] bg-colors_color_white_fixed items-center p-3 gap-9`}
+            className={`lg:align-middle p-11 items-center rounded flex flex-col items-start gap-[52px] bg-colors_color_white_fixed items-center p-3 gap-9`}
           >
             <article className="flex flex-col gap-8">
               <Heading type="h6" weight={600} extra_classes="text-grey_0">
                 Fotos
               </Heading>
-              <ul
-                className={`grid grid-cols-3 grid-rows-2 gap-8 items-start w-full `}
-              >
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-              </ul>
+              <ImageList list_length={announcementData.image.length}>
+                {announcementData.image.length &&
+                  announcementData.image.map((photo) => {
+                    return <ImageCard image={photo.imageUrl}/>
+                  })
+                }
+              </ImageList>
             </article>
   
             <article

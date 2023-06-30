@@ -24,29 +24,27 @@ const ViewUser = () => {
   const router = useRouter();
 
   const { setModalContent } = useContext(ModalContext);
-  const { getProfileDetails, profilePageInformation } = ProfileContext()
-  const { userAnnouncements ,getAllUserAnnouncements } = AnnouncementContext()
+  const { getProfileDetails, profilePageInformation } = ProfileContext();
+  const { userAnnouncements, getAllUserAnnouncements } = AnnouncementContext();
   const { userInfo, tokenState } = LoginContext();
 
   useEffect(() => {
-    if (router.query.id){
-      getProfileDetails(router.query.id)
+    if (router.query.id) {
+      getProfileDetails(router.query.id);
     }
-  }, [router.query.id])
+  }, [router.query.id]);
 
   useEffect(() => {
-    if (profilePageInformation?.isVendor){
-      getAllUserAnnouncements(profilePageInformation.id)
+    if (profilePageInformation?.isVendor) {
+      getAllUserAnnouncements(profilePageInformation.id);
     }
-  }, [profilePageInformation])
-
-
+  }, [profilePageInformation]);
 
   return (
     <div>
-      <main className={"body"}>
+      <main className={"body overflow-hidden"}>
         <NavBar />
-        {profilePageInformation ? 
+        {profilePageInformation ? (
           <div className="px-4 py-20 flex flex-col m-auto">
             <section className="flex items-center w-full justify-center">
               <Profile
@@ -63,20 +61,6 @@ const ViewUser = () => {
                 </Text>
                 {userInfo?.id === profilePageInformation.id && (
                   <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:flex-row lg:justify-between">
-                    <div className="flex flex-col w-full lg:w-[30%] lg:flex-row gap-4">
-                      <Button
-                        type="bg-brand"
-                        click_event={() => setModalContent(<EditUserForm />)}
-                      >
-                        Editar Perfil
-                      </Button>
-                      <Button
-                        type="bg-brand"
-                        click_event={() => setModalContent(<EditAddressForm />)}
-                      >
-                        Editar Endereço
-                      </Button>
-                    </div>
                     <Button
                       type="bg-alert"
                       extra_classes="lg:w-[20%]"
@@ -90,21 +74,26 @@ const ViewUser = () => {
             </section>
 
 
-            {profilePageInformation?.isVendor ?
-              <section className="max-w-[1140px] mx-auto">
+            {profilePageInformation?.isVendor ? (
+              <section className="flex flex-col lg:mx-auto">
                 <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
-                  type="h5"
-                  weight={600}
-                  extra_classes="text-grey_0 px-4"
+                    type="h5"
+                    weight={600}
+                    extra_classes="text-grey_0 px-4"
                   >
                     Anúncios
                   </Heading>
-                  {profilePageInformation?.id === userInfo?.id &&
-                    <Button type="bg-brand" click_event={() => setModalContent(<AnnForm />)}>Criar anuncio</Button>
-                  }
+                  {profilePageInformation?.id === userInfo?.id && (
+                    <Button
+                      type="bg-brand"
+                      click_event={() => setModalContent(<AnnForm />)}
+                    >
+                      Criar anuncio
+                    </Button>
+                  )}
                 </div>
-                <ul className="flex gap-4 overflow-scroll lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
+                <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
                   {userAnnouncements.length ?
                     userAnnouncements.map((element) => <Card key={element.id} car={element}/>)
                     :
@@ -113,17 +102,19 @@ const ViewUser = () => {
                 </ul>
                 <Next />
               </section>
-              :
-              <Heading type="h1" weight={700} extra_classes="text-feedback-alert_1 text-center">Esse usuário não é um anunciante</Heading>
-            }
-            
+            ) : (
+              <Heading
+                type="h1"
+                weight={700}
+                extra_classes="text-feedback-alert_1 text-center"
+              >
+                Esse usuário não é um anunciante
+              </Heading>
+            )}
           </div>
-          :
-          <div>
-            Esse usuário não existe
-          </div>
-        
-        }
+        ) : (
+          <div>Esse usuário não existe</div>
+        )}
         <Footer />
       </main>
     </div>

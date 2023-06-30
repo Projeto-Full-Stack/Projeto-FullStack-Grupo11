@@ -49,7 +49,10 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
   async findAllByUser(user_id: string): Promise<Announcement[]> {
     const announcements = await this.prisma.announcement.findMany({
       where: { user_id },
+      include: { image: true },
     });
+
+    return announcements;
 
     return announcements;
   }
@@ -57,7 +60,15 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
   async findOne(id: string): Promise<Announcement> {
     const announcement = await this.prisma.announcement.findUnique({
       where: { id },
-      include: { image: true, user: true },
+      include: {
+        image: true,
+        user: true,
+        comments: {
+          include: {
+            author: { select: { id: true, name: true, description: true } },
+          },
+        },
+      },
     });
 
     return plainToInstance(Announcement, announcement);
@@ -66,6 +77,7 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     const announcement = await this.prisma.announcement.update({
       where: { id },
       data: { ...data },
+      include: { image: true },
     });
 
     return plainToInstance(Announcement, announcement);
