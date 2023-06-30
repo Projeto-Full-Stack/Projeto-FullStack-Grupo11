@@ -18,23 +18,24 @@
 <h4>Backend:</h4>
 <p>Database: PostgreSQL</p>	
 	<ul>			
-    <li>Nest.js;</li>
-    <li>Prisma;</li>
-    <li>Passport;</li>	
-    <li>JWT;</li>
-    <li>NodeMailer;</li>
-    <li>MailGen;</li>
-    <li>Dotenv;</li>
-    <li>Bcryptjs;</li>
+    		<li>Nest.js;</li>
+    		<li>Prisma;</li>
+    		<li>Passport;</li>	
+    		<li>JWT;</li>
+    		<li>NodeMailer;</li>
+    		<li>MailGen;</li>
+    		<li>Dotenv;</li>
+    		<li>Bcryptjs;</li>
 	</ul>
 	<h4>Frontend:</h4>
 	<ul>
-		<li>Nest.js;</li>
-    <li>Prisma;</li>
-    <li>Passport;</li>	
-    <li>JWT;</li>
-    <li>NodeMailer;</li>
-    <li>MailGen;</li>
-    <li>Dotenv;</li>
-    <li>Bcryptjs;</li>
+		<li>Next.js;</li>
+    		<li>Vercel;</li>
+    		<li>Axios;</li>	
+    		<li>React-toastify;</li>
+    		<li>Zod;</li>
+   		<li>Tailwind;</li>
+   		<li>React-hook-form;</li>
+    		<li>JWT-Decode;</li>
+		<li>React Toastify</li>
 	</ul>
