@@ -7,9 +7,10 @@ import { CommentsRepository } from "./repositories/comments.repository";
 export class CommentService{
     constructor(private commentRepository: CommentsRepository) {}
 
-    async create(CreateCommentDto: CreateCommentDto, userId: string){
+    async create(CreateCommentDto: CreateCommentDto, announcementId: string, userId: string){
         const comment = await this.commentRepository.create(
             CreateCommentDto,
+            announcementId,
             userId
         );
             
@@ -26,8 +27,8 @@ export class CommentService{
         return comment;
       }
 
-    async findAllOfAnnounce(announcementId: string) {
-        const comments = await this.commentRepository.findAllOfAnnouncement(announcementId);
+    async findAll(announcementId: string) {
+        const comments = await this.commentRepository.findAll(announcementId);
 
         return comments;
     }
