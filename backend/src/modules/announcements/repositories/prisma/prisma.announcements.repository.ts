@@ -5,6 +5,8 @@ import { UpdateAnnouncementDto } from '../../dto/update-announcement.dto';
 import { Announcement } from '../../entities/announcement.entity';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
+import { IAnnouncementGetAll } from '../../announcement.schema';
+import { paginate } from 'nestjs-prisma-pagination';
 
 @Injectable()
 export class AnnouncementPrismaRepository implements AnnouncementRepository {
@@ -18,28 +20,38 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
       ...data,
       user_id: userId,
     });
-    this.prisma.announcement.createMany
+    this.prisma.announcement.createMany;
     const newAnnouncement = await this.prisma.announcement.create({
       data: { ...announcement },
     });
 
     return plainToInstance(Announcement, newAnnouncement);
   }
-  async findAll(): Promise<Announcement[]> {
-    const announcements = await this.prisma.announcement.findMany({
-      include: { image: true },
-    });
+  async findAll(query: IAnnouncementGetAll): Promise<Announcement[]> {
+    const queryConfig = paginate(
+      {
+        page: query.page,
+        limit: query.limit,
+        search: query.value,
+      },
+      {
+        search: [query.key],
+        includes: ['image', 'user'],
+        orderBy: { id: 'asc' },
+      },
+    );
+
+    const announcements = await this.prisma.announcement.findMany(queryConfig);
 
     return plainToInstance(Announcement, announcements);
   }
 
   async findAllByUser(user_id: string): Promise<Announcement[]> {
     const announcements = await this.prisma.announcement.findMany({
-      where: {user_id} 
-    })
+      where: { user_id },
+    });
 
-    return announcements
-
+    return announcements;
   }
 
   async findOne(id: string): Promise<Announcement> {

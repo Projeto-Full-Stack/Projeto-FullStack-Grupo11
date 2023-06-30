@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 import { AnnouncementRepository } from './repositories/announcements.repository';
+import { IAnnouncementGetAll } from './announcement.schema';
 
 @Injectable()
 export class AnnouncementsService {
@@ -15,14 +16,48 @@ export class AnnouncementsService {
     return announcement;
   }
 
-  async findAll() {
-    const announcement = await this.announcementsRepository.findAll();
+  async findAll(query: IAnnouncementGetAll) {
+    const fullLenQuery = { limit: 1000000, page: 1 };
+    const getLen = this.announcementsRepository.findAll(fullLenQuery);
+    const total = (await getLen).length;
+    let nextPage = 0;
+    let previousPage = 0;
 
-    return announcement;
+    const announcement = this.announcementsRepository.findAll(query);
+
+    const count = (await announcement).length;
+
+    if ((await announcement).length < 12) {
+      nextPage = null;
+      if (Number(query.page) == 1) {
+        previousPage = null;
+      } else {
+        previousPage = Number(query.page) - 1;
+      }
+    } else {
+      if (Number(query.page) == 1) {
+        previousPage = null;
+      } else {
+        previousPage = Number(query.page) - 1;
+      }
+      nextPage = Number(query.page) + 1;
+    }
+
+    const data = {
+      total: total,
+      count: count,
+      previousPage: previousPage,
+      nextPage: nextPage,
+      announcements: await announcement,
+    };
+
+    return data;
   }
 
-  async findAllByUser (user_id: string){
-    const announcement = await this.announcementsRepository.findAllByUser(user_id);
+  async findAllByUser(user_id: string) {
+    const announcement = await this.announcementsRepository.findAllByUser(
+      user_id,
+    );
 
     return announcement;
   }
