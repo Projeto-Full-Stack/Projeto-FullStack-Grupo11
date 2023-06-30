@@ -13,6 +13,7 @@ export class AddressPrismaRepository implements AddressRepository {
 
     async create(data: CreateAddressDto, user_id: string): Promise<Address> {
         const address = new Address()
+        console.log(user_id)
         Object.assign(address, {
             ...data,
             userId: user_id

@@ -93,15 +93,10 @@ export const LoginProvider = ({ children }: Props) => {
           setAddressInfo(userDetails.data.address);
           setToken(window.localStorage.getItem("token")!);
         } catch (error) {
-          router.push("/login");
           window.localStorage.removeItem("token");
         }
       };
       checkToken();
-    } else {
-      if (!router.pathname.includes("/recovery")) {
-        router.push("/login");
-      }
     }
   }, []);
 

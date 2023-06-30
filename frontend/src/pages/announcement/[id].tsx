@@ -14,6 +14,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { CommentInterface, commentSchema } from "@/schemas/comment.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginContext } from "@/context/login.context";
+import Link from "next/link";
+import { ImageCard } from "@/components/annImageCard";
+import { ImageList } from "@/components/annImageList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -77,15 +80,15 @@ export default function Announcements() {
     <div className={"body"}>
       <NavBar />
       <main className="p-11 flex flex-col items-center">
-        <div className="flex flex-col  gap-4 justify-between max-w-[2300px] lg:w-full lg:mb-0 lg:flex-row">
+        <div className="flex flex-col w-full gap-4 justify-between max-w-[2300px] lg:w-full lg:mb-0 lg:flex-row">
           <section
             className={`flex flex-col items-center py-3 gap-4 lg:py-[0px] lg:w-[60%] `}
           >
-            <article className={`flex flex-col gap-4 lg:w-full`}>
+            <article className={`flex flex-col w-full gap-4 lg:w-full`}>
               <div className="h-[355px] bg-colors_color_white_fixed flex justify-center rounded">
                 <img
                   className="object-scale-down"
-                  src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
+                  src={announcementData.coverImage}
                   alt="Cobalt"
                 />
               </div>
@@ -134,23 +137,18 @@ export default function Announcements() {
           </section>
 
           <aside
-            className={` flex flex-col items-center  gap-4  mt-[10px] sm:mt-0 lg:w-[40%]`}
+            className={`lg:align-middle   rounded flex flex-col   items-center gap-4 lg:w-[40%]`}
           >
             <article className="flex flex-col gap-8 w-full bg-colors_color_white_fixed p-11 rounded  ">
               <Heading type="h6" weight={600} extra_classes="text-grey_0">
                 Fotos
               </Heading>
-              <ul
-                className={`grid grid-cols-3 grid-rows-2 gap-8 items-start w-full `}
-              >
-                <li className="w-[90px] h-[90px] lg:w-[108px] lg:h-[108px] flex justify-center">
-                  <img
-                    className="object-scale-down"
-                    src="https://media.istockphoto.com/id/1150931120/photo/3d-illustration-of-generic-compact-white-car-front-side-view.jpg?b=1&s=612x612&w=0&k=20&c=ToS3pNwkL99nBZvLw4nt4ZMjPRIGPZV5xzza4pPdnkc="
-                    alt=""
-                  />
-                </li>
-              </ul>
+              <ImageList list_length={announcementData.image.length}>
+                {announcementData.image.length &&
+                  announcementData.image.map((photo) => {
+                    return <ImageCard image={photo.imageUrl} />;
+                  })}
+              </ImageList>
             </article>
 
             <article
@@ -172,7 +170,7 @@ export default function Announcements() {
             </article>
           </aside>
         </div>
-        <div className="flex flex-col p-11 gap-4 justify-between mb-4 max-w-[2300px] lg:p-0 lg:w-full lg:mt-8">
+        <div className="flex flex-col mt-4 gap-4 justify-between mb-4 max-w-[2300px] lg:p-0 lg:w-full lg:mt-8">
           <section className="bg-colors_color_white_fixed px-11 py-9 flex flex-col justify-center gap-[42px]  rounded lg:w-[60%] ">
             <div className="flex flex-col gap-7">
               <Heading type="h6" weight={600}>
