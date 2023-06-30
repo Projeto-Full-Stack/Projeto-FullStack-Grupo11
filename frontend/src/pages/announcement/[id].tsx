@@ -8,8 +8,13 @@ import Profile from "@/components/profile";
 import { AnnouncementContext } from "@/context/announcement.context";
 import { useEffect } from "react";
 import { Footer } from "@/components/footer";
-import Link from "next/link";
 import ListComments from "@/components/listComments";
+import { commentContext } from "@/context/comments.context";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { CommentInterface, commentSchema } from "@/schemas/comment.schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ProfileContext } from "@/context/profile.context";
+import { LoginContext } from "@/context/login.context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +22,21 @@ export default function Announcements() {
   const router = useRouter();
   const { announcementData, getAnnouncement, announcementUserData } =
     AnnouncementContext();
+  const { commentRequest } = commentContext();
+  const { userInfo } = LoginContext();
+
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<CommentInterface>({
+    resolver: zodResolver(commentSchema),
+    mode: "onChange",
+  });
+
+  const onSubmit: SubmitHandler<CommentInterface> = (data) =>
+    commentRequest(data, announcementData!.id);
 
   useEffect(() => {
     if (router.query.id) {
@@ -194,11 +214,14 @@ export default function Announcements() {
               name="Usuário Logado"
               extra_classes="flex items-center gap-3"
             />
-            <textarea
-              placeholder="Digite seu comentário aqui..."
-              className="w-full border-grey-grey_4 border rounded px-4 py-3 h-[128px] resize-none"
-            />
-            <Button type="bg-brand">Comentar</Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <textarea
+                {...register("comment")}
+                placeholder="Digite seu comentário aqui..."
+                className="w-full border-grey-grey_4 border rounded px-4 py-3 h-[128px] resize-none"
+              />
+              <Button type="bg-brand">Comentar</Button>
+            </form>
             <section className="flex gap-2 items-center flex-wrap">
               <small className="text-grey-grey_3 font-medium font-[14px] px-3 bg-grey-grey7 rounded-3xl">
                 Gostei Muito!
