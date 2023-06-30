@@ -15,7 +15,7 @@ import { CreateCommentDto } from "./dto/create-comment.dto";
 import { JwtAuthGuard } from "../auth/jawt.auth.guard";
 import { CommentService } from "./comments.service";
 import { ApiTags } from '@nestjs/swagger';
-import { ApiOkResponse, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger/dist/decorators';
+import { ApiOkResponse, ApiResponse, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger/dist/decorators';
 
 @ApiTags('Comments')
 @Controller('comments')
@@ -23,6 +23,7 @@ export class CommentsController{
     constructor(private readonly commentsService: CommentService){}
 
     @Post(':announcementId')
+    @ApiBearerAuth()
     @ApiCreatedResponse({ description: "Cria um comentário para um anúncio, recebe o ID do anúncio pelo parametro e o ID do usuário através do token", schema: {
         example: {
             "id": "d25aa8fe-b6cc-4b2e-ba0a-c45975fb3b88",
@@ -83,6 +84,7 @@ export class CommentsController{
     }
 
     @Patch(':commentId')
+    @ApiBearerAuth()
     @ApiOkResponse({ description: "Recebe o novo comentário e atualiza", schema: {
         example: {
             "id": "d25aa8fe-b6cc-4b2e-ba0a-c45975fb3b88",
@@ -109,6 +111,7 @@ export class CommentsController{
     }
 
     @Delete(':commentId')
+    @ApiBearerAuth()
     @ApiResponse({ status: 204, description: "Deleta o comentário passado pelo parametro" })
     @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o comentário", schema: {
         example: {

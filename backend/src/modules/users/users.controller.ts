@@ -16,7 +16,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jawt.auth.guard';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiOkResponse, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger/dist/decorators';
+import { ApiOkResponse, ApiResponse, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger/dist/decorators';
 
 @ApiTags('Users')
 @Controller('users')
@@ -135,6 +135,7 @@ export class UsersController {
 
 
   @Patch(':id')
+  @ApiBearerAuth()
   @ApiOkResponse({ description: "Recebe todas os usuários", schema: { 
     example: {
       "id": "84ca3ccf-1639-4cc4-9aa1-1c583537205d",
@@ -179,6 +180,7 @@ export class UsersController {
 
 
   @Delete(':id')
+  @ApiBearerAuth()
   @ApiResponse({ status: 204, description: "Deleta um usuário" })
   @ApiResponse({status: 404, description: "Erro de conflito: CPF já registrado", schema: {
     example: {
@@ -187,6 +189,7 @@ export class UsersController {
       "error": "Not Found"
     }
   }})
+  
   @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string,  @Request() req: any) {
     if(req.user.id !== id) throw new UnauthorizedException()

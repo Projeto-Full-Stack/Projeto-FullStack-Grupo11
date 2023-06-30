@@ -14,7 +14,7 @@ import { AnnouncementsService } from './announcements.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 import { JwtAuthGuard } from '../auth/jawt.auth.guard';
-import { ApiTags, ApiCreatedResponse, ApiResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiResponse, ApiOkResponse, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags("Announcements")
 @Controller('announcements')
@@ -22,6 +22,7 @@ export class AnnouncementsController {
   constructor(private readonly announcementsService: AnnouncementsService) {}
 
   @Post()
+  @ApiBearerAuth()
   @ApiCreatedResponse({ description: 'Created Succesfully', schema: { example: {
       "id": "757ad206-b887-4fac-9f23-a7319001f764",
       "brand": "brand",
@@ -136,6 +137,7 @@ export class AnnouncementsController {
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
   @ApiOkResponse({ description: "Recebe o anúncio atualizado", schema: { example: {
       "id": "757ad206-b887-4fac-9f23-a7319001f764",
       "brand": "brand",
@@ -167,6 +169,7 @@ export class AnnouncementsController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   @ApiResponse({ status: 204, description: "Recebe pelo parametro o ID do anúnico, não possui retorno", })
   @ApiResponse({ status: 404, description: "Erro caso o anúncio não seja encontrado", schema: { example: {
     "statusCode": 404,
