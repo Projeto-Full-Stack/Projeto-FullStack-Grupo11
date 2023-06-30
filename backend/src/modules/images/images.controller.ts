@@ -3,6 +3,7 @@ import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiCreatedResponse } from '@nestjs/swagger/dist/decorators';
 
 @ApiTags('Images')
 @Controller('images')
@@ -10,6 +11,7 @@ export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Post(':annId')
+  @ApiCreatedResponse({ description: "Cria uma ou mais imagens para um anúncio" })
   create(
     @Body() createImageDto: CreateImageDto[],
     @Param('annId') annId: string,

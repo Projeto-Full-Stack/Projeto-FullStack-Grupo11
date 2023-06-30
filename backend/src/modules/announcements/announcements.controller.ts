@@ -63,16 +63,9 @@ export class AnnouncementsController {
       "user_id": "84ca3ccf-1639-4cc4-9aa1-1c583537205d",
       "image": [],
       "user": {
-        "id": "84ca3ccf-1639-4cc4-9aa1-1c583537205d",
-        "name": "teste",
-        "email": "teste@mail.com",
-        "cpf": "12345678901",
-        "phone": "123456",
-        "birthDate": "10-10-1998",
-        "description": "1234567",
-        "password": "$2a$10$8noA/98YmNHGiM..I8FUe.iGRt4pcYULqbbVtYYzwtdODHCoLF6Fy",
-        "reset_token": null,
-        "isVendor": true
+        "id": "bda6fcf8-f593-49b1-8ab0-26fe300b885f",
+        "name": "teste2",
+        "description": "1234567"
 	    },
       "comments": [
         {
@@ -102,16 +95,9 @@ export class AnnouncementsController {
       "user_id": "84ca3ccf-1639-4cc4-9aa1-1c583537205d",
       "image": [],
       "user": {
-        "id": "84ca3ccf-1639-4cc4-9aa1-1c583537205d",
-        "name": "teste",
-        "email": "teste@mail.com",
-        "cpf": "12345678901",
-        "phone": "123456",
-        "birthDate": "10-10-1998",
-        "description": "1234567",
-        "password": "$2a$10$8noA/98YmNHGiM..I8FUe.iGRt4pcYULqbbVtYYzwtdODHCoLF6Fy",
-        "reset_token": null,
-        "isVendor": true
+        "id": "bda6fcf8-f593-49b1-8ab0-26fe300b885f",
+        "name": "teste2",
+        "description": "1234567"
 	    },
       "comments": [
         {

@@ -71,6 +71,13 @@ export class CommentsController{
             }
         ]
     }})
+    @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o anúncio", schema: {
+        example: {
+            "statusCode": 404,
+            "message": "Announcement not found!",
+            "error": "Not Found"
+        }
+    }})
     findAll(@Param('announcementId') annoucementId: string){
         return this.commentsService.findAll(annoucementId)
     }
@@ -86,6 +93,13 @@ export class CommentsController{
         }
         
     }})
+    @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o comentário", schema: {
+        example: {
+            "statusCode": 404,
+            "message": "Comment not found!",
+            "error": "Not Found"
+        }
+    }})
     @UseGuards(JwtAuthGuard)
     async update(@Param('commentId') commentId: string, @Body() updateCommentDto: UpdateCommentDto, @Request() req:any){
         const findComment = await this.commentsService.findOne(commentId);
@@ -96,7 +110,13 @@ export class CommentsController{
 
     @Delete(':commentId')
     @ApiResponse({ status: 204, description: "Deleta o comentário passado pelo parametro" })
-    @ApiResponse({ status: 404})
+    @ApiResponse({ status: 404, description: "Recebe um erro 404 caso não encontre o comentário", schema: {
+        example: {
+            "statusCode": 404,
+            "message": "Comment not found!",
+            "error": "Not Found"
+        }
+    }})
     @UseGuards(JwtAuthGuard)
     async remove(@Param('commentId') commentId: string, @Request() req:any){
         const findComment = await this.commentsService.findOne(commentId);
