@@ -1,8 +1,9 @@
-<h1 align="center">Cars E-Commerce</h1>
-Este projeto é uma aplicação web full-stack idealizado como entrega final de curso, com o intuito de colocar em prática (quase) tudo o que aprendemos até o momento, com um ano de estudos dentro da Kenzie Academy Brasil, tanto seu back-end quanto seu front-end foram planejados, criados e implementados pelos alunos, que receberam ao longo de cada sprint, as tarefas necessárias para sua conclusão.
 <h1 align="center"> 
 	🚧  Em construção...  🚧
 </h1>
+
+<h1 align="center">Cars E-Commerce</h1>
+Este projeto é uma aplicação web full-stack idealizado como entrega final de curso, com o intuito de colocar em prática (quase) tudo o que aprendemos até o momento, com um ano de estudos dentro da Kenzie Academy Brasil, tanto seu back-end quanto seu front-end foram planejados, criados e implementados pelos alunos, que receberam ao longo de cada sprint, as tarefas necessárias para sua conclusão.
 
 ## Objetivo
 
