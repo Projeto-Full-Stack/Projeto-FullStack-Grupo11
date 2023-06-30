@@ -28,7 +28,7 @@ export class ImagesController {
   }
 
   @Patch(':imageId')
-  update(@Param('imageId') imageId: string, data: UpdateImageDto){
+  update(@Param('imageId') imageId: string, @Body() data: UpdateImageDto){
     console.log(data)
     return this.imagesService.update(imageId, data)
   }
