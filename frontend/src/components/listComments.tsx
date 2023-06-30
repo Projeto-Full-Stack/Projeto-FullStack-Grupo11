@@ -1,15 +1,18 @@
-import { CommentInterface } from "@/schemas/comment.schemas";
+import {
+  CommentInterface,
+  IncludeIdCommentInterface,
+} from "@/schemas/comment.schemas";
 import Comment from "./comment";
 
 interface IListCommentsProps {
-  comments: CommentInterface[];
+  comments: IncludeIdCommentInterface[];
 }
 
 const ListComments = ({ comments }: IListCommentsProps) => {
   return (
     <ul>
-      {comments.map((comment, index) => (
-        <Comment comment={comment} />
+      {comments.map((comment) => (
+        <Comment key={comment.id} comment={comment} />
       ))}
     </ul>
   );

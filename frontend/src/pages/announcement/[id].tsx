@@ -22,7 +22,7 @@ export default function Announcements() {
   const router = useRouter();
   const { announcementData, getAnnouncement, announcementUserData } =
     AnnouncementContext();
-  const { commentRequest } = commentContext();
+  const { comments, commentRequest } = commentContext();
   const { userInfo } = LoginContext();
 
   const {
@@ -35,8 +35,11 @@ export default function Announcements() {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<CommentInterface> = (data) =>
-    commentRequest(data, announcementData!.id);
+  const onSubmit: SubmitHandler<CommentInterface> = (data) => {
+    if (userInfo) {
+      commentRequest(data, announcementData!.id);
+    }
+  };
 
   useEffect(() => {
     if (router.query.id) {
@@ -206,12 +209,12 @@ export default function Announcements() {
             <Heading type="h6" weight={600}>
               Comentários
             </Heading>
-            <ListComments comments={[]} />
+            <ListComments comments={comments} />
           </div>
           <div className="flex flex-col gap-6">
             <Profile
               type="small"
-              name="Usuário Logado"
+              name={userInfo!.name}
               extra_classes="flex items-center gap-3"
             />
             <form onSubmit={handleSubmit(onSubmit)}>

@@ -36,12 +36,19 @@ const NavBar = () => {
           </Heading>
         </Link>
         {userInfo ? (
-          <div className="flex w-fit items-end flex-col gap-6 absolute top-6 right-0 px-[16px]">
+          <div className="flex w-fit items-end flex-col gap-6 absolute top-8 right-0 px-[16px]">
             <button onClick={showNavigation} className="w-full">
+              <div className="w-full flex flex-col items-end sm:hidden">
+                <Image
+                  src={bars}
+                  className=" w-5 sm:[425px] sm:hidden"
+                  alt="Symbol drop down"
+                ></Image>
+              </div>
               <Profile
                 type="small"
                 name={userInfo.name}
-                extra_classes="flex items-end justify-end gap-2 max-w-[244px]"
+                extra_classes="items-center justify-end gap-2 max-w-[244px] hidden sm:flex"
               />
             </button>
             <section className={`${navStatus} `}>

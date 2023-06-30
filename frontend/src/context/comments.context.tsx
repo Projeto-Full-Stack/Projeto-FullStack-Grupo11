@@ -11,8 +11,10 @@ interface Props {
 
 interface ICommentProvider {
   commentRequest: (data: CommentInterface, commentId: string) => void;
+  getAllAnnoucementComments: (announcementId: string | string[]) => void;
   editComments: (data: CommentInterface, commentId: string) => void;
   deleteComments: (commentId: string) => void;
+  comments: IncludeIdCommentInterface[];
 }
 
 const CommentContext = createContext<ICommentProvider>({} as ICommentProvider);
@@ -21,13 +23,15 @@ export const CommentProvider = ({ children }: Props) => {
   const [comments, setComments] = useState<IncludeIdCommentInterface[] | []>(
     []
   );
-
+  const [listComments, setListComments] = useState<
+    IncludeIdCommentInterface[] | []
+  >([]);
   const commentRequest = async (
     data: CommentInterface,
     announcementId: string
   ) => {
     try {
-      const createComment = await motorsApi.post(
+      const commentData = await motorsApi.post(
         `comments/${announcementId}`,
         data,
         {
@@ -36,12 +40,16 @@ export const CommentProvider = ({ children }: Props) => {
           },
         }
       );
-
-      setComments([createComment.data, ...comments]);
+      setComments([commentData.data, ...comments]);
     } catch (error) {
       console.log(error);
     }
   };
+
+  async function getAllAnnoucementComments(announcementId: string | string[]) {
+    const comments = await motorsApi.get(`comments/${announcementId}`);
+    setListComments(comments.data);
+  }
 
   async function editComments(data: CommentInterface, commentId: string) {
     const { comment } = data;
@@ -83,8 +91,10 @@ export const CommentProvider = ({ children }: Props) => {
     <CommentContext.Provider
       value={{
         commentRequest,
+        getAllAnnoucementComments,
         editComments,
         deleteComments,
+        comments,
       }}
     >
       {children}

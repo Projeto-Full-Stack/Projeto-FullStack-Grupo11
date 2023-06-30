@@ -1,5 +1,6 @@
 import {
   CommentInterface,
+  IncludeIdCommentInterface,
   includeIdCommentSchema,
 } from "@/schemas/comment.schemas";
 import Profile from "./profile";
@@ -11,11 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 interface Props {
-  comment: CommentInterface;
+  comment: IncludeIdCommentInterface;
 }
 
 const Comment = ({ comment }: Props) => {
-  const { getProfileDetails, profilePageInformation } = ProfileContext();
+  const { userInfo } = LoginContext();
 
   return (
     <>
@@ -23,13 +24,13 @@ const Comment = ({ comment }: Props) => {
         <div className={`flex items-center gap-2`}>
           <Profile
             type="small"
-            name={profilePageInformation!.name}
+            name={userInfo!.name}
             extra_classes="flex items-center gap-3"
           />
           <div className="flex gap-3 items-center">
             <div className="w-1 h-1 bg-grey-grey_4 rounded-full"></div>
             <small className="text-grey-grey_3 font-normal font-[14px]">
-              7 horas
+              {comment.createdAt}
             </small>
           </div>
         </div>
