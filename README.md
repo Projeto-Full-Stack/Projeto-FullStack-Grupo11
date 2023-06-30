@@ -3,7 +3,9 @@ Este projeto é uma aplicação web full-stack idealizado como entrega final de 
 <h1 align="center"> 
 	🚧  Em construção...  🚧
 </h1>
+
 ## Objetivo
+
 <br/>
 
 O objetivo da aplicação, foi o de criar um e-commerce para usuários comprarem e venderem seus carros. <br/>
