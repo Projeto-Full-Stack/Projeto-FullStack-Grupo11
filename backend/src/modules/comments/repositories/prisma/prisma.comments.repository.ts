@@ -20,6 +20,9 @@ export class CommentPrismaRepository implements CommentsRepository {
 
         const newComment = await this.prisma.comment.create({
             data: { ...comment },
+            include: {
+                author: true
+            }
         });
 
         return plainToInstance(Comment, newComment);
@@ -32,7 +35,16 @@ export class CommentPrismaRepository implements CommentsRepository {
 
     async findAll(announcementId: string): Promise<Comment[]> {
         const comments = await this.prisma.comment.findMany({
-          where: {announcementId} 
+          where: {announcementId},
+          include: {
+            author: {
+                select: {
+                    id: true,
+                    name: true,
+                    description: true
+                }
+            }
+          }
         });
     
         return comments;
