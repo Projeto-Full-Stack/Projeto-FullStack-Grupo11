@@ -36,12 +36,19 @@ const NavBar = () => {
           </Heading>
         </Link>
         {userInfo ? (
-          <div className="flex w-fit items-end flex-col gap-6 absolute top-6 right-0 px-[16px]">
+          <div className="flex w-fit items-end flex-col absolute top-0 right-0 h-[80px] px-[16px] mt-[25px]">
             <button onClick={showNavigation} className="w-full">
+              <div className="w-full flex flex-col items-end sm:hidden">
+                <Image
+                  src={bars}
+                  className=" w-5 sm:[425px] sm:hidden"
+                  alt="Symbol drop down"
+                ></Image>
+              </div>
               <Profile
                 type="small"
                 name={userInfo.name}
-                extra_classes="flex items-end justify-end gap-2 max-w-[244px]"
+                extra_classes="items-center justify-end gap-2 max-w-[244px] hidden sm:flex"
               />
             </button>
             <section className={`${navStatus} `}>
@@ -75,7 +82,7 @@ const NavBar = () => {
           </div>
         ) : (
           <div
-            className="w-[40%] flex flex-col items-end p-2 h-fit absolute top-5 right-0 mb-3 
+            className="w-[40%] flex flex-col items-end p-2 h-fit absolute right-0 mb-3 
          sm:w-fit sm:mb-5 sm:flex-row"
           >
             <button onClick={showNavigation} className="sm:hidden">
@@ -87,7 +94,7 @@ const NavBar = () => {
             </button>
             <section className={`${navStatus} sm:block`}>
               <div
-                className={`flex-col flex items-center p-2 mt-5 shadow-sm h-full
+                className={`flex-col flex items-center p-2  shadow-sm h-full
             bg-colors_color_white_fixed  shadow-indigo-500/40 sm:[425px] sm:mt-0  sm:flex-row sm:w-fit sm:bg-transparent `}
               >
                 <Link href="/login">
