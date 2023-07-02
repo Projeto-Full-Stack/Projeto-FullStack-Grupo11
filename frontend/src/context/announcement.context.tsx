@@ -18,11 +18,12 @@ interface AnnouncementContextInterface {
   setUserAnnouncements: (data: []) => void;
   setAllAnnouncementData: (data: []) => void;
   userAnnouncements: IncludeIdAnnouncementInterface[];
+  totalAnn: number;
   editAnnouncement: (data: EditAnnouncementInterface) => void;
   deleteAnnouncement: (announcement_id: string) => void;
   getAnnouncement: (announcement_id: string | string[]) => void;
-  getAllAnnouncements: () => void;
-  filterFunction: (value: string, type: string) => void;
+  getAllAnnouncements: (number?: number) => void;
+  filterFunction: (data: any) => void;
   announcementData: IncludeIdAnnouncementInterface | null;
   announcementUserData: UserInterface;
   allAnnouncementData: IncludeIdAnnouncementInterface[] | [];
@@ -43,6 +44,7 @@ export function AnnouncementProvider({ children }: Props) {
   const [allAnnouncementData, setAllAnnouncementData] = useState<
     IncludeIdAnnouncementInterface[] | []
   >([]);
+  const [totalAnn, setTotalAnn] = useState<number>(0);
   const { setModalContent } = ContextModal();
 
   async function createAnnouncement(data: AnnoucementInterface) {
@@ -61,11 +63,13 @@ export function AnnouncementProvider({ children }: Props) {
     }
   }
 
-  async function getAllAnnouncements() {
+  async function getAllAnnouncements(number = 1) {
+    setAllAnnouncementData([]);
     const allAnnouncements = await motorsApi.get(
-      "announcements?page=1&limit=12"
+      `announcements?page=${number}&limit=12`
     );
     setAllAnnouncementData(allAnnouncements.data.announcements);
+    setTotalAnn(allAnnouncements.data.totalPages);
   }
 
   async function getAllUserAnnouncements(user_id: string) {
@@ -124,10 +128,20 @@ export function AnnouncementProvider({ children }: Props) {
     }
   }
 
-  async function filterFunction(value: string, type: string) {
+  async function filterFunction(data: any) {
+    let newData = "";
+    if (data._reactName === "onClick") {
+      newData = "";
+    } else {
+      for (const key of Object.keys(data)) {
+        if (data[key] !== null && data[key] !== "") {
+          newData += `&${key}=${data[key]}`;
+        }
+      }
+    }
     try {
       const filteredAnn = await motorsApi.get(
-        `announcements?page=1&limit=12&key=${type}&value=${value}`
+        `announcements?page=1&limit=12${newData}`
       );
       setAllAnnouncementData(filteredAnn.data.announcements);
     } catch (error) {
@@ -143,6 +157,7 @@ export function AnnouncementProvider({ children }: Props) {
         getAllAnnouncements,
         setAllAnnouncementData,
         userAnnouncements,
+        totalAnn,
         setUserAnnouncements,
         editAnnouncement,
         deleteAnnouncement,
