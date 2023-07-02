@@ -6,7 +6,6 @@ import { Announcement } from '../../entities/announcement.entity';
 import { PrismaService } from 'src/database/prisma.service';
 import { plainToInstance } from 'class-transformer';
 import { IAnnouncementGetAll } from '../../announcement.schema';
-import { paginate } from 'nestjs-prisma-pagination';
 
 @Injectable()
 export class AnnouncementPrismaRepository implements AnnouncementRepository {
@@ -27,21 +26,59 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
 
     return plainToInstance(Announcement, newAnnouncement);
   }
-  async findAll(query: IAnnouncementGetAll): Promise<Announcement[]> {
-    const queryConfig = paginate(
-      {
-        page: query.page,
-        limit: query.limit,
-        search: query.value,
-      },
-      {
-        search: [query.key],
-        includes: ['image', 'user'],
-        orderBy: { id: 'asc' },
-      },
-    );
 
-    const announcements = await this.prisma.announcement.findMany(queryConfig);
+  async findAll(query: IAnnouncementGetAll): Promise<Announcement[]> {
+    const dataWhere = {};
+
+    const { page, limit, ...queries } = query;
+
+    for (const key of Object.keys(queries)) {
+      if (
+        key != 'minPrice' &&
+        key != 'maxPrice' &&
+        key != 'minMileage' &&
+        key != 'maxMileage'
+      ) {
+        dataWhere[key] = { contains: queries[key], mode: 'insensitive' };
+      }
+      if (key == 'minPrice') {
+        dataWhere['price'] = { gte: Number(queries[key]) };
+      }
+      if (key == 'maxPrice') {
+        dataWhere['price'] = { lte: Number(queries[key]) };
+      }
+      if (key == 'minMileage') {
+        dataWhere['mileage'] = { gte: Number(queries[key]) };
+      }
+      if (key == 'maxMileage') {
+        dataWhere['mileage'] = { lte: Number(queries[key]) };
+      }
+    }
+
+    let auxPage = 1;
+    let auxLimit = 1000000;
+
+    page ? (auxPage = page) : (auxPage = 1);
+    limit ? (auxLimit = limit) : (auxLimit = 1000000);
+
+    let pageNum = 1;
+    const perPageNum = Number(auxLimit);
+    if (page === 1) {
+      pageNum = perPageNum * Number(auxPage);
+    } else {
+      pageNum = perPageNum * (Number(auxPage) - 1);
+    }
+
+    const announcements = await this.prisma.announcement.findMany({
+      skip: pageNum,
+      take: perPageNum,
+      orderBy: {
+        brand: 'asc',
+      },
+      where: {
+        AND: { ...dataWhere },
+      },
+    });
 
     return plainToInstance(Announcement, announcements);
   }

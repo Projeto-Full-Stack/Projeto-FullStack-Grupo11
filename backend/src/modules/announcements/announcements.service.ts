@@ -17,17 +17,22 @@ export class AnnouncementsService {
   }
 
   async findAll(query: IAnnouncementGetAll) {
-    const fullLenQuery = { limit: 1000000, page: 1 };
-    const getLen = this.announcementsRepository.findAll(fullLenQuery);
-    const total = (await getLen).length;
+    const getLen = await this.announcementsRepository.findAll({});
+    const totalAnnouncements = getLen.length;
+    let totalPages = 0;
+    if (totalAnnouncements / 12 > 0) {
+      totalPages = Math.ceil(totalAnnouncements / 12);
+    } else {
+      totalPages = 1;
+    }
     let nextPage = 0;
     let previousPage = 0;
 
-    const announcement = this.announcementsRepository.findAll(query);
+    const announcement = await this.announcementsRepository.findAll(query);
 
-    const count = (await announcement).length;
+    const count = announcement.length;
 
-    if ((await announcement).length < 12) {
+    if (announcement.length < 12) {
       nextPage = null;
       if (Number(query.page) == 1) {
         previousPage = null;
@@ -44,11 +49,11 @@ export class AnnouncementsService {
     }
 
     const data = {
-      total: total,
+      totalPages: totalPages,
       count: count,
       previousPage: previousPage,
       nextPage: nextPage,
-      announcements: await announcement,
+      announcements: announcement,
     };
 
     return data;

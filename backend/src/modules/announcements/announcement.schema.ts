@@ -1,6 +1,5 @@
 export interface IAnnouncementGetAll {
-  page: number;
-  limit: number;
-  value?: string;
+  page?: number;
+  limit?: number;
   key?: string;
 }
