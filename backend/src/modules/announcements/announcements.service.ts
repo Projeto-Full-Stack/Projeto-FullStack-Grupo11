@@ -17,7 +17,13 @@ export class AnnouncementsService {
   }
 
   async findAll(query: IAnnouncementGetAll) {
-    const getLen = await this.announcementsRepository.findAll({});
+    const newObj = {};
+    for (const key of Object.keys(query)) {
+      if (key !== 'page' && key !== 'limit') {
+        newObj[key] = query[key];
+      }
+    }
+    const getLen = await this.announcementsRepository.findAll(newObj);
     const totalAnnouncements = getLen.length;
     let totalPages = 0;
     if (totalAnnouncements / 12 > 0) {
@@ -45,7 +51,11 @@ export class AnnouncementsService {
       } else {
         previousPage = Number(query.page) - 1;
       }
-      nextPage = Number(query.page) + 1;
+      if (count) {
+        nextPage = null;
+      } else {
+        nextPage = Number(query.page) + 1;
+      }
     }
 
     const data = {
