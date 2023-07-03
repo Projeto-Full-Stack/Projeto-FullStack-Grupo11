@@ -17,8 +17,15 @@ export default function Home() {
     showFilter != "hidden" ? setAside("hidden") : setAside("block");
   }
 
-  const { getAllAnnouncements, allAnnouncementData, totalAnn, filterFunction } =
-    AnnouncementContext();
+  const {
+    getAllAnnouncements,
+    setPageData,
+    allAnnouncementData,
+    totalAnn,
+    pageData,
+    filterFunction,
+    changePage,
+  } = AnnouncementContext();
   const { cars } = CarContext();
 
   useEffect(() => {
@@ -247,7 +254,10 @@ export default function Home() {
                 <Heading type="h4" weight={600}>
                   Km
                 </Heading>
-                <section className="flex justify-between gap-8">
+                <section
+                  className="flex justify-between gap-8"
+                  onChange={handleSubmit(filterFunction)}
+                >
                   <input
                     type="number"
                     placeholder="Mínima"
@@ -266,7 +276,10 @@ export default function Home() {
                 <Heading type="h4" weight={600}>
                   Preco
                 </Heading>
-                <section className="flex justify-between gap-8">
+                <section
+                  className="flex justify-between gap-8"
+                  onChange={handleSubmit(filterFunction)}
+                >
                   <input
                     type="number"
                     placeholder="Mínimo"
@@ -300,16 +313,13 @@ export default function Home() {
               </Button>
             </div>
           </aside>
-          <section className="flex overflow-hidden h-fit w-fit pl-2 lg:pl-0">
-            <ul className="flex gap-3 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10"></ul>
+          <section className="flex overflow-hidden h-fit pl-2 lg:pl-0 w-full">
+            <ul className="flex gap-6 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10">
+              {allAnnouncementData.map((ann) => {
+                return <Card car={ann} key={ann.id} />;
+              })}
+            </ul>
           </section>
-          <div
-            className={`flex flex-wrap justify-start gap-10 p-4 w-[90%] h-max`}
-          >
-            {allAnnouncementData.map((ann) => {
-              return <Card car={ann} key={ann.id} />;
-            })}
-          </div>
         </main>
         <section
           className={`flex justify-center align-center text-decoration-line: underline gap-2`}
@@ -320,7 +330,7 @@ export default function Home() {
               <button
                 key={`${item}`}
                 type="button"
-                onClick={() => getAllAnnouncements(Number(item))}
+                onClick={() => changePage(pageData, item)}
               >
                 {item}
               </button>

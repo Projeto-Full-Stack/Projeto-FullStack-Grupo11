@@ -4,7 +4,14 @@ import {
   IncludeIdAnnouncementInterface,
 } from "@/schemas/announcement.schemas";
 import motorsApi from "@/services/motors.service";
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import { ContextModal } from "./modal.context";
 import { UserInterface } from "@/schemas/user.schemas";
 
@@ -17,13 +24,16 @@ interface AnnouncementContextInterface {
   getAllUserAnnouncements: (user_id: string) => void;
   setUserAnnouncements: (data: []) => void;
   setAllAnnouncementData: (data: []) => void;
+  setPageData: Dispatch<SetStateAction<string>>;
   userAnnouncements: IncludeIdAnnouncementInterface[];
   totalAnn: number;
+  pageData: string;
   editAnnouncement: (data: EditAnnouncementInterface) => void;
   deleteAnnouncement: (announcement_id: string) => void;
   getAnnouncement: (announcement_id: string | string[]) => void;
   getAllAnnouncements: (number?: number) => void;
   filterFunction: (data: any) => void;
+  changePage: (data: any, page: string) => void;
   announcementData: IncludeIdAnnouncementInterface | null;
   announcementUserData: UserInterface;
   allAnnouncementData: IncludeIdAnnouncementInterface[] | [];
@@ -45,6 +55,7 @@ export function AnnouncementProvider({ children }: Props) {
     IncludeIdAnnouncementInterface[] | []
   >([]);
   const [totalAnn, setTotalAnn] = useState<number>(0);
+  const [pageData, setPageData] = useState<string>("");
   const { setModalContent } = ContextModal();
 
   async function createAnnouncement(data: AnnoucementInterface) {
@@ -144,6 +155,19 @@ export function AnnouncementProvider({ children }: Props) {
         `announcements?page=1&limit=12${newData}`
       );
       setAllAnnouncementData(filteredAnn.data.announcements);
+      setTotalAnn(filteredAnn.data.totalPages);
+      setPageData(newData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function changePage(data: any, page: string) {
+    try {
+      const pageChange = await motorsApi.get(
+        `announcements?page=${Number(page)}&limit=12${data}`
+      );
+      setAllAnnouncementData(pageChange.data.announcements);
     } catch (error) {
       console.error(error);
     }
@@ -156,13 +180,16 @@ export function AnnouncementProvider({ children }: Props) {
         getAllUserAnnouncements,
         getAllAnnouncements,
         setAllAnnouncementData,
+        setPageData,
         userAnnouncements,
         totalAnn,
+        pageData,
         setUserAnnouncements,
         editAnnouncement,
         deleteAnnouncement,
         getAnnouncement,
         filterFunction,
+        changePage,
         announcementData,
         announcementUserData,
         allAnnouncementData,

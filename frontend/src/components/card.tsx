@@ -20,7 +20,7 @@ const Card = ({ car }: Props) => {
   const router = useRouter();
 
   return (
-    <li className="flex flex-col min-w-[288px] max-w-[400px] gap-4 h-fit mb-4 relative">
+    <li className="flex flex-col min-w-[288px] min-w-[400px] max-w-[400px] gap-4 h-fit mb-4 relative">
       <div className="relative">
         <img
           src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg"
