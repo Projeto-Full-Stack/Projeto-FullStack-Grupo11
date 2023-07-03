@@ -97,7 +97,7 @@ export default function Home() {
                 X
               </button>
             </header>
-            <form onBlur={handleSubmit(filterFunction)}>
+            <form onInput={handleSubmit(filterFunction)}>
               <div className="flex flex-col gap-[20px] mb-4">
                 <Heading type="h4" weight={600}>
                   Marca
@@ -137,7 +137,7 @@ export default function Home() {
                       <div key={`${car}`} className={`flex flex-col`}>
                         <input
                           id={`${car}`}
-                          className={`flex flex-col appearance-none`}
+                          className={`flex flex-col appearance-none pointer`}
                           value={`${car}`}
                           type={`radio`}
                           {...register("model")}
