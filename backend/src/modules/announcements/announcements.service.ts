@@ -38,6 +38,8 @@ export class AnnouncementsService {
 
     const count = announcement.length;
 
+    let actualPage = 1;
+
     if (announcement.length < 12) {
       nextPage = null;
       if (Number(query.page) == 1) {
@@ -58,8 +60,15 @@ export class AnnouncementsService {
       }
     }
 
+    if (previousPage === null) {
+      actualPage = 1;
+    } else {
+      actualPage = previousPage + 1;
+    }
+
     const data = {
       totalPages: totalPages,
+      actualPage: actualPage,
       count: count,
       previousPage: previousPage,
       nextPage: nextPage,
