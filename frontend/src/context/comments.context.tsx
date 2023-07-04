@@ -15,7 +15,7 @@ interface ICommentProvider {
   commentRequest: (data: CommentInterface, commentId: string) => void;
   getAllAnnoucementComments: (announcementId: string | string[]) => void;
   editComment: (data: CommentInterface, comment_id: string) => void;
-  // deleteComments: (commentId: string) => void;
+  deleteComment: (comment_id: string) => void;
   listComments: IncludeIdCommentInterface[];
 }
 
@@ -70,8 +70,20 @@ export const CommentProvider = ({ children }: Props) => {
   }
   catch (error){
     console.log(error)
-  }
-    
+  }}
+
+  async function deleteComment (comment_id: string){
+    console.log(comment_id)
+    const array = [...listComments]
+    await motorsApi.delete(`comments/${comment_id}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}` 
+      }
+    })
+    const comment_index = listComments.findIndex((item) => item.id === comment_id)
+    array.splice(comment_index, 1)
+    setListComments(array)
+    setModalContent(false)
   }
 
   return (
@@ -80,7 +92,8 @@ export const CommentProvider = ({ children }: Props) => {
         commentRequest,
         getAllAnnoucementComments,
         listComments,
-        editComment
+        editComment,
+        deleteComment
       }}
     >
       {children}

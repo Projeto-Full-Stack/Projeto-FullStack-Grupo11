@@ -7,6 +7,7 @@ import { LoginContext } from "@/context/login.context";
 import Button from "./button";
 import { ContextModal } from "@/context/modal.context";
 import { EditComment } from "./forms/comments/editComment";
+import { DeleteComment } from "./forms/comments/deleteComment";
 
 interface Props {
   comment: IncludeIdCommentInterface;
@@ -39,7 +40,7 @@ const Comment = ({ comment }: Props) => {
         {userInfo?.id === comment.authorId &&
           <div className="flex gap-4">
             <Button type="bg-brand" click_event={() => setModalContent(<EditComment comment_content={comment}/>)}>Editar</Button>
-            <Button type="bg-alert" click_event={() => setModalContent(false)}>Deletar</Button>
+            <Button type="bg-alert" click_event={() => setModalContent(<DeleteComment comment_content={comment} />)}>Deletar</Button>
           </div>
         }
       </li>
