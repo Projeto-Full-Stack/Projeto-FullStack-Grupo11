@@ -1,16 +1,21 @@
 import { IncludeIdCommentInterface } from "@/schemas/comment.schemas";
 import Profile from "./profile";
 import { Text } from "@/components/typography/text.component";
+import "moment/locale/pt-br"
 import moment from "moment";
+import { LoginContext } from "@/context/login.context";
+import Button from "./button";
+import { ContextModal } from "@/context/modal.context";
 
 interface Props {
   comment: IncludeIdCommentInterface;
 }
 
 const Comment = ({ comment }: Props) => {
-  const momentDate = moment();
-  const commentDate = moment(comment.createdAt);
-  const daysPost = momentDate.diff(commentDate, "days");
+  const { userInfo } = LoginContext()
+  const { setModalContent } = ContextModal()
+
+  const commentDate = moment(comment.createdAt).fromNow();
   return (
     <>
       <li className={`flex flex-col gap-3 h-fit sm:h-[116px]`}>
@@ -23,13 +28,19 @@ const Comment = ({ comment }: Props) => {
           <div className="flex gap-3 items-center">
             <div className="w-1 h-1 bg-grey-grey_4 rounded-full"></div>
             <small className="text-grey-grey_3 font-normal font-[14px]">
-              há {daysPost} dias
+              {commentDate}
             </small>
           </div>
         </div>
         <Text type="b1" weight={400}>
           {comment.comment}
         </Text>
+        {userInfo?.id === comment.authorId &&
+          <div className="flex gap-4">
+            <Button type="bg-brand">Editar</Button>
+            <Button type="bg-alert">Deletar</Button>
+          </div>
+        }
       </li>
     </>
   );
