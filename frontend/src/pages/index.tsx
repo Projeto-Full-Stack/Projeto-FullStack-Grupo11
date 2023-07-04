@@ -9,6 +9,7 @@ import { AnnouncementContext } from "@/context/announcement.context";
 import { CarContext } from "@/context/cars.context";
 import { carArr, carColors, carYears, carFuelType } from "@/data/filter.data";
 import { useForm } from "react-hook-form";
+import Next from "@/components/next";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
@@ -19,7 +20,6 @@ export default function Home() {
 
   const {
     getAllAnnouncements,
-    setPageData,
     allAnnouncementData,
     totalAnn,
     pageData,
@@ -324,18 +324,7 @@ export default function Home() {
         <section
           className={`flex justify-center align-center text-decoration-line: underline gap-2`}
         >
-          paginas
-          {auxArr.map((item) => {
-            return (
-              <button
-                key={`${item}`}
-                type="button"
-                onClick={() => changePage(pageData, item)}
-              >
-                {item}
-              </button>
-            );
-          })}
+          <Next data={pageData} />
         </section>
       </div>
       <div className="flex justify-center items-center lg:hidden mt-[30px]">
