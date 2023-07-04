@@ -21,10 +21,10 @@ export default function App({ Component, pageProps }: AppProps) {
                 <RecoveryProvider>
                   <CommentProvider>
                     <Component {...pageProps} />
+                    <Modal />
                   </CommentProvider>
                 </RecoveryProvider>
               </ProfileProvider>
-              <Modal />
             </LoginProvider>
           </RegisterProvider>
         </AnnouncementProvider>

@@ -5,6 +5,7 @@ import {
 import motorsApi from "@/services/motors.service";
 
 import { ReactNode, createContext, useContext, useState } from "react";
+import { ContextModal } from "./modal.context";
 
 interface Props {
   children: ReactNode;
@@ -13,14 +14,17 @@ interface Props {
 interface ICommentProvider {
   commentRequest: (data: CommentInterface, commentId: string) => void;
   getAllAnnoucementComments: (announcementId: string | string[]) => void;
-  // editComments: (data: CommentInterface, commentId: string) => void;
-  // deleteComments: (commentId: string) => void;
+  editComment: (data: CommentInterface, comment_id: string) => void;
+  deleteComment: (comment_id: string) => void;
   listComments: IncludeIdCommentInterface[];
 }
 
-const CommentContext = createContext<ICommentProvider>({} as ICommentProvider);
+export const CommentContext = createContext<ICommentProvider>({} as ICommentProvider);
 
 export const CommentProvider = ({ children }: Props) => {
+  const { setModalContent } = ContextModal()
+
+
   const [listComments, setListComments] = useState<
     IncludeIdCommentInterface[] | []
   >([]);
@@ -51,41 +55,36 @@ export const CommentProvider = ({ children }: Props) => {
     setListComments(comments.data);
   }
 
-  // async function editComments(data: CommentInterface, commentId: string) {
-  //   const { comment } = data;
+  async function editComment (data: CommentInterface, comment_id: string){
+    const array = [...listComments]
+    try {
+    const edited_comment = await motorsApi.patch(`comments/${comment_id}`, data, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}` 
+      }
+    })
+    const edited_index = listComments.findIndex((item) => item.id === comment_id)
+    array[edited_index].comment = edited_comment.data.comment
+    setListComments(array)
+    setModalContent(false)
+  }
+  catch (error){
+    console.log(error)
+  }}
 
-  //   try {
-  //     const updateComment = await motorsApi.patch(
-  //       `comments/${commentId}`,
-  //       comment,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-  //     const index = comments.findIndex(
-  //       (element: IncludeIdCommentInterface) => element.id === commentId
-  //     );
-  //     comments[index] = updateComment.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // async function deleteComments(commentId: string) {
-  //   await motorsApi.delete(`comments/${commentId}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-  //     },
-  //   });
-  //   const index = comments.findIndex(
-  //     (element: IncludeIdCommentInterface) => element.id === commentId
-  //   );
-  //   const array = [...comments];
-  //   array.splice(index, 1);
-  //   setComments(array);
-  // }
+  async function deleteComment (comment_id: string){
+    console.log(comment_id)
+    const array = [...listComments]
+    await motorsApi.delete(`comments/${comment_id}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}` 
+      }
+    })
+    const comment_index = listComments.findIndex((item) => item.id === comment_id)
+    array.splice(comment_index, 1)
+    setListComments(array)
+    setModalContent(false)
+  }
 
   return (
     <CommentContext.Provider
@@ -93,6 +92,8 @@ export const CommentProvider = ({ children }: Props) => {
         commentRequest,
         getAllAnnoucementComments,
         listComments,
+        editComment,
+        deleteComment
       }}
     >
       {children}
