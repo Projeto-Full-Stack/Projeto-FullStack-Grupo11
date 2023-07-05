@@ -56,6 +56,16 @@ export default function Announcements() {
     }
   };
 
+  const buyCar = () => {
+    if (userInfo) {
+      const phoneNumber = announcementUserData.phone;
+      console.log(announcementUserData.phone);
+      const url = `https://wa.me/${phoneNumber}`;
+
+      window.location.href = url;
+    }
+  };
+
   if (!announcementData) {
     return (
       <div className="flex flex-col bg-grey-6 min-h-screen">
@@ -115,7 +125,11 @@ export default function Announcements() {
                     {`R$ ${Number(announcementData?.price).toFixed(2)}`}
                   </Heading>
                 </div>
-                <Button type="bg-brand" extra_classes="w-fit">
+                <Button
+                  type="bg-brand"
+                  click_event={buyCar}
+                  extra_classes="w-fit"
+                >
                   Comprar
                 </Button>
               </div>
