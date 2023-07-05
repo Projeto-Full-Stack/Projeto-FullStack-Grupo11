@@ -79,7 +79,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [DER](https://imgur.com/rWQe2x0)
 
 ## Criadores:
-[Edmilson Junior](https://github.com/Malaiobol),
-[Elias Jin](https://github.com/Eliasjp),
-[João Vicente](https://github.com/Joaovicente985),
-[Mayza Santos](https://github.com/MOS-01).
+[Edmilson Junior](https://www.linkedin.com/in/malaiobol/),
+[Elias Jin](https://www.linkedin.com/in/elias-park-45427b246/),
+[João Vicente](https://www.linkedin.com/in/jo%C3%A3o-vicente-araujo-horst-2ab8a21bb/),
+[Mayza Santos](https://www.linkedin.com/in/mayza-santos-839943171).
