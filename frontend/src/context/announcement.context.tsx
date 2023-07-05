@@ -87,9 +87,13 @@ export function AnnouncementProvider({ children }: Props) {
     setActualPage(allAnnouncements.data.actualPage);
   }
 
-  async function getAllUserAnnouncements(user_id: string) {
-    const announcements = await motorsApi.get(`announcements/users/${user_id}`);
-    setUserAnnouncements(announcements.data);
+  async function getAllUserAnnouncements(user_id: string, page = 1) {
+    const announcements = await motorsApi.get(
+      `announcements/users/${user_id}?page=${page}&perPage=12`
+    );
+    setUserAnnouncements(announcements.data.announcements);
+    setTotalAnn(announcements.data.totalPages);
+    setActualPage(announcements.data.actualPage);
   }
 
   async function editAnnouncement(data: EditAnnouncementInterface) {
@@ -167,7 +171,12 @@ export function AnnouncementProvider({ children }: Props) {
     }
   }
 
-  async function changePage(data: any, page: string, type: number) {
+  async function changePage(
+    data: any,
+    page: string,
+    type: number,
+    user_id?: string
+  ) {
     if (type === 1) {
       try {
         const pageChange = await motorsApi.get(
@@ -185,6 +194,29 @@ export function AnnouncementProvider({ children }: Props) {
           `announcements?page=${Number(page) - 1}&limit=12${data}`
         );
         setAllAnnouncementData(pageChange.data.announcements);
+        setActualPage(pageChange.data.actualPage);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (type === 3) {
+      try {
+        const pageChange = await motorsApi.get(
+          `announcements/users/${user_id}?page=${Number(page) + 1}&perPage=12`
+        );
+        setUserAnnouncements(pageChange.data.announcements);
+        setActualPage(pageChange.data.actualPage);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (type === 4) {
+      try {
+        const pageChange = await motorsApi.get(
+          `announcements/users/${user_id}?page=${Number(page) - 1}&perPage=12`
+        );
+        console.log(pageChange.data.announcements);
+        setUserAnnouncements(pageChange.data.announcements);
         setActualPage(pageChange.data.actualPage);
       } catch (error) {
         console.error(error);

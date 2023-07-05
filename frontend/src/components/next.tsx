@@ -3,9 +3,10 @@ import { Heading } from "./typography/heading.component";
 
 interface IPropsSchema {
   data?: string;
+  user_id?: string;
 }
 
-const Next = ({ data }: IPropsSchema) => {
+const Next = ({ data, user_id }: IPropsSchema) => {
   const { changePage, totalAnn, actualPage } = AnnouncementContext();
 
   const nextTxt = "Seguinte >";
@@ -16,21 +17,43 @@ const Next = ({ data }: IPropsSchema) => {
       <Heading type="h6" weight={500} extra_classes="text-grey-3 ">
         {`${actualPage} de ${totalAnn}`}
       </Heading>
-      {actualPage > 1 && (
+      {user_id
+        ? actualPage > 1 && (
+            <button
+              className=" font-bold font-lexend text-6 text-brand-2 "
+              onClick={() => {
+                changePage("", String(actualPage), 4, user_id);
+              }}
+            >
+              {prevTxt}
+            </button>
+          )
+        : actualPage > 1 && (
+            <button
+              className=" font-bold font-lexend text-6 text-brand-2 "
+              onClick={() => {
+                changePage(data, String(actualPage), 2);
+              }}
+            >
+              {prevTxt}
+            </button>
+          )}
+      {user_id ? (
+        actualPage < totalAnn && (
+          <button
+            className=" font-bold font-lexend text-6 text-brand-2 "
+            onClick={() => {
+              changePage("", String(actualPage), 3, user_id);
+            }}
+          >
+            {nextTxt}
+          </button>
+        )
+      ) : (
         <button
           className=" font-bold font-lexend text-6 text-brand-2 "
           onClick={() => {
-            console.log(data), changePage(data, String(actualPage), 2);
-          }}
-        >
-          {prevTxt}
-        </button>
-      )}
-      {actualPage < totalAnn && (
-        <button
-          className=" font-bold font-lexend text-6 text-brand-2 "
-          onClick={() => {
-            console.log(data), changePage(data, String(actualPage), 1);
+            changePage(data, String(actualPage), 1);
           }}
         >
           {nextTxt}

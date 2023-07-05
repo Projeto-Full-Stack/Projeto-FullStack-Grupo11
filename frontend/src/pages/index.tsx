@@ -10,6 +10,7 @@ import { CarContext } from "@/context/cars.context";
 import { carArr, carColors, carYears, carFuelType } from "@/data/filter.data";
 import { useForm } from "react-hook-form";
 import Next from "@/components/next";
+import { Text } from "@/components/typography/text.component";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
@@ -315,16 +316,22 @@ export default function Home() {
           </aside>
           <section className="flex overflow-hidden h-fit pl-2 lg:pl-0 w-full">
             <ul className="flex gap-6 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:gap-10">
-              {allAnnouncementData.map((ann) => {
-                return <Card car={ann} key={ann.id} />;
-              })}
+              {allAnnouncementData.length ? (
+                allAnnouncementData.map((ann) => {
+                  return <Card car={ann} key={ann.id} />;
+                })
+              ) : (
+                <Text type="b1" weight={600}>
+                  Ainda não existe nenhum anúncio
+                </Text>
+              )}
             </ul>
           </section>
         </main>
         <section
           className={`flex justify-center align-center text-decoration-line: underline gap-2`}
         >
-          <Next data={pageData} />
+          {allAnnouncementData.length > 0 && <Next data={pageData} />}
         </section>
       </div>
       <div className="flex justify-center items-center lg:hidden mt-[30px]">
