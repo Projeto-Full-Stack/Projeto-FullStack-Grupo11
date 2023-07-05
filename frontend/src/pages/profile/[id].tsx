@@ -103,7 +103,9 @@ const ViewUser = () => {
                     </Text>
                   )}
                 </ul>
-                <Next />
+                {userAnnouncements.length > 0 && (
+                  <Next user_id={profilePageInformation.id} />
+                )}
               </section>
             ) : (
               <Heading
