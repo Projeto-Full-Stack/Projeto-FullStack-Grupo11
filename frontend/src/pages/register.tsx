@@ -96,7 +96,7 @@ function RegisterPage() {
               label="Celular *"
               extra_classes="my-[5px] w-[315px] h-[40px]"
             >
-              {"(DDD) 90000-0000"}
+              {"(DD)9XXXX-YYYY"}
             </Input>
             {errors.phone && (
               <p className={`flex py-2 text-feedback-alert_1`}>
@@ -122,7 +122,7 @@ function RegisterPage() {
               input_name="description"
               input_type="textArea"
               label="Descrição *"
-              extra_classes="w-[315px] h-[40px]"
+              extra_classes="w-[315px]"
             >
               {"Digitar descrição"}
             </Input>

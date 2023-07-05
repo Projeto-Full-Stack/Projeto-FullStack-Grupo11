@@ -89,7 +89,7 @@ export default function Announcements() {
                 <img
                   className="object-scale-down"
                   src={announcementData.coverImage}
-                  alt="Cobalt"
+                  alt={announcementData.model}
                 />
               </div>
               <div
@@ -144,10 +144,12 @@ export default function Announcements() {
                 Fotos
               </Heading>
               <ImageList list_length={announcementData.image.length}>
-                {announcementData.image.length &&
-                  announcementData.image.map((photo) => {
+                {announcementData.image.length ?
+                  announcementData.image.map((photo: any) => {
                     return <ImageCard image={photo.imageUrl} />;
-                  })}
+                }):
+                <Text type="b2" weight={500}>Não possui fotos</Text>
+                }
               </ImageList>
             </article>
 
