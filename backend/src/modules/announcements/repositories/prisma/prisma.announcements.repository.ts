@@ -61,13 +61,9 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     page ? (auxPage = page) : (auxPage = 1);
     limit ? (auxLimit = limit) : (auxLimit = 1000000);
 
-    let pageNum = 1;
     const perPageNum = Number(auxLimit);
-    if (page === 1) {
-      pageNum = perPageNum * Number(auxPage);
-    } else {
-      pageNum = perPageNum * (Number(auxPage) - 1);
-    }
+
+    const pageNum = perPageNum * (Number(auxPage) - 1);
 
     const announcements = await this.prisma.announcement.findMany({
       skip: pageNum,
@@ -78,20 +74,54 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
       where: {
         AND: { ...dataWhere },
       },
+      include: {
+        image: true,
+        user: true,
+        comments: {
+          include: {
+            author: { select: { id: true, name: true, description: true } },
+          },
+        },
+      },
     });
 
     return plainToInstance(Announcement, announcements);
   }
 
-  async findAllByUser(user_id: string): Promise<Announcement[]> {
+  async findAllByUser(
+    user_id: string,
+    page?: string,
+    perPage?: string,
+  ): Promise<Announcement[]> {
+    let auxPage = '1';
+    let auxLimit = '1000000';
+
+    page ? (auxPage = page) : (auxPage = auxPage);
+    perPage ? (auxLimit = perPage) : (auxLimit = auxLimit);
+
+    const perPageNum = Number(auxLimit);
+
+    const pageNum = perPageNum * (Number(auxPage) - 1);
+
     const announcements = await this.prisma.announcement.findMany({
+      skip: pageNum,
+      take: perPageNum,
+      orderBy: {
+        brand: 'asc',
+      },
       where: { user_id },
-      include: { image: true },
+      include: {
+        image: true,
+        user: true,
+        comments: {
+          include: {
+            author: { select: { id: true, name: true, description: true } },
+          },
+        },
+      },
     });
 
-    return announcements;
-
-    return announcements;
+    return plainToInstance(Announcement, announcements);
   }
 
   async findOne(id: string): Promise<Announcement> {

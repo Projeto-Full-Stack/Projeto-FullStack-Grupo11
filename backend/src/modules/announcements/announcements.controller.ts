@@ -149,8 +149,12 @@ export class AnnouncementsController {
     description:
       "Recebe pelo parametro o ID do usuário e procura por anúncios onde o user_id seja igual ao do parametro, o retorno é igual ao GET '/announcements'",
   })
-  findAllByUser(@Param('user_id') user_id: string) {
-    return this.announcementsService.findAllByUser(user_id);
+  findAllByUser(
+    @Param('user_id') user_id: string,
+    @Query('page') page: string,
+    @Query('perPage') perPage: string,
+  ) {
+    return this.announcementsService.findAllByUser(user_id, page, perPage);
   }
 
   @Get(':id')

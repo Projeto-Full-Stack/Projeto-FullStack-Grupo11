@@ -40,7 +40,7 @@ export class AnnouncementsService {
 
     let actualPage = 1;
 
-    if (announcement.length < 12) {
+    if (count < 12) {
       nextPage = null;
       if (Number(query.page) == 1) {
         previousPage = null;
@@ -53,7 +53,7 @@ export class AnnouncementsService {
       } else {
         previousPage = Number(query.page) - 1;
       }
-      if (count) {
+      if (count === totalAnnouncements) {
         nextPage = null;
       } else {
         nextPage = Number(query.page) + 1;
@@ -78,12 +78,64 @@ export class AnnouncementsService {
     return data;
   }
 
-  async findAllByUser(user_id: string) {
+  async findAllByUser(user_id: string, page?: string, perPage?: string) {
+    const getLen = await this.announcementsRepository.findAllByUser(user_id);
+    const totalAnnouncements = getLen.length;
+    let totalPages = 0;
+    if (totalAnnouncements / 12 > 0) {
+      totalPages = Math.ceil(totalAnnouncements / 12);
+    } else {
+      totalPages = 1;
+    }
+    let nextPage = 0;
+    let previousPage = 0;
+
     const announcement = await this.announcementsRepository.findAllByUser(
       user_id,
+      page,
+      perPage,
     );
 
-    return announcement;
+    const count = announcement.length;
+
+    let actualPage = 1;
+
+    if (count < 12) {
+      nextPage = null;
+      if (Number(page) == 1) {
+        previousPage = null;
+      } else {
+        previousPage = Number(page) - 1;
+      }
+    } else {
+      if (Number(page) == 1) {
+        previousPage = null;
+      } else {
+        previousPage = Number(page) - 1;
+      }
+      if (count === totalAnnouncements) {
+        nextPage = null;
+      } else {
+        nextPage = Number(page) + 1;
+      }
+    }
+
+    if (previousPage === null) {
+      actualPage = 1;
+    } else {
+      actualPage = previousPage + 1;
+    }
+
+    const data = {
+      totalPages: totalPages,
+      actualPage: actualPage,
+      count: count,
+      previousPage: previousPage,
+      nextPage: nextPage,
+      announcements: announcement,
+    };
+
+    return data;
   }
 
   async findOne(id: string) {
