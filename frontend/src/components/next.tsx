@@ -38,27 +38,27 @@ const Next = ({ data, user_id }: IPropsSchema) => {
               {prevTxt}
             </button>
           )}
-      {user_id ? (
-        actualPage < totalAnn && (
-          <button
-            className=" font-bold font-lexend text-6 text-brand-2 "
-            onClick={() => {
-              changePage("", String(actualPage), 3, user_id);
-            }}
-          >
-            {nextTxt}
-          </button>
-        )
-      ) : (
-        <button
-          className=" font-bold font-lexend text-6 text-brand-2 "
-          onClick={() => {
-            changePage(data, String(actualPage), 1);
-          }}
-        >
-          {nextTxt}
-        </button>
-      )}
+      {user_id
+        ? actualPage < totalAnn && (
+            <button
+              className=" font-bold font-lexend text-6 text-brand-2 "
+              onClick={() => {
+                changePage("", String(actualPage), 3, user_id);
+              }}
+            >
+              {nextTxt}
+            </button>
+          )
+        : actualPage < totalAnn && (
+            <button
+              className=" font-bold font-lexend text-6 text-brand-2 "
+              onClick={() => {
+                changePage(data, String(actualPage), 1);
+              }}
+            >
+              {nextTxt}
+            </button>
+          )}
     </span>
   );
 };
