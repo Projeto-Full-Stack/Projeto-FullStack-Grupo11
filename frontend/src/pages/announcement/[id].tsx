@@ -198,39 +198,40 @@ export default function Announcements() {
               <ListComments comments={listComments} />
             </div>
           </section>
-          <section className="bg-colors_color_white_fixed px-11 py-9 mt-[16px] flex flex-col h-fit  rounded lg:w-[60%] ">
-            <div className="flex flex-col gap-6">
               {userInfo! && (
-                <Profile
-                  type="small"
-                  name={userInfo.name}
-                  extra_classes="flex items-center gap-3"
-                />
-              )}
+                <section className="bg-colors_color_white_fixed px-11 py-9 mt-[16px] flex flex-col h-fit  rounded lg:w-[60%] ">
+                  <div className="flex flex-col gap-6">
+                    <Profile
+                      type="small"
+                      name={userInfo.name}
+                      extra_classes="flex items-center gap-3"
+                    />
+                  
 
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <textarea
-                  {...register("comment")}
-                  placeholder="Digite seu comentário aqui..."
-                  className="w-full border-grey-grey_4 border rounded px-4 py-3 h-[128px] resize-none"
-                />
-                <Button type="bg-brand">Comentar</Button>
-              </form>
-              <section className="flex gap-2 items-center flex-wrap">
-                <div className="flex gap-2 items-center">
-                  <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
-                    Gostei Muito!
-                  </span>
-                  <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
-                    Incrível
-                  </span>
-                </div>
-                <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
-                  Recomendária para meus amigos
-                </span>
-              </section>
-            </div>
-          </section>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <textarea
+                      {...register("comment")}
+                      placeholder="Digite seu comentário aqui..."
+                      className="w-full border-grey-grey_4 border rounded px-4 py-3 h-[128px] resize-none"
+                    />
+                    <Button type="bg-brand">Comentar</Button>
+                  </form>
+                  <section className="flex gap-2 items-center flex-wrap">
+                    <div className="flex gap-2 items-center">
+                      <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
+                        Gostei Muito!
+                      </span>
+                      <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
+                        Incrível
+                      </span>
+                    </div>
+                    <span className="bg-grey-6 px-4 py-1 text-[12px] text-grey-3 rounded">
+                      Recomendária para meus amigos
+                    </span>
+                  </section>
+                  </div>
+                </section>
+              )}
         </div>
       </main>
       <Footer />

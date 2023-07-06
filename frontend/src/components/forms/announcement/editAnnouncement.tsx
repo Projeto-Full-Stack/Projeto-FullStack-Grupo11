@@ -70,7 +70,7 @@ export function EditAnnouncementForm ({announcement}: Props){
                     </div>
                 )}
                 {fields.length >= 1 && fields.length < 6 &&
-                    <Button type="bg-brand" click_event={() => append({imageUrl: ""})}  button_type="button">Adicionar mais fotos</Button>
+                    <Button type="bg-brand" click_event={() => append({imageUrl: ""})}  button_type="button" extra_classes="lg:w-fit">Adicionar mais fotos</Button>
                 }
 
 

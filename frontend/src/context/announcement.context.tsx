@@ -1,5 +1,6 @@
 import {
   AnnoucementInterface,
+  AnnouncementImagesInterface,
   EditAnnouncementInterface,
   IncludeIdAnnouncementInterface,
 } from "@/schemas/announcement.schemas";
@@ -30,7 +31,7 @@ interface AnnouncementContextInterface {
   totalAnn: number;
   pageData: string;
   actualPage: number;
-  editAnnouncement: (data: EditAnnouncementInterface) => void;
+  editAnnouncement: (data: EditAnnouncementInterface, originalImages: AnnouncementImagesInterface) => void;
   deleteAnnouncement: (announcement_id: string) => void;
   getAnnouncement: (announcement_id: string | string[]) => void;
   getAllAnnouncements: (number?: number) => void;
@@ -96,28 +97,52 @@ export function AnnouncementProvider({ children }: Props) {
     setActualPage(announcements.data.actualPage);
   }
 
-  async function editAnnouncement(data: EditAnnouncementInterface) {
-    const { id, ...announcementDetails } = data;
-    try {
-      const updatedAnnouncement = await motorsApi.patch(
-        `announcements/${id}`,
-        announcementDetails,
-        {
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
+  async function editAnnouncement (data: EditAnnouncementInterface, originalImages: AnnouncementImagesInterface){
+    const {id, image, ...announcementDetails} = data
+
+
+    const newImages = image.filter((photo) => !photo.id)
+
+    const deleted = originalImages.filter((oldPhoto) => {
+        if (!image.some((element) => oldPhoto.id === element.id)){
+            return oldPhoto.id
         }
-      );
-      const index = userAnnouncements.findIndex(
-        (element: IncludeIdAnnouncementInterface) => element.id === id
-      );
-      userAnnouncements[index] = updatedAnnouncement.data;
-      setUserAnnouncements(userAnnouncements);
-      setModalContent(false);
-    } catch (error) {
-      console.log(error);
+    })
+    const deletedIds = deleted.map(element => element.id)
+
+    const edited = image.filter((newPhoto) => originalImages.some((oldPhoto) => (newPhoto.id === oldPhoto.id && newPhoto.imageUrl !== oldPhoto.imageUrl )))
+
+
+    try {
+        const updatedAnnouncement = await motorsApi.patch(`announcements/${id}`, announcementDetails, {
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`
+            }
+        })
+        const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === id)
+
+        if (newImages) await motorsApi.post(`images/${id}`, newImages)
+
+
+        if (deletedIds.length) await motorsApi.delete("images", { params: deletedIds})
+
+
+        if (edited){
+            edited.map(async (photo) => {
+                const data = {imageUrl: photo.imageUrl}
+                const editedPhoto = await motorsApi.patch(`images/${photo.id}`, data)
+            })
+        }
+
+        userAnnouncements[index] = updatedAnnouncement.data
+        userAnnouncements[index].image = image
+        setUserAnnouncements(userAnnouncements)
+        setModalContent(false)
     }
-  }
+    catch (error){
+        console.log(error)
+    }
+}
 
   async function deleteAnnouncement(announcement_id: string) {
     await motorsApi.delete(`announcements/${announcement_id}`, {
