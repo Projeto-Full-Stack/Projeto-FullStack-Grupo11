@@ -25,9 +25,13 @@ const Card = ({ car }: Props) => {
       <Link href={`/announcement/${car.id}`}>
         <div className="relative">
           <img
-            src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg"
-            alt="car-photo"
-            className="w-fit"
+            src={car.coverImage}
+            alt={car.model}
+            onError={({currentTarget}) => {
+              currentTarget.onerror = null
+              currentTarget.src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+            }}
+            className="w-full h-[162px] object-cover"
           />
           {car.avaliable == true ? (
               <span className="w-fit bg-brand-1 text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">

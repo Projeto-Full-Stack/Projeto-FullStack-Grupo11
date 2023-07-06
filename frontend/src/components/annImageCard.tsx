@@ -16,7 +16,10 @@ export function ImageCard ({image}: Props){
             <img
             className="object-scale-down"
             src={image}
-            alt=""
+            onError={({currentTarget}) => {
+                currentTarget.onerror = null
+                currentTarget.src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+              }}
             />
         </li>
     )

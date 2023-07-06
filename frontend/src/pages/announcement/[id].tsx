@@ -101,6 +101,10 @@ export default function Announcements() {
                   className="object-scale-down"
                   src={announcementData.coverImage}
                   alt={announcementData.model}
+                  onError={({currentTarget}) => {
+                    currentTarget.onerror = null
+                    currentTarget.src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+                  }}
                 />
               </div>
               <div
