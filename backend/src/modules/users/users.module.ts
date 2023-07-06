@@ -18,7 +18,7 @@ import { MailService } from 'src/utils/mail.service';
         },
       },
       defaults: {
-        from: '',
+        from: 'contatestekenzie@gmail.com',
       },
     }),
   ],
