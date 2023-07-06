@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { userSchema } from "./user.schemas"
 
 export const annoucementSchema = z.object({
     brand: z.string(),
@@ -35,7 +36,8 @@ export const includeIdAnnouncementSchema = z.object({
     description: z.string(),
     coverImage: z.string().url(),
     avaliable: z.boolean().default(true),
-    image: z.array(z.object({imageUrl: z.string()}))
+    image: z.array(z.object({imageUrl: z.string()})),
+    user: userSchema
 }).refine((data) => {
     data.fipe = Number(data.fipe)
     data.price = Number(data.price)

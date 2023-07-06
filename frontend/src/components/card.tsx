@@ -19,6 +19,7 @@ const Card = ({ car }: Props) => {
   const { setModalContent } = useContext(ModalContext);
   const { userInfo, tokenState } = LoginContext();
   const router = useRouter();
+  console.log(car)
 
   return (
     <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
@@ -48,7 +49,7 @@ const Card = ({ car }: Props) => {
           {car.description}
         </Text>
 
-        <Profile type="small" name={"Mayza"} extra_classes="flex items-center gap-3"/>
+        <Profile type="small" name={car.user.name} extra_classes="flex items-center gap-3"/>
 
         <div className="flex justify-between items-center">
           <div className="flex w-1/3 gap-3 ">
