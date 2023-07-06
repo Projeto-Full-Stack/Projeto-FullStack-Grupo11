@@ -19,7 +19,6 @@ const Card = ({ car }: Props) => {
   const { setModalContent } = useContext(ModalContext);
   const { userInfo, tokenState } = LoginContext();
   const router = useRouter();
-  console.log(car)
 
   return (
     <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
@@ -45,7 +44,7 @@ const Card = ({ car }: Props) => {
             )}
         </div>
         <Heading type="h7" weight={600}>{car.model}</Heading>
-        <Text type="b2" weight={400}>
+        <Text type="b2" weight={400} extra_classes="line-clamp-1">
           {car.description}
         </Text>
 

@@ -30,6 +30,17 @@ export class ImagesPrismaRepository implements ImagesRepository {
   async findAll(annId: string): Promise<Image[]> {
     const images = await this.prisma.image.findMany({
       where: { announcementId: annId },
+      include: {
+        announcement: {
+          include: {
+            user: {
+              select: {
+                name: true
+              }
+            }
+          }
+        }
+      }
     });
 
     return plainToInstance(Image, images);

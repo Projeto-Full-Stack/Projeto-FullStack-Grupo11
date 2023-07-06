@@ -118,15 +118,7 @@ export function AnnouncementProvider({ children }: Props) {
 
 
     try {
-        const updatedAnnouncement = await motorsApi.patch(`announcements/${id}`, announcementDetails, {
-            headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("token")}`
-            }
-        })
-        const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === id)
-
         if (newImages) await motorsApi.post(`images/${id}`, newImages)
-
 
         if (deletedIds.length) await motorsApi.delete("images", { params: deletedIds})
 
@@ -138,8 +130,16 @@ export function AnnouncementProvider({ children }: Props) {
             })
         }
 
+        const updatedAnnouncement = await motorsApi.patch(`announcements/${id}`, announcementDetails, {
+          headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`
+          }
+        })
+        const index = userAnnouncements.findIndex((element: IncludeIdAnnouncementInterface) => element.id === id)
+
         userAnnouncements[index] = updatedAnnouncement.data
-        userAnnouncements[index].image = image
+        userAnnouncements[index].image = updatedAnnouncement.data.image
+        console.log(userAnnouncements[index].image)
         setUserAnnouncements(userAnnouncements)
         setModalContent(false)
     }
