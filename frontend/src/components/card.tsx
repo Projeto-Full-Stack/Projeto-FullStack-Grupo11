@@ -21,7 +21,7 @@ const Card = ({ car }: Props) => {
   const router = useRouter();
 
   return (
-    <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
+    <li className="flex flex-col min-w-[400px] max-w-[400px] gap-4 h-fit mb-4 relative">
       <Link href={`/announcement/${car.id}`}>
         <div className="relative">
           <img
@@ -43,7 +43,7 @@ const Card = ({ car }: Props) => {
               </span>
             )}
         </div>
-        <Heading type="h7" weight={600}>{car.model}</Heading>
+        <Heading type="h7" weight={600} extra_classes="line-clamp-1">{car.model}</Heading>
         <Text type="b2" weight={400} extra_classes="line-clamp-1">
           {car.description}
         </Text>
