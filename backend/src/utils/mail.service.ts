@@ -7,7 +7,7 @@ const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'Projeto e-commerce',
-    link: 'http://localhost:3001',
+    link: 'https://grupo-11-projeto-fullstack.onrender.com',
   },
 });
 
@@ -23,7 +23,7 @@ export class MailService {
         html: text,
       })
       .then(() => {
-        console.log('Email send with sucess');
+        console.log('Email sent with sucess');
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +48,7 @@ export class MailService {
           button: {
             color: '#4529e6',
             text: 'Reset your password',
-            link: `http://localhost:3000/recovery/${resetToken}`,
+            link: `https://grupo-11-projeto-fullstack.onrender.com/recovery/${resetToken}`,
           },
         },
         outro:
