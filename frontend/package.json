@@ -6,10 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prisma:generate": "yarn prisma generate",
-    "prisma:migrate": "yarn prisma migrate dev --name init",
-    "prisma:deploy": "yarn prisma migrate deploy"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
@@ -34,6 +31,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
     "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
