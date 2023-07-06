@@ -5,6 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  variants: {
+    padding: ['responsive', 'hover', 'focus', 'group-hover', '*'],
+  },
   theme: {
     colors: {
       feedback: {
@@ -61,6 +64,9 @@ module.exports = {
         lexend: ["Lexend", "sans-serif"],
         inter: ["Inter", "sans-serif"],
       },
+      padding: {
+        inherit: 'inherit'
+      }
     },
   },
   plugins: [],

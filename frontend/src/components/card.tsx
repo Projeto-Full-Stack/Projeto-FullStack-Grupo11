@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { IncludeIdAnnouncementInterface } from "@/schemas/announcement.schemas";
 import { EditAnnouncementForm } from "./forms/announcement/editAnnouncement";
 import { DeleteAnnouncementForm } from "./forms/announcement/deleteAnnouncement";
+import Link from "next/link";
 
 interface Props {
   car: IncludeIdAnnouncementInterface;
@@ -20,45 +21,47 @@ const Card = ({ car }: Props) => {
   const router = useRouter();
 
   return (
-    <li className="flex flex-col min-w-[288px] min-w-[400px] max-w-[400px] gap-4 h-fit mb-4 relative">
-      <div className="relative">
-        <img
-          src="https://hips.hearstapps.com/hmg-prod/images/this-handout-photo-from-toyota-shows-the-companys-2002-news-photo-1591364386.jpg"
-          alt="car-photo"
-          className="w-fit"
-        />
-        {car.avaliable == true ? (
-          <span className="w-fit bg-brand-1 text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
-            Ativo
-          </span>
-        ) : (
-          <span className="w-fit bg-grey-4  text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
-            Inativo
-          </span>
-        )}
-      </div>
-      <Heading type="h7" weight={600}>
-        {car.model}
-      </Heading>
-      <Text type="b2" weight={400}>
-        {car.description}
-      </Text>
-
-      <Profile
-        type="small"
-        name={"Mayza"}
-        extra_classes="flex items-center gap-3"
-      />
-
-      <div className="flex justify-between items-center">
-        <div className="flex w-1/3 gap-3 ">
-          <Button type="specifications">{`${String(car.mileage)} KM`}</Button>
-          <Button type="specifications">{car.year}</Button>
+    <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
+      <Link href={`/announcement/${car.id}`}>
+        <div className="relative">
+          <img
+            src={car.coverImage}
+            alt={car.model}
+            onError={({currentTarget}) => {
+              currentTarget.onerror = null
+              currentTarget.src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg"
+            }}
+            className="w-full h-[162px] object-cover"
+          />
+          {car.avaliable == true ? (
+              <span className="w-fit bg-brand-1 text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
+                Ativo
+              </span>
+            ) : (
+              <span className="w-fit bg-grey-4  text-colors_color_white_fixed absolute py-1 px-2 rounded top-2 left-2">
+                Inativo
+              </span>
+            )}
         </div>
-        <Heading type="h7" weight={500}>
-          {`R$ ${Number(car.price).toFixed(2).toString()}`}
-        </Heading>
-      </div>
+        <Heading type="h7" weight={600}>{car.model}</Heading>
+        <Text type="b2" weight={400} extra_classes="line-clamp-1">
+          {car.description}
+        </Text>
+
+        <Profile type="small" name={car.user.name} extra_classes="flex items-center gap-3"/>
+
+        <div className="flex justify-between items-center">
+          <div className="flex w-1/3 gap-3 ">
+            <Button type="specifications">{`${String(car.mileage)} KM`}</Button>
+            <Button type="specifications">{car.year}</Button>
+          </div>
+          <Heading type="h7" weight={500}>
+            {`R$ ${Number(car.price).toFixed(2).toString()}`}
+          </Heading>
+        </div>
+      </Link>
+
+
       {userInfo?.id == router.query.id && router.pathname == "/profile/[id]" ? (
         <div className="mt-2 flex gap-4 ">
           <Button

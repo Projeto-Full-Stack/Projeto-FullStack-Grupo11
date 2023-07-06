@@ -30,7 +30,7 @@ const Input = ({
   state = false,
 }: IInput) => {
   let input_pattern = "";
-  if (input_type == "tel") input_pattern = "[0-9]{3}-[0-9]{3}-[0-9]{4}";
+  if (input_type == "tel") input_pattern = "[(][0-9]{2}[)][9]{1}[0-9]{4}-[0-9]{4}";
   if (input_type == "date") input_pattern = regex;
   if (
     input_type == "text" ||

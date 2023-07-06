@@ -74,7 +74,7 @@ const ViewUser = () => {
             </section>
 
             {profilePageInformation?.isVendor ? (
-              <section className="flex flex-col lg:mx-auto">
+              <section className="flex flex-col lg:mx-auto lg:w-[1140px]">
                 <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
                     type="h5"
@@ -92,7 +92,7 @@ const ViewUser = () => {
                     </Button>
                   )}
                 </div>
-                <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:flex-wrap lg:justify-center lg:grid lg:grid-rows-2 lg:grid-cols-4 ">
+                <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:grid lg:grid-rows-auto lg:grid-cols-2 xl:grid-cols-3 lg:gap-4">
                   {userAnnouncements.length ? (
                     userAnnouncements.map((element) => (
                       <Card key={element.id} car={element} />

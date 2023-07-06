@@ -112,6 +112,7 @@ const EditUserForm = () => {
           >
             Digite seu telefone...
           </Input>
+          <Text type="b2" weight={400}>Ex: (ZZ)9XXXX-YYYY</Text>
           {errors.phone && (
             <p className={`flex py-2 text-feedback-alert_1`}>
               {errors.phone.message}

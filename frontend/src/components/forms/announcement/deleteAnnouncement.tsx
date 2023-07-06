@@ -15,7 +15,7 @@ export function DeleteAnnouncementForm ({id}: Props){
 
     return (
         <>
-            <ModalHeader>Deleção de usuário</ModalHeader>
+            <ModalHeader>Deleção de anúncio</ModalHeader>
             <div className="flex flex-col gap-4">
                 <Text type="b1" weight={600} extra_classes="text-feedback-alert_1">Você tem certeza que quer deletar esse anúncio?</Text>
                 <Text type="b1" weight={600} extra_classes="text-feedback-alert_1">Essa ação é irreversível!</Text>
