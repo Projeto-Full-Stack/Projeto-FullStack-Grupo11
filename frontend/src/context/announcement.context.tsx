@@ -62,21 +62,25 @@ export function AnnouncementProvider({ children }: Props) {
   const [actualPage, setActualPage] = useState<number>(1);
   const { setModalContent } = ContextModal();
 
-  async function createAnnouncement(data: AnnoucementInterface) {
-    try {
-      const announcement: any = await motorsApi.post("announcements", data, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-      });
-      const array = [...userAnnouncements];
-      array.push(announcement.data);
-      setUserAnnouncements(array);
-      setModalContent(false);
-    } catch (error) {
-      console.log(error);
+  async function createAnnouncement (data: AnnoucementInterface){
+    try{
+        const { images, ...announcementData } = data
+        const announcement: any = await motorsApi.post("announcements", announcementData, {
+            headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`
+            }
+        })
+        await motorsApi.post(`images/${announcement.data.id}`, images)
+        const array = [...userAnnouncements]
+        array.push(announcement.data)
+        setUserAnnouncements(array)
+        setModalContent(false)
+    }
+    catch(error) {
+        console.log(error)
     }
   }
+
 
   async function getAllAnnouncements(number = 1) {
     setAllAnnouncementData([]);
