@@ -27,8 +27,6 @@ export class ImagesService {
   }
 
   async update(imageId: string, data: UpdateImageDto){
-    console.log("----------")
-    console.log(data)
     const image = await this.imageReopository.update(imageId, data)
 
     return image
