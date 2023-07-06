@@ -36,7 +36,7 @@ interface AnnouncementContextInterface {
   getAnnouncement: (announcement_id: string | string[]) => void;
   getAllAnnouncements: (number?: number) => void;
   filterFunction: (data: any) => void;
-  changePage: (data: any, page: string, type: number) => void;
+  changePage: (data: any, page: string, type: number, user_id?: string) => void;
   announcementData: IncludeIdAnnouncementInterface | null;
   announcementUserData: UserInterface;
   allAnnouncementData: IncludeIdAnnouncementInterface[] | [];
