@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Announcement {
+  id          String  @id
+  brand       String
+  model       String
+  year        String
+  fuel        String
+  fipe        Int
+  color       String
+  price       Int
+  description String
+  coverImage  String
+  mileage     Int
+  avaliable   Boolean
+  image       Image[]
+  user        User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String
+  comments    Comment[]
+
+  @@map("announcements")
+}
+
+model Image {
+  id             String       @id
+  imageUrl       String
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  announcementId String
+
+  @@map("images")
+}
+
+model User {
+  id          String   @id
+  name        String
+  email       String   @unique
+  cpf         String   @unique
+  phone       String
+  birthDate   String
+  description String
+  password    String
+  reset_token String?
+  isVendor    Boolean
+  address     Address?
+  announcements Announcement[]
+  comments    Comment[]
+
+  @@map("users")
+}
+
+model Address {
+  id         String  @id
+  street     String
+  state      String
+  city       String
+  number     Int
+  complement String?
+  cep        String
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String  @unique
+}
+
+model Comment {
+  id             String @id
+  comment        String
+  createdAt      DateTime @default(now())
+  author         User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId       String
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  announcementId String
+
+  @@map("comments")
+}

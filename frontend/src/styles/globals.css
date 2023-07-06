@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .body {
+    @apply bg-gradient-to-t from-grey-6 to-20% to-brand-1 from-85%;
+  }
+
+  .announcement-box {
+    @apply bg-colors_color_white_fixed align-middle p-11 items-center max-w-2xl rounded;
+  }
+
+  .loginBody {
+    @apply bg-grey-6 align-middle items-center rounded;
+  }
+}
