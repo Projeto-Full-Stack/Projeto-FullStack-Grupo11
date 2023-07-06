@@ -7,7 +7,7 @@ const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'Projeto e-commerce',
-    link: 'https://grupo-11-projeto-fullstack.onrender.com',
+    link: 'https://m6g11-frontend.vercel.app',
   },
 });
 
@@ -48,7 +48,7 @@ export class MailService {
           button: {
             color: '#4529e6',
             text: 'Reset your password',
-            link: `https://grupo-11-projeto-fullstack.onrender.com/recovery/${resetToken}`,
+            link: `https://m6g11-frontend.vercel.app/recovery/${resetToken}`,
           },
         },
         outro:
