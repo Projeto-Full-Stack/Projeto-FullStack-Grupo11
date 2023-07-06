@@ -149,19 +149,24 @@ export function AnnouncementProvider({ children }: Props) {
 }
 
   async function deleteAnnouncement(announcement_id: string) {
-    await motorsApi.delete(`announcements/${announcement_id}`, {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-      },
-    });
-    const index = userAnnouncements.findIndex(
-      (element: IncludeIdAnnouncementInterface) =>
-        element.id === announcement_id
-    );
-    const array = [...userAnnouncements];
-    array.splice(index, 1);
-    setUserAnnouncements(array);
-    setModalContent(false);
+    try {
+      await motorsApi.delete(`announcements/${announcement_id}`, {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
+      const index = userAnnouncements.findIndex(
+        (element: IncludeIdAnnouncementInterface) =>
+          element.id === announcement_id
+      );
+      const array = [...userAnnouncements];
+      array.splice(index, 1);
+      setUserAnnouncements(array);
+      setModalContent(false);
+    }
+    catch (error){
+      console.log(error)
+    } 
   }
 
   async function getAnnouncement(announcement_id: string | string[]) {

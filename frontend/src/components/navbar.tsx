@@ -91,21 +91,21 @@ const NavBar = () => {
                 alt="Symbol drop down"
               ></Image>
             </button>
-              <div
-                className={`flex flex-col items-center shadow-sm h-fit ${navStatus}
-                bg-colors_color_white_fixed shadow-indigo-500/40 sm:flex-row sm:w-fit sm:bg-transparent sm:static
-                absolute right-0 top-[100%]
-                `}
-              >
-                <Link href="/login">
-                  <Button type={"bg-light"}>Fazer login</Button>
-                </Link>
-                <Link href="/register">
-                  <Button type={"bg-light"} extra_classes="w-full ">
-                    Cadastrar
-                  </Button>
-                </Link>
-              </div>
+            <div
+              className={`flex flex-col items-center shadow-sm h-fit ${navStatus}
+              bg-colors_color_white_fixed shadow-indigo-500/40 sm:flex-row sm:w-fit sm:bg-transparent sm:static sm:flex
+              absolute right-0 top-[100%]
+              `}
+            >
+              <Link href="/login">
+                <Button type={"bg-light"}>Fazer login</Button>
+              </Link>
+              <Link href="/register">
+                <Button type={"bg-light"} extra_classes="w-full ">
+                  Cadastrar
+                </Button>
+              </Link>
+            </div>
           </>
         )}
       </header>

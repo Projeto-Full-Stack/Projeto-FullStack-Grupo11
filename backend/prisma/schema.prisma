@@ -34,7 +34,7 @@ model Announcement {
 model Image {
   id             String       @id
   imageUrl       String
-  announcement   Announcement @relation(fields: [announcementId], references: [id])
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
   announcementId String
 
   @@map("images")
