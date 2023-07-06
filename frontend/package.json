@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:generate": "yarn prisma generate",
+    "prisma:migrate": "yarn prisma migrate dev --name init",
+    "prisma:deploy": "yarn prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
