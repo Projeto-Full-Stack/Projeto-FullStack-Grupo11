@@ -12,13 +12,13 @@ import { DeleteAnnouncementForm } from "./forms/announcement/deleteAnnouncement"
 import Link from "next/link";
 
 interface Props {
-  car: IncludeIdAnnouncementInterface
+  car: IncludeIdAnnouncementInterface;
 }
 
-const Card = ({car}: Props) => {
+const Card = ({ car }: Props) => {
   const { setModalContent } = useContext(ModalContext);
   const { userInfo, tokenState } = LoginContext();
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <li className="flex flex-col min-w-[288px] max-w-[288px] gap-4 h-fit mb-4 relative">
@@ -60,8 +60,22 @@ const Card = ({car}: Props) => {
 
       {userInfo?.id == router.query.id && router.pathname == "/profile/[id]" ? (
         <div className="mt-2 flex gap-4 ">
-          <Button type="bg-light" click_event={() => setModalContent(<EditAnnouncementForm announcement={car}/>)}>Editar</Button>
-          <Button type="bg-alert" click_event={() => setModalContent(<DeleteAnnouncementForm id={car.id}/>)}>Deletar</Button>
+          <Button
+            type="bg-light"
+            click_event={() =>
+              setModalContent(<EditAnnouncementForm announcement={car} />)
+            }
+          >
+            Editar
+          </Button>
+          <Button
+            type="bg-alert"
+            click_event={() =>
+              setModalContent(<DeleteAnnouncementForm id={car.id} />)
+            }
+          >
+            Deletar
+          </Button>
         </div>
       ) : (
         <div></div>

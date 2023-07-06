@@ -207,7 +207,7 @@ const EditAddressForm = () => {
             </div>
           </span>
           <section className="w-full flex gap-2 justify-end mt-2">
-            <Button type="b-brand">Teste</Button>
+            <Button type="b-brand">Editar</Button>
           </section>
         </div>
       </form>

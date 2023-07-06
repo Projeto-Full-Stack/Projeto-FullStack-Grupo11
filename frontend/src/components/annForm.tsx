@@ -173,7 +173,7 @@ export const AnnForm = () => {
           </div>
           )}
           {fields.length >= 1 && fields.length < 6 &&
-            <Button type="bg-brand" click_event={() => append({imageUrl: ""})}>Adicionar mais fotos</Button>
+            <Button type="bg-brand" click_event={() => append({imageUrl: ""})} button_type="button">Adicionar mais fotos</Button>
           }
         <div className={`flex gap-2 justify-end`}>
           <button className={`bg-grey-6 rounded p-2 px-6`} onClick={() => setModalContent(false)}>Cancelar</button>

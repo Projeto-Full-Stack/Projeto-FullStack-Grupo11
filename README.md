@@ -1,7 +1,3 @@
-<h1 align="center"> 
-	🚧  Em construção...  🚧
-</h1>
-
 <h1 align="center">Cars E-Commerce</h1>
 <p align="center">Este projeto é uma aplicação web full-stack idealizado como entrega final de curso, com o intuito de colocar em prática (quase) tudo o que aprendemos até o momento, com um ano de estudos dentro da Kenzie Academy Brasil, tanto seu back-end quanto seu front-end foram planejados, criados e implementados pelos alunos, que receberam ao longo de cada sprint, as tarefas necessárias para sua conclusão.</p>
 
@@ -56,8 +52,12 @@ $ yarn prisma migrate dev
 $ yarn run start:dev
 
 # O servidor inciará na porta:3001 - acesse <http://localhost:3001>
-```
 
+# Todas as rotas tem o prefixo de http://localhost:3001
+
+# Acesse a rota /api para ter acesso a todas as rotas e seus respectivos requisitos do servidor
+
+```
 ### 🛠 Tecnologias
 As seguintes ferramentas foram usadas na construção do projeto:
 <h4>Backend:</h4>
@@ -73,13 +73,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Next.js](https://nextjs.org/docs)
 - [Tailwind](https://v2.tailwindcss.com/docs)
 
-## Links Úteis
+## Links Úteis:
 
 - [Figma](https://www.figma.com/file/KX3C3fIi8zmCRpNipxIYYF/M6---E-Commerce-Filter?type=design&node-id=45-2&mode=design&t=JxsFniec9pmnH3Jd-0)
 - [DER](https://imgur.com/rWQe2x0)
 
 ## Criadores:
-[Edmilson Junior](https://github.com/Malaiobol),
-[Elias Jin](https://github.com/Eliasjp),
-[João Vicente](https://github.com/Joaovicente985),
-[Mayza Santos](https://github.com/MOS-01).
+[Edmilson Junior](https://www.linkedin.com/in/malaiobol/),
+[Elias Jin](https://www.linkedin.com/in/elias-park-45427b246/),
+[João Vicente](https://www.linkedin.com/in/jo%C3%A3o-vicente-araujo-horst-2ab8a21bb/),
+[Mayza Santos](https://www.linkedin.com/in/mayza-santos-839943171).
