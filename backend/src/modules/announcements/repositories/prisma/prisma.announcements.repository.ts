@@ -22,6 +22,14 @@ export class AnnouncementPrismaRepository implements AnnouncementRepository {
     this.prisma.announcement.createMany;
     const newAnnouncement = await this.prisma.announcement.create({
       data: { ...announcement },
+      include: {
+        image: true,
+        user: {
+          select: {
+            name: true
+          }
+        }
+      }
     });
 
     return plainToInstance(Announcement, newAnnouncement);
