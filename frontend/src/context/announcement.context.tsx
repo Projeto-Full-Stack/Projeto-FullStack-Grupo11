@@ -139,7 +139,6 @@ export function AnnouncementProvider({ children }: Props) {
 
         userAnnouncements[index] = updatedAnnouncement.data
         userAnnouncements[index].image = updatedAnnouncement.data.image
-        console.log(userAnnouncements[index].image)
         setUserAnnouncements(userAnnouncements)
         setModalContent(false)
     }

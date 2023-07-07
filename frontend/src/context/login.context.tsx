@@ -76,7 +76,7 @@ export const LoginProvider = ({ children }: Props) => {
 
   const logout = () => {
     window.localStorage.removeItem("token");
-    router.push("/");
+    router.push("/login");
     setUserInfo(null);
     setToken("");
   };
