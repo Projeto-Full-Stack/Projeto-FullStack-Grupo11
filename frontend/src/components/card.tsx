@@ -22,7 +22,7 @@ const Card = ({ car }: Props) => {
 
   return (
     <li className="flex flex-col min-w-[400px] max-w-[400px] gap-4 h-fit mb-4 relative">
-      <Link href={`/announcement/${car.id}`}>
+      <Link href={`/announcement/${car.id}`} className="flex flex-col gap-1">
         <div className="relative">
           <img
             src={car.coverImage}

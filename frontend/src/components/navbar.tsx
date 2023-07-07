@@ -11,6 +11,7 @@ import EditAddressForm from "./forms/formAddressEdit";
 import { useContext } from "react";
 import { ModalContext } from "@/context/modal.context";
 import EditUserForm from "./forms/formUserEdit";
+import { DeleteUserForm } from "./forms/formUserDelete";
 
 const NavBar = () => {
   const [navStatus, setNavStatus] = useState("hidden");
@@ -69,6 +70,9 @@ const NavBar = () => {
                     click_event={() => setModalContent(<EditAddressForm />)}
                   >
                     Editar endereço
+                  </Button>
+                  <Button type="bg-light" extra_classes="w-full flex flex-start" click_event={() => setModalContent(<DeleteUserForm />)}>
+                    Deletar conta
                   </Button>
                   {userInfo.isVendor == true && (
                     <Link href={`/profile/${userInfo.id}`}>

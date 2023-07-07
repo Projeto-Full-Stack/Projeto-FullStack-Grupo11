@@ -42,7 +42,10 @@ const ViewUser = () => {
 
   return (
     <div>
-      <main className={"body overflow-hidden"}>
+      <div className="h-screen absolute -z-10">
+        <div className="bg-brand-1 w-screen h-[35%] -z-10"></div>
+      </div>
+      <main>
         <NavBar />
         {profilePageInformation ? (
           <div className="px-4 py-20 flex flex-col m-auto">
@@ -50,7 +53,7 @@ const ViewUser = () => {
               <Profile
                 type="big"
                 name={profilePageInformation!.name}
-                extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-3 mb-8 w-[1600px] h-fit "
+                extra_classes="h-96 flex flex-col gap-y-4 bg-colors_color_white_fixed py-10 px-3 mb-8 w-[1600px] h-fit rounded"
               >
                 <Text
                   type="b1"
@@ -59,22 +62,11 @@ const ViewUser = () => {
                 >
                   {profilePageInformation!.description}
                 </Text>
-                {userInfo?.id === profilePageInformation.id && (
-                  <div className="mt-2 flex flex-row gap-4 lg:flex-row lg:justify-between">
-                    <Button
-                      type="bg-alert"
-                      extra_classes="lg:w-[20%]"
-                      click_event={() => setModalContent(<DeleteUserForm />)}
-                    >
-                      Excluir Perfil
-                    </Button>
-                  </div>
-                )}
               </Profile>
             </section>
 
             {profilePageInformation?.isVendor ? (
-              <section className="flex flex-col lg:mx-auto lg:max-w-[1600px]">
+              <section className="flex flex-col lg:mx-auto lg:max-w-[1600px] lg:w-full gap-4">
                 <div className="flex flex-col mb-5 gap-4 lg:flex-row items-center">
                   <Heading
                     type="h5"
@@ -92,7 +84,7 @@ const ViewUser = () => {
                     </Button>
                   )}
                 </div>
-                <ul className="flex overflow-x-scroll gap-4 lg:overflow-hidden lg:flex-wrap lg:justify-between">
+                <ul className="grid grid-flow-row grid-cols-3 auto-rows-auto">
                   {userAnnouncements.length ? (
                     userAnnouncements.map((element) => (
                       <Card key={element.id} car={element} />

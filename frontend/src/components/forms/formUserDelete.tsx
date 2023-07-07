@@ -18,6 +18,7 @@ export function DeleteUserForm (){
             }
         })
         logout()
+        setModalContent(false)
     }
 
     return (

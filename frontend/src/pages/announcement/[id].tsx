@@ -88,9 +88,12 @@ export default function Announcements() {
   }
 
   return (
-    <div className={"body"}>
+    <div>
+      <div className="h-screen absolute -z-10">
+        <div className="bg-brand-1 w-screen h-[65%] -z-10"></div>
+      </div>
       <NavBar />
-      <main className="p-11 flex flex-col items-center">
+      <main className="p-2 flex flex-col items-center lg:max-w-[80%] lg:mx-auto">
         <div className="flex flex-col w-full gap-4 justify-between max-w-[2300px] lg:w-full lg:mb-0 lg:flex-row">
           <section
             className={`flex flex-col items-center py-3 gap-4 lg:py-[0px] lg:w-[60%] `}
@@ -98,7 +101,7 @@ export default function Announcements() {
             <article className={`flex flex-col w-full gap-4 lg:w-full`}>
               <div className="h-[355px] bg-colors_color_white_fixed flex justify-center rounded">
                 <img
-                  className="object-scale-down"
+                  className="object-cover rounded"
                   src={announcementData.coverImage}
                   alt={announcementData.model}
                   onError={({currentTarget}) => {
@@ -145,7 +148,7 @@ export default function Announcements() {
               className={`flex flex-col gap-4 bg-colors_color_white_fixed rounded w-full`}
             >
               <div
-                className={`align-middle p-11 rounded flex flex-col h-fit gap-4 items-start lg:h-[200px]`}
+                className={`align-middle p-4 rounded flex flex-col h-fit gap-4 items-start lg:h-[200px]`}
               >
                 <Heading type="h6" weight={600} extra_classes="text-grey_0">
                   Descrição
@@ -160,7 +163,7 @@ export default function Announcements() {
           <aside
             className={`lg:align-middle   rounded flex flex-col   items-center gap-4 lg:w-[40%]`}
           >
-            <article className="flex flex-col gap-8 w-full bg-colors_color_white_fixed p-11 rounded  ">
+            <article className="flex flex-col gap-8 w-full bg-colors_color_white_fixed p-4 rounded  ">
               <Heading type="h6" weight={600} extra_classes="text-grey_0">
                 Fotos
               </Heading>
